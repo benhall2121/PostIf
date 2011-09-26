@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PostIf</title>
+    <%= stylesheet_link_tag 'fancybox/jquery.fancybox-1.3.4.css', 'application' %>
+    <%= javascript_include_tag 'jquery', 'Paint', 'application' %>
+    <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js", "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js", "fancybox/jquery.fancybox-1.3.4.pack.js" %>
+    <%= javascript_include_tag 'rails' %>
+    <%= csrf_meta_tag %>
+</head>
+<body>
+
+
+<%= link_to 'Home', home_path(:which => 'home'), :class => 'header_nav', :id => 'popHome' %>
+<%= link_to 'Create', home_path(:which => 'create'), :class => 'header_nav', :id => 'popcreate_nav' %>
+<%= link_to 'About', home_path(:which => 'about'), :class => 'header_nav', :id => 'popAbout' %>
+<%= link_to 'Help', home_path(:which => 'help'), :class => 'header_nav', :id => 'popHelp' %>
+<%= link_to 'Feedback', home_path(:which => 'feedback'), :class => 'header_nav', :id => 'popFeedback' %>
+
+
+
+<%= yield %>
+
+
+<script type="text/javascript">
+  
+</script>
+
+
+</body>
+</html>

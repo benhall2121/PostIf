@@ -1,0 +1,48 @@
+<script type="text/javascript">	
+  if('<%= params[:which] %>' != ''){
+    $('#<%= params[:which] %>').show();
+  } else {
+    $('#home').show();
+  }
+  
+  function new_tab(tab)
+  {  
+    if(tab == 'create'){	
+      $.fancybox.close();
+    } else {  
+      $(".fb_nav").hide();
+      $("#" + tab).show();  
+    }
+  }
+  
+</script>
+
+<%= link_to_function 'Home', "new_tab('home')" %>
+<%= link_to_function 'Create', "new_tab('create')" %>
+<%= link_to_function 'About', "new_tab('about')" %>
+<%= link_to_function 'Help', "new_tab('help')" %>
+<%= link_to_function 'Feedback', "new_tab('feedback')" %>
+
+<div id="home" class="fb_nav" style="display:none">
+  <h1>HOME</h1>
+</div>
+
+
+<div id="about" class="fb_nav" style="display:none">
+  <h1>About</h1>
+  <br/>hhhh
+  <br/>hhhh
+  <br/>hhhh
+  <br/>hhhh
+  <br/>hhhh
+  <br/>hhhh
+</div>
+
+<div id="help" class="fb_nav" style="display:none">
+  <h1>Help</h1>
+</div>
+
+<div id="feedback" class="fb_nav" style="display:none">
+  <h1>Feedback</h1>
+</div>
+
