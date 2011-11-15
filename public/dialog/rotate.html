@@ -1,0 +1,133 @@
+﻿<script type="text/javascript">
+var dialog = {
+
+   rotateAngle: 0,
+
+   canvasInitImage: null,
+   applied: false,
+   init:function(obj){
+      $("#frm_rotate input[name=rotate][value=90]").attr("checked",true);
+      this.degree = 0;
+      this.rotateAngle = 0;
+      this.applied = false;
+      this.currentObject = null;
+   },
+
+   
+   apply:function(obj){
+      var v = $("#frm_rotate input[name=rotate]:checked").val();
+      if ( !isNaN(v) ){
+         this.rotateAngle += (v*1);
+         
+         this.currentObject = obj;
+         
+         if ( obj.type == "selection" && !this.applied){
+            var originalClipboard = obj.paintApp.clipboard;
+            obj.cut();
+            
+            var canvas = document.createElement( "canvas" );
+            canvas.width = parseInt( obj.shape.maxX - obj.shape.minX );
+            canvas.height = parseInt( obj.shape.maxY - obj.shape.minY );
+            
+            var context = canvas.getContext("2d");
+            context.beginPath();
+            context.save();
+            
+            context.fillStyle = "#fff";
+            //context.rect(0, 0, canvas.width+1, canvas.height+1);
+            //context.fill();
+            context.restore();            
+            context.drawImage(obj.paintApp.clipboard,0,0);
+            
+            
+            var selectedImage = canvas;
+            var minX = obj.shape.minX;
+            var minY = obj.shape.minY; 
+            var maxX = obj.shape.maxX; 
+            var maxY = obj.shape.maxY; 
+            
+            obj.paintApp.clipboard = originalClipboard;
+            
+            var pApp = obj.paintApp;
+            pApp.trackableObject= new InsertedImageObject();
+            
+            obj = pApp.trackableObject;
+            
+            obj.init(pApp,selectedImage,"rotate");
+            
+            obj.shape.move(minX,minY);
+            obj.shape.draw();
+            this.currentObject = obj;
+         }
+         
+         if ( obj.type == "shape" ){
+            obj.myContext.context.clearRect(0,0,obj.paintApp.width,obj.paintApp.height);
+            obj.shape
+               .rotate(v*1)
+               .draw(obj.myContext);
+         }
+      }
+      obj.showFocusRing(null);
+      this.applied = true;
+      return false;
+   },
+   
+   commitRotation: function(obj) {
+      $(".tool_rotate").removeClass("selected");
+   },
+   
+   cancelApply: function(obj) {
+      obj = this.currentObject;
+      if ( !isNaN(this.rotateAngle) && this.rotateAngle != 0 ){
+      
+         var sign = this.rotateAngle > 0 ? 1 : -1;
+         
+         var undoRotate = 360 - parseInt((Math.abs(this.rotateAngle))%360);
+         undoRotate *= sign;
+
+         
+         if ( obj.type == "shape" ){
+            obj.myContext.context.clearRect(0,0,obj.paintApp.width,obj.paintApp.height);
+            obj.shape
+               .rotate(undoRotate)
+               .draw(obj.myContext);
+            obj.showFocusRing(null);
+            
+         }
+      }
+      $(".tool_rotate").removeClass("selected");
+      return true;
+   }
+   
+};
+</script>
+<form name="frm_rotate" id="frm_rotate" method="post">
+   <div class="h_sep"></div>
+   <fieldset>
+      <legend>Rotate</legend>
+      <div style="margin-left:40px;height:auto;">
+      <div>
+         <input type="radio" name="rotate" id="rotate_1" value="90" checked/>
+         <label for="rotate_1" class="field" style="text-align:left">Rotate right 90&deg;</label>
+      </div>   
+      <div>
+         <input type="radio" name="rotate" id="rotate_2" value="-90" />
+         <label for="rotate_2" class="field" style="text-align:left">Rotate left 90&deg;</label>
+      </div>   
+      <div>
+         <input type="radio" name="rotate" id="rotate_3" value="180" />
+         <label for="rotate_3" class="field" style="text-align:left">Rotate 180&deg;</label>
+      </div>   
+      </div>
+   </fieldset>
+
+   <div class="h_sep"></div>
+
+   <div style="text-align:right">
+      
+      <button name="BtnApply">Apply</button>&nbsp;&nbsp;&nbsp;
+      <button name="BtnCancel">Cancel</button>
+      <button name="BtnClose">Close</button>
+   </div>
+   	            
+</form>

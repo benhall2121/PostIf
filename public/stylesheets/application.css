@@ -1,5 +1,6 @@
 body{
  background-color:gray;
+ font-family:Arial, Helvetica, sans-serif;
 }
 
 
@@ -58,4 +59,94 @@ div.button_selected{
  .wrapper{
   overflow:auto;
  }
+ 
+ /****************     Home    ****************/
+ 
+.home_wrapper{
+   width:600px;	 
+   border:2px solid #7E9C3F;
+   margin:0px;
+ }
+ 
+.navigation{
+   background-color: #A8D83F;
+   border-bottom:1px solid #7E9C3F;
+   padding:10px;
+ }
+ 
+ .navigation a{
+   font-size:20px;	
+   color:#7A3F15;
+   padding: 0 5px 0 5px;
+   text-decoration:none;
+ }
+ 
+ a.selected{
+   font-weight:600;	 
+   font-size:25px;
+ }
+ 
+ .postif_logo_div, .create_a_page_div{
+   text-align:center;
+   margin: 50px 0;
+ }
+ 
+ .text_wrapper{
+   text-align:center;	 
+ }
+ 
+ .text_wrapper div{
+   margin: 20px 0;	 
+ }
+ 
+ .green{
+   color:#6F8038;	 
+ }
+ 
+ .red{
+   color:#7D411B;	 
+ }
+ 
+ .text_top{
+   font-size:23px;
+   font-weight:200;
+ }
+ 
+ .text_middle{
+   font-size:26px;
+   font-weight:200;
+ }
+ 
+ .text_bottom{
+   font-size:32px;
+   font-weight:600;
+   font-style:italic;
+ }
+ 
+ .tell_friends{
+   margin:0 20px 5px 20px;
+   font-size:14px;
+   color:#78B4FF;
+   font-weight:300;
+   font-style:italic;
+ }
+
+ .tell_friends img{
+  vertical-align:middle;
+  margin:0 2px;
+ }
+ 
+ img#twitter_follow_us{
+   float:right;	 
+ }
+ 
+.footer{
+   background-color: #A8D83F;
+   border-top:1px solid #7E9C3F;
+   padding:7px;
+   text-align:center;
+   color:#868F72;
+   font-size:12px;
+ }
+ /****************     End Home    ****************/ 
  

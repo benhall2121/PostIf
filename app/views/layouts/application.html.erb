@@ -3,29 +3,84 @@
 <head>
   <title>PostIf</title>
     <%= stylesheet_link_tag 'fancybox/jquery.fancybox-1.3.4.css', 'application' %>
-    <%= javascript_include_tag 'jquery', 'Paint', 'application' %>
-    <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js", "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js", "fancybox/jquery.fancybox-1.3.4.pack.js" %>
+    <script type="text/javascript" src="/src/jquery-1.4.2.min.js"></script>
+    
+    <%= javascript_include_tag 'application' %>
+    
+    <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js" %>
+    <%= javascript_include_tag "fancybox/jquery.fancybox-1.3.4.pack.js" %>
     <%= javascript_include_tag 'rails' %>
+    
+    
+    <!-----  iPaint Files  ----->
+        <link rel="stylesheet" type="text/css" href="/style/iPaint.css" />      
+        <link rel="stylesheet" type="text/css" href="/style/window.css" /> 
+    
+        <style type="text/css">
+	  #toolbar_close.expand{background:url(/style/collapse.png);cursor:pointer;}
+	  #toolbar_close.collapse{background:url(/style/expand.png);cursor:pointer;}
+	</style>
+	
+        <script type="text/javascript">
+          function EXTEND(cls,superCls){
+            cls.prototype = new superCls();
+            cls.prototype.constructor = cls;
+            cls.prototype.parent = superCls.prototype; 
+          }
+        </script>		
+        <!--
+            Change the google api key based on your domain so that you can search online image 
+            using google search engine.
+            
+            Added by Yubo on 9/21/2011
+        -->
+        
+        <script type="text/javascript" src="https://www.google.com/jsapi?key=ABQIAAAAFdxLwjTbVerV8hz73P9GWRS2L7evLMGoPVmRVJJ45ieHtfHZTBQU0CUMZYOc7yhgnQdjoWC2VonO-A"></script>
+        
+        <script type="text/javascript" src="/src/jquery.getimagedata.js"></script>
+        <script type="text/javascript" src="/colorPicker/jsColorPicker.js"></script>
+        <script type="text/javascript" src="/src/dom-drag.js"></script>
+        <script type="text/javascript" src="/src/iPaintApp.js"></script>
+	<script type="text/javascript" src="/src/history.js"></script>
+	<script type="text/javascript" src="/src/Shape.js"></script>
+	<script type="text/javascript" src="/src/Trackable.js"></script>
+	<script type="text/javascript" src="/src/brush.js"></script>
+	<script type="text/javascript" src="/src/rectangle.js"></script>
+	<script type="text/javascript" src="/src/window.js"></script>
+	<script type="text/javascript" src="/src/ImageProcessor.js"></script>
+	<script type="text/javascript" src="/src/sliderControl.js"></script>
+	<script type="text/javascript" src="/src/main.js"></script>
+    
+    <!-----  End iPaint Files  ----->
+    
     <%= csrf_meta_tag %>
+    
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-26036470-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+ 
+  </script>
 </head>
 <body>
 
-
-<%= link_to 'Home', home_path(:which => 'home'), :class => 'header_nav', :id => 'popHome' %>
-<%= link_to 'Create', home_path(:which => 'create'), :class => 'header_nav', :id => 'popcreate_nav' %>
-<%= link_to 'About', home_path(:which => 'about'), :class => 'header_nav', :id => 'popAbout' %>
-<%= link_to 'Help', home_path(:which => 'help'), :class => 'header_nav', :id => 'popHelp' %>
-<%= link_to 'Feedback', home_path(:which => 'feedback'), :class => 'header_nav', :id => 'popFeedback' %>
-
-
+<div>
+  <%= link_to 'Home', home_path(:which => 'home'), :class => 'header_nav', :id => 'popHome' %>
+  <%= link_to 'Create', root_path(), :id => 'popcreate_nav' %>
+  <%= link_to 'About', home_path(:which => 'about'), :class => 'header_nav', :id => 'popAbout' %>
+  <%= link_to 'Help', home_path(:which => 'help'), :class => 'header_nav', :id => 'popHelp' %>
+  <%= link_to 'Feedback', home_path(:which => 'feedback'), :class => 'header_nav', :id => 'popFeedback' %>
+  <%= link_to 'Save', '#', :class => 'save_canvas' %>
+</div>
 
 <%= yield %>
-
-
-<script type="text/javascript">
-  
-</script>
-
 
 </body>
 </html>

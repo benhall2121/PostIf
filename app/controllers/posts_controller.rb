@@ -1,6 +1,23 @@
 class PostsController < ApplicationController
+	skip_before_filter :require_secret, :only => [:check_secret, :secret_test, :create]
   # GET /posts
   # GET /posts.xml
+  
+  def secret_test
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
+  
+   def check_secret
+    if params[:secret] == 'postifMark'
+      session[:secret_ok] = true
+      redirect_to :root
+    else
+      flash[:error] = "Wrong secret. Try again."
+      redirect_to secret_test_path
+    end
+  end
   
   def home
     render :layout => false	  
@@ -18,8 +35,12 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.xml
   def show
-    @post = Post.find(params[:id])
-
+    if params[:url]
+      @post = Post.find_by_url(params[:url])
+    else  
+      @post = Post.find(params[:id])
+    end
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @post }
@@ -45,6 +66,9 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.xml
   def create
+  	
+    session[:secret_ok] = true
+  	  
     @post = Post.new(params[:post])
 
     respond_to do |format|
@@ -74,6 +98,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def search_post
+    @posts = Post.search(params[:search])
+  end
+  
   # DELETE /posts/1
   # DELETE /posts/1.xml
   def destroy

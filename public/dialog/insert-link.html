@@ -1,0 +1,91 @@
+﻿<style type="text/css">
+.insert_link {
+   margin: 0;
+   margin-left: auto;
+   margin-right: auto;
+   text-align: center;
+   padding: 0;
+   padding-top: 27px;
+   font:12px arial;
+}
+.insert_link input {
+   font:12px arial;
+}
+.insert_link_buttons {
+   padding: 0;
+   margin-top: 14px;
+
+}
+#insert_link_url{
+   width: 300px;
+   font: 12px arial;
+   text-align:center;
+}
+.insert_link_buttons input {
+   font-weight: bold;
+   background: buttonface;
+   border: 2px outset buttonface;
+   padding: 0 6px;
+}
+.insert_link_label{
+   margin-bottom: 5px;
+   font: 14px arial;
+   color: #948094;
+}
+</style>
+
+<script type="text/javascript">
+var dialog = {
+   open: function(jWin, app, callback, callbackCancel, currentUrl) {
+      
+      $( "#insert_link_ok" ).click(function(evt) {
+         var url = $("#insert_link_url").val();
+         
+         if ( url.indexOf("http://") === -1 ) {
+            url = "http://" + url;
+         }
+
+         var regexp = /^http\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?$/;
+         if(regexp.test(url)) {
+            callback( url );
+            jWin.close();
+         }
+         else {
+               alert("Please enter a valid url");
+         }
+
+         return false;
+      });
+      
+      $( "#insert_link_cancel" ).click(function(evt) {
+         callbackCancel();
+         jWin.close();
+      });      
+      
+      $( "#insert_link_form" ).bind("submit",function(evt) {
+         $( "#insert_link_ok" ).trigger("click");
+         return false;
+      });
+      
+      if(currentUrl && currentUrl.length > 0) {
+         $("#insert_link_url").val(currentUrl);
+      }
+      
+      $("#insert_link_url").click(function(evt) {
+         if ( $(this).val() == "Enter URL using format www.website.com" ) {
+            $(this).val("");
+         }
+      });
+   }
+};
+</script>
+<div class="insert_link">
+   <form id="insert_link_form">
+   <div class="insert_link_label">Enter a link to an external webpage:</div>   
+   <input type="text" name="insert_link_url" id="insert_link_url" value="Enter URL using format www.website.com"/>
+   <div class="insert_link_buttons">
+      <input type="button" id="insert_link_ok" value="Ok">&nbsp;&nbsp;&nbsp;
+      <input type="button" id="insert_link_cancel" value="Cancel">
+   </div>
+   </form>
+</div>
