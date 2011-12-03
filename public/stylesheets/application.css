@@ -3,6 +3,19 @@ body{
  font-family:Arial, Helvetica, sans-serif;
 }
 
+h1{
+  padding:0;
+  margin:0;
+}
+
+a{
+  color:#3D85C6;
+  text-decoration:none;
+}
+
+a:hover{
+  color:#62A0D9;
+}
 
 #container{
   width:905px;
@@ -60,16 +73,26 @@ div.button_selected{
   overflow:auto;
  }
  
- /****************     Home    ****************/
+ 
+/****************     FancyBox    ****************/
+#fancybox-wrap {
+  position: absolute;
+  top: 10px !important;
+} 
+/****************     End FancyBox    ****************/
+ 
+ 
+/****************     Home    ****************/
  
 .home_wrapper{
-   width:600px;	 
+   width:750px;	 
+   overflow:auto;
    border:2px solid #7E9C3F;
    margin:0px;
  }
  
 .navigation{
-   background-color: #A8D83F;
+   background-color: #A4E63A;
    border-bottom:1px solid #7E9C3F;
    padding:10px;
  }
@@ -100,11 +123,11 @@ div.button_selected{
  }
  
  .green{
-   color:#6F8038;	 
+   color:#668A3A;	 
  }
  
  .red{
-   color:#7D411B;	 
+   color:#783F00;	 
  }
  
  .text_top{
@@ -141,12 +164,132 @@ div.button_selected{
  }
  
 .footer{
-   background-color: #A8D83F;
+   background-color: #A4E63A;
    border-top:1px solid #7E9C3F;
    padding:7px;
    text-align:center;
    color:#868F72;
    font-size:12px;
  }
- /****************     End Home    ****************/ 
+ 
+.fb_nav{
+  padding:5px 15px; 	 
+}
+
+.fb_nav_header{
+  padding:2px 0;
+  border-bottom: 1px solid #668A3A;	
+}
+
+.section{
+  padding:10px 0;	
+}
+
+.section h1{
+   font-size:22px;
+   font-weight:600;
+}
+
+
+.larger_gray, .normal_gray{
+  color: #666666;
+}
+
+.larger_gray{
+  font-size: 18px;
+}
+
+.normal_gray{
+  font-size: 16px;
+}
+
+.indented{
+  font-weight:bold;
+  width:75%;
+  margin:0 auto;
+}
+
+.indented_notes{
+  font-size:14px;
+  font-style:italic;
+  width:75%;
+  margin:0 auto;
+}
+
+.orange{
+  color:#E69138;
+}
+
+.example{
+  font-size:16px;
+  color:#3D85C6;
+  display:none;
+}
+
+.toggle_example_button{
+  color:#3D85C6;
+}
+
+.toggle_example_button:hover{
+  color:#62A0D9;
+  cursor:pointer;
+}
+
+/*****     About Postif    *****/ 
+
+
+
+/**     About Postif - postif:  The fastest, easiest way to create and share stuff online!    **/ 
+
+.postif_about_desc{
+  font-size: 16px;
+  list-style-type: none;
+  color: #948A53;
+  margin-left:30px;
+  font-weight:bold;
+}
+
+.postif_about_desc li{
+}
+
+/**     About Postif - postif:  The fastest, easiest way to create and share stuff online!    **/ 
+
+
+
+/**     About Postif - What is postif?    **/ 
+
+.postif_video{
+  text-align:center;	
+}
+
+.postif_video iframe{
+  border: 1px solid #AAA;
+  padding:5px;
+}
+
+/**     End About Postif - What is postif?    **/ 
+
+
+
+
+/**     About Postif - Contact Us    **/ 
+.contact_us_table{
+	
+}
+
+.contact_us_table tr td{
+  vertical-align: top;
+}
+
+.contact_us_table tr td:first-child{
+  width:200px;   	
+}
+
+/**     End About Postif - Contact Us    **/ 
+
+
+/*****     End About Postif    *****/ 
+
+ 
+/****************     End Home    ****************/ 
  

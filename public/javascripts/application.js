@@ -10,7 +10,9 @@ $(window).load(function () {
 });
 
 $(document).ready(function() {	
-  $(".header_nav").fancybox();
+		$(".header_nav").fancybox({
+		  
+		});
   
   $(".save_canvas").click(function(){
   	aa = $('canvas#ipaint_frame_canvas').get();

@@ -1,12 +1,15 @@
 <div class="home_wrapper">
 <script type="text/javascript">	
+  var window_height = Math.round($(window).height()*0.87);
+  $('.home_wrapper').css({'max-height': window_height});
+  
   if('<%= params[:which] %>' != ''){
     new_tab("<%= params[:which] %>");
   } else {
     new_tab("home");
   }
   
-  function new_tab(tab)
+  function new_tab(tab, anchor_name)
   {  
     if(tab == 'create'){	
       $.fancybox.close();
@@ -16,8 +19,36 @@
       $("#" + tab + "_nav").addClass('selected');
       $("#" + tab).show();
     }
+    
+    if(anchor_name != undefined){
+      window.location.hash=anchor_name; 	    
+    } else {
+      window.location.hash='';  
+      $('.home_wrapper').animate({ scrollTop: 0 }, 0);
+    }
+    $.fancybox.css('padding-top','10px');
   }
   
+
+$(document).ready(function() {  
+  
+  $(".toggle_example_button").click(function(){
+    var example = $(this).parent().siblings('.example');
+    var text = '';
+    
+    
+    if(example.is(":visible") == true){	  
+  	example.hide();	  
+  	text = "Click to hide the example"
+    } else { 
+  	example.show();	  
+  	text = "Click to see an example"
+    }
+    
+    $(this).html(text);
+  });
+  
+});
 </script>
 
 <div class="navigation">
@@ -26,6 +57,10 @@
   <%= link_to_function 'About', "new_tab('about')", :id => "about_nav" %>
   <%= link_to_function 'Help', "new_tab('help')", :id => "help_nav" %>
   <%= link_to_function 'Feedback', "new_tab('feedback')", :id => "feedback_nav" %>
+  
+  <%= image_tag('smallLogo_greenBackground.png', :style => 'float:right;') %>
+  <%= image_tag('beta.png', :style => 'float:right; padding-right:8px;') %>
+  
 </div>
 
 
@@ -52,34 +87,236 @@
     <%= image_tag('create_a_page.png') %>
   </div>
   
-  <div class="tell_friends">
-    Tell your friends about postif.com
-    <%= link_to image_tag('facebook.png'), 'http://www.facebook.com/postif', :target => 'blank' %>
-    <%= link_to image_tag('twitter.png'), 'http://twitter.com/#!/postif', :target => 'blank' %>
-    <%= link_to image_tag('linkedin.png'), 'http://www.linkedin.com/company/2352726', :target => 'blank' %>
-    <%= link_to image_tag('google.png'), '', :target => 'blank' %>
-    <%= link_to image_tag('mail.png'), 'mailto:benhall2121@yahoo.com', :target => 'blank' %>
-    <%= link_to image_tag('twitter_follow_us.png', :id => 'twitter_follow_us'), 'http://twitter.com/#!/postif', :target => 'blank' %>
-  </div>
 </div>
 
 
 <div id="about" class="fb_nav" style="display:none">
-  <h1>About</h1>
-  <br/>hhhh
-  <br/>hhhh
-  <br/>hhhh
-  <br/>hhhh
-  <br/>hhhh
-  <br/>hhhh
+  <div class="fb_nav_header">
+    <h1 class="red">About postif</h1>
+  </div>
+  
+  <div class="section">
+    <h1 class="green">postif: The fastest, easiest way to create and share stuff online!</h1>
+    <ul class="postif_about_desc">
+      <li>postif... you don't have a website or blog</li>
+      <li>&nbsp;&nbsp;&nbsp;postif... you don't want to join yet another site</li>
+      <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;postif... you can't create what you want on your site</li>
+      <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;postif... you want to share something accross social networks</li>
+      <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;postif... you want to add info to a tweet, post or discussion</li>
+      <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;postif... you want to add detail and pics to a classified ad</li>
+      <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;postif... you just want to get creative</li>
+    </ul>
+  </div>
+  
+  <div class="section">
+    <h1 class="green">What is postif?</h1>
+    
+    <p class="larger_gray">Postif is not a website builder or blog or social network. <span class="orange">It's simply a place on the Internet you can create and post stuff for others to see.</span> It's a little like posting a flyer on a public bulletin board, except only people with the link can view it. You don't need to join or register or any of that. You just jump on and use it!</p>
+    <p class="normal_gray">Use our <b>super simple page creator</b> tools to create a page with <b>text, shapes, images, hyperlinks</b>, etc. You create a <b>unique URL link for your page</b> to include in emails, posts o social networks, discussions groups, etc. People will be happy to pass on your page because it's just a link, so it's easy to post in their status updates, twitter, etc. And anyone can access your page no matter what social network they are on, or if they aren't on one at all! Pages you post expire 90 days from post date in order to minimize storage space. This keeps postif free and even helps the planet a little!</p>
+    <p class="postif_video"><iframe width="420" height="315" src="http://www.youtube.com/embed/r1Bm77GVIA4" frameborder="0" allowfullscreen></iframe></p>
+  </div>
+  
+  <div class="section">
+    <h1 class="green">Who Uses postif?</h1>
+    
+    <p class="normal_gray">Some people don't have a place on the Internet to post things. Or if they do, that place doesn't have the tools to create something that looks the way they want. Emails have formatting challenges and social networks are problematic because not everyone is a member of the same ones, or perhaps one at all. Also, a link is easier to share than an attachment, so people are more likely to pass on a link. And sometimes people just want a fun way to get creative and express themselves! <span class="toggle_example_button">Click to see an example</span></p>
+    <div class="example">
+      <p>Fred is having an open house at his office. He doesn't want to pay to add a temporary page to his website. A Twitter post is too short to include all the info. Fred could post the info on Facebook, but some people he's inviting aren't on Facebook. He could create as email, but formatting and images can be lost depending on what email program the receiver uses. Fred could create an attachment, but everyone might not have the right program to open it. Fred needs an easier way!</p>
+      <p>So Fred goes to postif.com and without logging in or registering, he clicks the Create button and goes straight to the Create page. He sees a blank canvas and a toolbar with a bunch of familiar looking tools. Using the text tool, Fred adds the info for his event, formats the text to make it look nice, creates a map by drawing lines and shapes, then inserts a picture of his smiling office staff. He adds a hyperlink to his company website for good measure. Last, Fred types a link for his page, "postif.com/FredsOpenHouse" and clicks Post. Whamo, his page is on the internet!</p>
+      <p>Fred sends out the link in an email, a Tweet, Facebook and LinkedIn posts. Fred is happy because he only had to create the info in one place, he knows everyone can access it and that it will look the same to everyone. He also knows people are more likely to pass on his link than they are an email attachment. Fred's open house is so successful that he is promoted and declares to his co-workers in the Friday morning meeting that, thanks to postif, he has at last found true happiness!</p>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h1 class="green"><a name="beta"></a>Beta</h1>
+    
+    <p class="normal_gray">We consider postif to be in Beta mainly because we are not finished adding all its features. The most important features are here and work great. So we think you will find postif is a trouble-free tool you can trust for posting your impoetant info!</p>
+    <p class="normal_gray">We will be adding lots of <%= link_to_function 'new features', "new_tab('help', 'coming_soon')" %>. If you have any suggestions on ways to make postif beter, please post it on our <%= link_to_function 'Feedback', "new_tab('feedback')" %> page.</p>
+  </div>
+  
+  <div class="section">
+    <h1 class="green">Coming Soon</h1>
+    
+    <p class="normal_gray">See a list of <%= link_to_function 'enhancements', "new_tab('help', 'coming_soon')" %> to postif we are diligently working on.</p>
+  </div>
+  
+  <div class="section">
+    <h1 class="green">About the Co & People</h1>
+    
+    <p class="normal_gray">postif is run by people who want to provide a really useful service that people will love and feel completely safe using. Being up front about things should help with that. So here's some things you probably want to know:</p>
+    <p class="normal_gray"><b>Free-ness:</b> Nothing is realy free, right. So be weary of "free" sites who have no way to, well, make money. They will either disappear, start charging later, or perhaps sell your personal info. So how do <u>we</u> provide postif for free and still keep our doors open? Mostly by selling the ads you see throughout postif. We also plan to make a little money from people who sign up for permanent pages (a feature that is under development). A company that makes a fair profit is a healty company and will be here to serve you tomorrow and the next day. That's the plan for postif.</p>
+    <p class="normal_gray"><b>Goodness:</b> postif is free and open, but there has to be some rules about acceptable use. To keep postif safe and fun, shenanigans are strictly prohibited. See more under <%= link_to_function 'Rules', "new_tab('about', 'rules')" %></b> 
+    <p class="normal_gray"><b>Privacy:</b>Bottom line, we don't share users' info with any thrid parties. See more under <%= link_to_function 'Privacy Policy', "new_tab('about', 'privacy_policy')" %></p>
+  </div>
+  
+  <div class="section">
+    <h1 class="green"><a name="rules"></a>Rules</h1>
+    
+    <p class="normal_gray">By using postif, you agree to abide by the site rules. Using the site in any of the following ways is against the rules and will result in immediate deletion of the offending page without notice:</p>
+    <ul class="normal_gray">
+      <li>Pages used for unlawful purposes.</li>
+      <li>Pages with hateful, inappropriate or offensive material.</li>
+      <li>Pages generating excessively high traffic</li>
+      <li>Creating pages for purposes of squatting on postif.com URLs</li>
+      <li>Postif reserves he right to delete any page for any reason,</li>
+      <li>Postif of course reserves the right to change the rule as needed.</li>
+    </ul>
+    
+  </div>
+  
+  <div class="section">
+    <h1 class="green"><a name="privacy_policy"></a>Privacy Policy</h1>
+    
+    <p class="normal_gray"><b>We do not share your info with anybody</b>. You can feel 100% safe and here's why:  For users who don't register, the only info to protect is your email address, should you choose to provide it (for purposes of being notified when your page expires). We do not share your email address with anybody.</p>
+    <p class="normal_gray">In the future when users can register and subscribe if they want to, we will not share their info with any third parties.</p>
+    <p class="normal_gray">We have an auto-bot that scans pages in order to deliver ads that are relevant to you while you are on our site, but that's its only purpose. The info on those pages is not provided to any third parties.</p>
+    <p class="normal_gray"><i>The only exception to sharing user's info would be if we are compelled to do so by some legal authority.</i></p>
+  </div>
+  
+  <div class="section">
+    <h1 class="green">Contact Us</h1>
+    <table class="contact_us_table">
+      <tr>
+        <td class="larger_gray">Advertising:</td>
+        <td class="normal_gray">If you are interested in advertising on postif.com, please email us: <a href="mailto:Ads@postif.com">Ads@postif.com</a></td>
+      </tr>
+      <tr>
+        <td class="larger_gray">Feedback:</td>
+        <td class="normal_gray">Have some feedback about postif.com? Please leave a comment on our <%= link_to_function 'Feedback', "new_tab('feedback')" %> page.</td>
+      </tr>
+      <tr>
+        <td class="larger_gray">Tech Support:</td>
+        <td class="normal_gray">Please see our Help page. If you can't find an answer there, please email us. We will do our bext to reply quickly, but please understand it may take some time because we get a lot of email :) <a href="mailto:Support@postif.com">Support@postif.com</a></td>
+      </tr>
+    </table>
+  </div>
 </div>
+
+
 
 <div id="help" class="fb_nav" style="display:none">
-  <h1>Help</h1>
+  <div class="fb_nav_header">
+    <h1 class="red">Help</h1>
+  </div>
+  
+    <div class="section">
+      <h1 class="green">Beta Version</h1>
+      
+      <p class="normal_gray">Click here for info about this <%= link_to_function 'Beta version', "new_tab('about', 'beta')" %> of postif.</p>
+    </div>
+    
+    <div class="section">
+      <h1 class="green">Give Feedback or Report a Problem</h1>
+    
+      <p class="normal_gray">Please give us your <%= link_to_function 'Feedback', "new_tab('feedback')" %> or <%= link_to_function 'report any problems', "new_tab('feedback')" %> you experience using the site. We really appreciate it!</p>
+    </div>
+    
+    
+    <div class="section">
+      <h1 class="green"><a name="coming_soon"></a>Coming Soon!</h1>
+      
+      <p class="normal_gray">Here's a few enhancements to postif we are working on. We will be implementing them one at a time as they are ready:</p>
+      <ul class="normal_gray">
+        <li><b>My Pages:</b> You will be able to create a user account which will make using postif easier for people who have multiple postif pages and want the ability to manage them.</li>
+        <li><b>Permanent Pages:</b> For a small monthly fee, your pages will remain posted rather than needing to manually renew them every 90 if you don't want them to expire.</li>
+        <li><b>Drawing Tools:</b> Embed Youtube and other videos, insert media, page borders & backgrounds, underline text, text alignment, bullets & numbering, clip art, create tables and more.</li>
+        <li><b>Upload Pages:</b> Upload files (like Word docs and PDFs) so you can post it as a postif page.</li>
+        <li><b>Widgets:</b> Add features to your pages like Commenting, Voting and RSVP.</li>
+      </ul>
+      <p class="normal_gray"><b>What else should we add?</b> Please help us make postif better by <%= link_to_function 'making a suggestion!', "new_tab('feedback')" %></p>
+    </div>
+    
+    <div class="section">
+      <h1 class="green">Using the Drawing Tools</h1>
+      
+      <p class="normal_gray">You can find help for the following tools by hovering (hold the mouse above the button until info appears) and by reading the instructions that appear in the bar at the bottom of the canvas after you click on a tool:</p>
+      <p class="normal_gray indented">Background, pencil, fill bucket, eraser, erase page, eye dropper, cut, copy, paste, select, brush, crop canvas, resize, rotate, add hyperlink, remove hyperlink, insert image, insert text, font, font size, bold, italics, draw shapes, outline shapes, fill shapes, line size, colors & opacity (also see below), rulers, gridlines, width, height, undo, redo.</p>
+      <p class="normal_gray"><b>Underline Text:</b> Currently a text underline function is not available in postif, but we are working on it!  Until we add it, you can simply use the Line tool to draw a line under text you want to emphasize.</p>
+    </div>
+    
+    <div class="section">
+      <h1 class="green">Menu Commands</h1>
+      
+      <p class="normal_gray"><b>New Page</b> - Create a New Page:  If at any time while using postif you wish to leave a page and start a new one, click New Page. The page you are on will close and a new, blank page will open. Before opening a new page, make sure any changes to the page you are on are saved or they will be lost.</p>
+      <p class="normal_gray"><b>URL</b> - Create a URL (link) for a Page:  Every page you create with postif has it's own URL (or link) address, which is akin to a file name for your page. The page URL is the address you send to other people who you want to have see your page. Type your desired URL into the green URL box above the drawing tool bar. It must be unique, so if you enter a URL someone else has already used, you will be prompted to enter a different URL. You can only use letters, numbers, hyphen and underscore. It can be any length. Once a page expires, it's URL becomes available again for anyone to use. See "Renew" below for more about expiration dates.</p>
+      <p class="normal_gray"><b>Open Page</b> - Open & Edit a Page:  If you want to edit a page you created previously it, click the Open Page command, then enter the page's URL and password (if you gave the page a password when you created it). If you forgot the password you can click "I forgot the password" and it will be emailed to you (if you entered an email when you created the page). If you a) did not provide an email address and don't know the password or b) you are opening someone else's postif page (to use as a template, for example), you can click Open Page, then click Read Only. After the page opens, enter a new URL to create a copy of the page with a new URL. You will be prompted to create a password for the page (optional) and an email (optional) to be notified before the page expires. Click Save, then you can continue on with editing the page you have now created.</p>
+      <p class="normal_gray"><b>Save</b> - Save a Page:  Pages will save automatically from time to time as you work, so you shouldn't have to worry about losing anything if your computer crashes or something. But to be certain you won't lose any work, you should always click Save before closing postif.</p>
+      <p class="normal_gray"><b>Preview</b> - Preview a Page:  To see what your page will look like on the web before you Post it, click Preview to view it in a new browser tab.</p>
+      <p class="normal_gray"><b>Post</b> - Post a Page:  When your page is done and ready to share with others, Post it to the Internet by clicking Post. You can always edit your page later if you want (as long as you create a password for it when you first create the page).</p>
+      <p class="normal_gray"><b>Share</b> - Share a Page:  Postif pages are meant to be shared, so they all have their own unique URLs that are viewable by anyone. To share your page, you must first Post it. Once you have posted it, go to the page and use the share buttons at the bottom of the page to share it on Facebook, Twitter, by email, etc. Or you can manually enter the URL link any place on the web you like, such as a discussion group on LinkedIn, in an ad you post on Craigslist, or in a text or email.</p>
+      <p class="normal_gray"><b>Renew</b> - Renew a Pages Expiration Date:  All posted pages expire 90 days from the date they are posted. You can renew the date at any time by clicking Renew on the menu bar of the Create page. You can renew your expiration date as often and as many times as like, but it cannot exceed 90 days. You can set it to expire sooner than 90 days by clicking Renew and choosing a specific expiration date.</p>
+      <p class="normal_gray indented_notes">Note:  We will soon be making it possible to set expiration dates beyond 90 days for a small fee.</p>
+      <p class="normal_gray"><b>Delete</b> - Delete a Page:  To delete a page entirely and remove it from the Internet, first Open the page you want to delete. Then click Delete. You will be prompted to enter a password to delete the page.</p>
+      <p class="normal_gray"><b>Hidden or Private Pages</b>:  You cannot hide postif pages or make them private. Anyone who knows the URL for your page can view it. So if your page contains sensitive info, be careful who you share the URL link with.</p>
+      <p class="normal_gray"><b>Page Expiration Dates</b>: All posted pages expire 90 days from the date they are posted. You can renew the date at any time by clicking Renew on the menu bar of the Create page. You can renew your expiration date as often and as many times as like. You can also set it to expire sooner than 90 days by clicking Renew and choosing a specific expiration date.</p>
+      <p class="normal_gray indented_notes">Note:  We will soon be making it possible to set expiration dates beyond 90 days for a small fee.</p>
+      <p class="normal_gray"><b>Copying Pages</b>:  To copy any page, click Open Page on the menu bar of the Create page. Enter the password or click Read Only (you can do either). After the page opens, enter a new URL to create a copy of the page with a new URL. You will be prompted to create a password for the page (optional) and enter an email (optional) to be notified before the page expires. Click Save, then you can continue on with editing the page you have now created.</p>
+      <span class="normal_gray"><b>Colors & Opacity:</b></span>
+      <ul class="normal_gray">
+        <li>The top square represents the <i>line</i> color for fonts, lines and shapes you create.</li>
+        <li>The bottom square represents the <i>fill</i> color for shapes, the fill bucket, and canvas background.</li>
+        <li>You click the little <i>bent arrow</i> if you want to swap the line and fill colors.</li>
+        <li>The <i>Opacity selector</i> sets the transparency of both the <i>line</i> and <i>fill</i> colors - they cannot be set independently.</li>
+        <li>To select the color <b>White</b>, click the line or <i>fill</i> color button. When the Select Color box appears, click in the white area of the very top left corner of the center box, then click OK. It works the same for <b>Black</b> (but of course you must click in the black area, rather than the white).</li>
+      </ul>
+    </div>
+    
+    
+    <div class="section">
+      <h1 class="green">How-Tos, Tips & Tricks</h1>
+      
+      <p class="normal_gray"><b>Page Sizes:</b> What size should your page be to be viewable on a particular device?</p>
+      <ul class="normal_gray">
+        <li><b>Page height</b> is not critical because, whether a page is viewed on a PC or a mobile phone, it's normal to have to scroll up and down to view a web page. This is true on all devices.</li>
+        <li><b>Page width</b> is important, because having to scroll right or left is a nuisance. So set your page width according to the device you expect it to be viewed on:</li>
+        <ul>
+          <li><b>Desktop</b> screens vary, but around 950 pixels is viewable on most PC monitors.</li>
+          <li><b>Tablet</b> screens vary, but a good size for an iPad is about 700 pixels.</li>
+          <li><b>Mobile</b> devices also vary, but a good size for an iPhone is about 350 pixels.</li>
+        </ul>
+      </ul>
+      
+      <p class="normal_gray"><b>Erasing</b>:</p>
+      <ul class="normal_gray">
+        <li>Use the <b>eraser tool</b>. Increase or shrink the eraser size by pressing the Shift and Ctrl keys while dragging.</li>
+        <li>Erase the entire page by clicking the <b><i>Erase entire page</i></b> button.</li>
+        <li>Use the <b><i>Rectangular or Polygon Selection</i></b> tools to select a specific area, then click <i>Delete</i> or <i>Cut</i> to remove the area.</li>
+        <li>Use <b>drawing tools</b> like the <i>pencil</i>, <i>paintbrush</i>, and <i>shapes</i> to draw with the same color as the background.</li>
+      </ul>
+      
+      <p class="normal_gray"><b>Collaboration</b>:</p>
+      <ul class="normal_gray">
+        <li>You can collaborate on a postif page with others simply by sharing the URL and password with them. </li>
+        <li>A less secure trick is too put the password right on the postif page somewhere, then all your collaborators need to know is the URL.</li>
+      </ul>
+      
+      <p class="normal_gray"><b>Passwords</b>:</p>
+      <ul class="normal_gray">
+        <li><b>If you forget your password</b> you can click "I forgot the password!" to have the password sent to the email address associated with the page: Click "Open Page" on the canvas menu bar, then click "I forgot the password!"</li>
+        <li><b>If you didn't set a password or email address for the page</b> you can not retrieve or create a password, nor can you edit the page. You can, however, create a copy of the page and edit that, though you will need to give it a new URL: Click "Open Page" (on the canvas menu bar), enter the URL for the original page, then click "Open as Read-Only". When you see your page on the canvas, type a new URL, then click "Save".</li>
+        <li>There is no way to <b>change the email address or password</b> associated with a page after it has been Posted. You can, however, retrieve the password if a password and email were set when the page was originally Posted (see above).</li>
+      </ul>
+      
+    </div>
+    
 </div>
 
+
 <div id="feedback" class="fb_nav" style="display:none">
-  <h1>Feedback</h1>
+  <div class="fb_nav_header">
+    <h1 class="red">Feedback</h1>
+  </div>
+</div>
+
+
+<div class="tell_friends">
+    Tell your friends about postif.com
+    <%= link_to image_tag('facebook.png'), 'http://www.facebook.com/sharer/sharer.php?u=http://www.postif.com&t=I found this really useful site: www.postif.com ', :target => 'blank' %>
+    <%= link_to image_tag('twitter.png'), 'http://twitter.com/home?status=I found this really useful site: www.postif.com ', :target => 'blank' %>
+    <%= link_to image_tag('linkedin.png'), 'http://www.linkedin.com/company/2352726', :target => 'blank' %>
+    <%= link_to image_tag('google.png'), '', :target => 'blank' %>
+    <%= link_to image_tag('mail.png'), 'mailto:benhall2121@yahoo.com', :target => 'blank' %>
+    <%= link_to image_tag('twitter_follow_us.png', :id => 'twitter_follow_us'), 'http://twitter.com/#!/postif', :target => 'blank' %>
 </div>
 
 <div class="footer">
