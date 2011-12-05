@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111104174724) do
+ActiveRecord::Schema.define(:version => 20111205061816) do
 
   create_table "posts", :force => true do |t|
     t.string   "url"
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(:version => 20111104174724) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "canvas_html"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "email"
+    t.boolean  "subscribed", :default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

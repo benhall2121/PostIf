@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-	skip_before_filter :require_secret, :only => [:check_secret, :secret_test, :create]
+  skip_before_filter :require_secret, :only => [:check_secret, :secret_test, :create]
   # GET /posts
   # GET /posts.xml
   

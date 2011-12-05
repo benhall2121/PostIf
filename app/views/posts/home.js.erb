@@ -3,14 +3,14 @@
   var window_height = Math.round($(window).height()*0.87);
   $('.home_wrapper').css({'max-height': window_height});
   
-  if('<%= params[:which] %>' != ''){
-    new_tab("<%= params[:which] %>");
-  } else {
-    new_tab("home");
-  }
+ 
   
   function new_tab(tab, anchor_name)
-  {  
+  {   
+    if(tab == ''){
+      tab = 'home';	  	  
+    }
+    
     if(tab == 'create'){	
       $.fancybox.close();
     } else {  
@@ -21,16 +21,23 @@
     }
     
     if(anchor_name != undefined){
-      window.location.hash=anchor_name; 	    
+      window.location.hash=anchor_name; 
+      parent.$.fancybox.css('padding-top','10px');	    
     } else {
       window.location.hash='';  
       $('.home_wrapper').animate({ scrollTop: 0 }, 0);
     }
-    $.fancybox.css('padding-top','10px');
   }
+ 
+$.ajaxSetup({
+  beforeSend: function(xhr) {
+    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+  }
+}); 
   
-
 $(document).ready(function() {  
+
+  new_tab("<%= params[:which] %>");
   
   $(".toggle_example_button").click(function(){
     var example = $(this).parent().siblings('.example');
@@ -39,13 +46,29 @@ $(document).ready(function() {
     
     if(example.is(":visible") == true){	  
   	example.hide();	  
-  	text = "Click to hide the example"
+  	text = "Click to see an example"
     } else { 
   	example.show();	  
-  	text = "Click to see an example"
+  	text = "Click to hide the example"
     }
     
     $(this).html(text);
+  });
+  
+  $('#subscribe_submit_email').click(function(){
+  	
+      var email_address = $('#subscribe_email_textfield_id').val();
+      
+        
+      if(email_address.indexOf("@") == -1){ 
+        $('.subscribe_warning_message_div').html('Please enter a valid email address');
+        return false;
+      }
+  		
+      $.post('/users/add_subscriber', {"email_address": email_address }, function(response) { 
+        $('.subscribe_warning_message_div').html("Thanks for signing up! You'll hear from us soon");
+        $('#subscribe_email_textfield_id').val('');
+      });
   });
   
 });
@@ -81,6 +104,10 @@ $(document).ready(function() {
     <div class="text_bottom">
       <span class="red">Just use It!</span>
     </div>
+  </div>
+  
+  <div class="watch_youtube">
+    <%= link_to image_tag('watchYouTubeVideo.png'), 'http://www.youtube.com/embed/r1Bm77GVIA4', :target => 'blank' %>
   </div>
   
   <div class="create_a_page_div">
@@ -308,15 +335,24 @@ $(document).ready(function() {
   </div>
 </div>
 
+<div id="subscribe" class="fb_nav" style="display:none">
+  <div class="fb_nav_header">
+    <h1 class="red">Subscribe</h1>
+  </div>
+  <%= render 'users/subscribe' %>
+</div>
+
 
 <div class="tell_friends">
     Tell your friends about postif.com
     <%= link_to image_tag('facebook.png'), 'http://www.facebook.com/sharer/sharer.php?u=http://www.postif.com&t=I found this really useful site: www.postif.com ', :target => 'blank' %>
     <%= link_to image_tag('twitter.png'), 'http://twitter.com/home?status=I found this really useful site: www.postif.com ', :target => 'blank' %>
     <%= link_to image_tag('linkedin.png'), 'http://www.linkedin.com/company/2352726', :target => 'blank' %>
-    <%= link_to image_tag('google.png'), '', :target => 'blank' %>
+    <%= link_to image_tag('google.png'), 'https://m.google.com/app/plus/x/?v=compose&content=I found this really useful site: www.postif.com ', :target => 'blank' %>
     <%= link_to image_tag('mail.png'), 'mailto:benhall2121@yahoo.com', :target => 'blank' %>
-    <%= link_to image_tag('twitter_follow_us.png', :id => 'twitter_follow_us'), 'http://twitter.com/#!/postif', :target => 'blank' %>
+    
+    <%= link_to image_tag('twitter_follow_us.png', :id => 'twitter_follow_us'), 'http://twitter.com/postifcom', :target => 'blank' %>
+    <%= link_to_function image_tag('subscribe.png', :id => 'subscribe'), "new_tab('subscribe')" %>
 </div>
 
 <div class="footer">

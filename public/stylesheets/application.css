@@ -109,7 +109,7 @@ div.button_selected{
    font-size:25px;
  }
  
- .postif_logo_div, .create_a_page_div{
+ .postif_logo_div{
    text-align:center;
    margin: 50px 0;
  }
@@ -140,6 +140,16 @@ div.button_selected{
    font-weight:200;
  }
  
+ .watch_youtube{
+   text-align:center;
+   margin: 50px 0;
+ }
+ 
+.create_a_page_div{
+   text-align:center;
+   margin: 50px 0;
+ }
+ 
  .text_bottom{
    font-size:32px;
    font-weight:600;
@@ -157,6 +167,11 @@ div.button_selected{
  .tell_friends img{
   vertical-align:middle;
   margin:0 2px;
+ }
+
+ img#subscribe{
+   float:right;	 
+   margin-right:30px;
  }
  
  img#twitter_follow_us{
@@ -292,4 +307,30 @@ div.button_selected{
 
  
 /****************     End Home    ****************/ 
+
+
+
+
+/****************     users/_subscribe.html.erb    ****************/ 
+
+.subscribe_wrapper{
+  text-align:center;
+  margin:20px;
+}
+
+.subscribe_email_textfield{
+  width:332px;	
+  height:30px;
+  font-size:13px;
+  border:1px solid #C9C9C9;
+  padding: 0 5px 0 5px;
+  outline: none;
+  
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -khtml-border-radius: 8px;
+  border-radius: 8px;
+}
+
+/****************     End users/_subscribe.html.erb    ****************/ 
  
