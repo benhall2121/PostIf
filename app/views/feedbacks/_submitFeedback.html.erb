@@ -1,0 +1,32 @@
+<div class="feedback_form_wrapper">
+  <div class="feedback_label_wrapper">
+    <%= image_tag('redAsterisk5x5.jpg', :class => "asterisk") %> Your Name:
+  </div>
+  <div class="feedback_name_wrapper">
+    <%= text_field_tag :name, '', :id => 'feedback_name_id', :class => 'feedback_name_field standard_field', :placeholder => 'Enter Your Name' %>
+  </div>
+  <div class="feedback_label_wrapper">
+    <%= image_tag('redAsterisk5x5.jpg', :class => "asterisk") %> Subject:
+  </div>
+  <div class="feedback_subject_wrapper">
+    <%= text_field_tag :subject, '', :id => 'feedback_subject_id', :class => 'feedback_subject_field standard_field', :placeholder => 'Enter A Subject' %>
+  </div>
+  <div class="feedback_label_wrapper">
+    <%= image_tag('redAsterisk5x5.jpg', :class => "asterisk") %> Message:
+  </div>
+  <div class="feedback_message_wrapper">
+    <%= text_area_tag :message, '', :id => 'feedback_message_id', :class => 'feedback_message_field standard_field', :placeholder => 'Enter A Message' %>
+  </div>
+  
+  <div class="feedback_submit_wrapper">
+    <button type="button" id="feedback_submit" class="feedback_submit_button">Submit</button>
+    <button type="button" id="feedback_cancel" class="feedback_cancel_button">Cancel</button>
+  </div>
+</div>
+
+<div class="all_feedback_wrapper">
+  <% Feedback.all(:order => 'created_at desc').each do |a| %>
+    <%= render "feedbacks/feedback_info", :a => a %>
+  <% end %>
+</div>
+

@@ -10,9 +10,9 @@ $(window).load(function () {
 });
 
 $(document).ready(function() {	
-		$(".header_nav").fancybox({
+  $(".header_nav").fancybox({
 		  
-		});
+  });
   
   $(".save_canvas").click(function(){
   	aa = $('canvas#ipaint_frame_canvas').get();
@@ -28,6 +28,46 @@ $(document).ready(function() {
   $("#search_post input").keyup(function() {
     $.get($("#search_post").attr("action"), $("#search_post").serialize(), null, "script");
     return false;
+  });
+  
+  //Submit Subscribe
+  $('#subscribe_submit_email').live('click',function(){
+      var email_address = $('#subscribe_email_textfield_id').val();
+      
+        
+      if(email_address.indexOf("@") == -1){ 
+        $('.subscribe_warning_message_div').html('Please enter a valid email address');
+        return false;
+      }
+  		
+      $.post('/users/add_subscriber', {"email_address": email_address }, function(response) { 
+        $('.subscribe_warning_message_div').html("Thanks for signing up! You'll hear from us soon");
+        $('#subscribe_email_textfield_id').val('');
+      });
+  });
+  
+  //Submit feedback
+  $("#feedback_submit").live('click',function(){
+      var name = $('#feedback_name_id').val();
+      var subject = $('#feedback_subject_id').val();
+      var message = $('#feedback_message_id').val();
+  
+      if(name == '' || subject == '' || message == ''){
+        alert("All fields are required. Please fill out the rest of the form");
+      	return false;      
+      }
+      
+      $.post('/feedbacks/add_feedback', {"feedback": {"name": name, "subject": subject, "message": message} }, 'script');
+      $('#feedback_name_id').val('');
+        $('#feedback_subject_id').val('');
+        $('#feedback_message_id').val('');
+  });
+  
+  //Submit feedback
+  $("#feedback_cancel").live('click',function(){
+      $('#feedback_name_id').val('');
+      $('#feedback_subject_id').val('');
+      $('#feedback_message_id').val('');
   });
   
 });

@@ -1,0 +1,21 @@
+<div class="single_feedback_wrapper">
+  <div class="bubble_div">
+    <%= image_tag('bubble.jpg') %>
+  </div>
+  <div class="single_feedback_desc">
+    <div class="single_feedback_name">
+      <%= a.name %>
+    </div>
+    <div class="single_feedback_subject">
+      <%= a.subject %>
+    </div>
+    <div class="single_feedback_message">	
+      <%= a.message %>
+    </div>
+    <div class="single_feedback_date">	
+      <%= time_ago_in_words(a.created_at) %> ago
+    </div>
+  </div>
+</div>
+
+

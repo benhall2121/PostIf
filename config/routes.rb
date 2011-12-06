@@ -1,4 +1,6 @@
 Postif::Application.routes.draw do
+  resources :feedbacks
+
   resources :users
 
   resources :posts
@@ -6,6 +8,7 @@ Postif::Application.routes.draw do
   match "home" => "posts#home", :as => "home"
   
   match '/users/add_subscriber' => 'users#add_subscriber'
+  match '/feedbacks/add_feedback' => 'feedbacks#add_feedback'
   
   root :to => "posts#new"
   match '/posts/create' => 'posts#create'
