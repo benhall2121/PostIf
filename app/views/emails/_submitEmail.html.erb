@@ -9,7 +9,7 @@
     <%= image_tag('redAsterisk5x5.jpg', :class => "asterisk") %> From:
   </div>
   <div class="email_name_wrapper">
-    <%= text_field_tag :from, '', :id => 'email_from_id', :class => 'email_field standard_field', :placeholder => 'Enter Your Email Address' %>
+    <%= text_field_tag :from, '', :id => 'email_from_id', :class => 'email_field standard_field', :placeholder => 'Enter Your Email Address' %> <%= check_box_tag "email_cc" %> <span class="email_cc">CC yourself on the email?</span>
   </div>
   <div class="email_label_wrapper">
     <%= image_tag('redAsterisk5x5.jpg', :class => "asterisk") %> Subject:

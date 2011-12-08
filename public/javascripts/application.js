@@ -76,16 +76,19 @@ $(document).ready(function() {
       var from = $('#email_from_id').val();
       var subject = $('#email_subject_id').val();
       var message = $('#email_message_id').val();
-  
-      if(name == '' || subject == '' || message == ''){
+      var cc = $('#email_cc').is(':checked');
+      
+      if(to == '' || from == '' || subject == '' || message == ''){
         alert("All fields are required. Please fill out the rest of the form");
       	return false;      
       }
       
-      $.post('/emails/add_email', {"email": {"to": to, "from": from, "subject": subject, "message": message} }, 'script');
+      $.post('/emails/add_email', {"email": {"to": to, "from": from, "subject": subject, "message": message}, "cc": cc }, 'script');
       $('#email_from_id').val('');
       $('#email_subject_id').val('');
       $('#email_message_id').val('');
+      $('#email_cc').attr('checked', false);
+
   });
   
   //Cancel Email
@@ -93,6 +96,7 @@ $(document).ready(function() {
       $('#email_from_id').val('');
       $('#email_subject_id').val('');
       $('#email_message_id').val('');
+      $('#email_cc').attr('checked', false);
   });
   
 });

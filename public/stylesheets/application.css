@@ -498,6 +498,11 @@ img.asterisk{
   vertical-align:top;
 }
 
+.email_cc{
+  color: #5E81C1;
+  font-size:10px;
+}
+
 
 .email_field{  
   width:50%;

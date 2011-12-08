@@ -7,6 +7,10 @@ class EmailsController < ApplicationController
     
     PostifMailer.emailMe(@emails).deliver
     
+    if params[:cc]
+      PostifMailer.emailUser(@emails).deliver    
+    end
+    
     respond_to do |format|
       format.js {render :nothing => true}  
     end
