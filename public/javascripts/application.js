@@ -63,11 +63,36 @@ $(document).ready(function() {
         $('#feedback_message_id').val('');
   });
   
-  //Submit feedback
+  //Cancel feedback
   $("#feedback_cancel").live('click',function(){
       $('#feedback_name_id').val('');
       $('#feedback_subject_id').val('');
       $('#feedback_message_id').val('');
+  });
+  
+  //Submit Email
+  $("#email_submit").live('click',function(){
+      var to = $('#email_to_id').val();
+      var from = $('#email_from_id').val();
+      var subject = $('#email_subject_id').val();
+      var message = $('#email_message_id').val();
+  
+      if(name == '' || subject == '' || message == ''){
+        alert("All fields are required. Please fill out the rest of the form");
+      	return false;      
+      }
+      
+      $.post('/emails/add_email', {"email": {"to": to, "from": from, "subject": subject, "message": message} }, 'script');
+      $('#email_from_id').val('');
+      $('#email_subject_id').val('');
+      $('#email_message_id').val('');
+  });
+  
+  //Cancel Email
+  $("#email_cancel").live('click',function(){
+      $('#email_from_id').val('');
+      $('#email_subject_id').val('');
+      $('#email_message_id').val('');
   });
   
 });

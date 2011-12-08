@@ -5,7 +5,7 @@
   
  
   
-  function new_tab(tab, anchor_name)
+  function new_tab(tab, anchor_name, email_to)
   {   
     if(tab == ''){
       tab = 'home';	  	  
@@ -13,11 +13,17 @@
     
     if(tab == 'create'){	
       $.fancybox.close();
+      return false;
     } else {  
       $(".fb_nav").hide();
       $(".navigation a").removeClass('selected');
       $("#" + tab + "_nav").addClass('selected');
       $("#" + tab).show();
+    }
+    
+    if(tab == 'email'){
+      $('#email_to_id').val(email_to);
+      return false;
     }
     
     if(anchor_name != undefined){
@@ -65,8 +71,8 @@ $(document).ready(function() {
   <%= link_to_function 'Help', "new_tab('help')", :id => "help_nav" %>
   <%= link_to_function 'Feedback', "new_tab('feedback')", :id => "feedback_nav" %>
   
-  <%= image_tag('smallLogo_greenBackground.png', :style => 'float:right;') %>
-  <%= image_tag('beta.png', :style => 'float:right; padding-right:8px;') %>
+  <%= link_to_function image_tag('smallLogo_greenBackground.png', :style => 'float:right;'), "new_tab('home')" %>
+  <%= link_to_function image_tag('beta.png', :style => 'float:right; padding-right:8px;'), "new_tab('home')" %>
   
 </div>
 
@@ -95,7 +101,8 @@ $(document).ready(function() {
   </div>
   
   <div class="create_a_page_div">
-    <%= image_tag('create_a_page.png') %>
+    <%= link_to_function image_tag('create_a_page_button.png', :class => 'create_a_page_button'), "new_tab('create')" %>
+    <%= image_tag('create_a_page_text.png') %>
   </div>
   
 </div>
@@ -189,7 +196,7 @@ $(document).ready(function() {
     <table class="contact_us_table">
       <tr>
         <td class="larger_gray">Advertising:</td>
-        <td class="normal_gray">If you are interested in advertising on postif.com, please email us: <a href="mailto:Ads@postif.com">Ads@postif.com</a></td>
+        <td class="normal_gray">If you are interested in advertising on postif.com, please email us: <%= link_to_function 'Ads@postif.com', "new_tab('email', '', 'Ads@postif.com')" %></td>
       </tr>
       <tr>
         <td class="larger_gray">Feedback:</td>
@@ -197,7 +204,7 @@ $(document).ready(function() {
       </tr>
       <tr>
         <td class="larger_gray">Tech Support:</td>
-        <td class="normal_gray">Please see our Help page. If you can't find an answer there, please email us. We will do our bext to reply quickly, but please understand it may take some time because we get a lot of email :) <a href="mailto:Support@postif.com">Support@postif.com</a></td>
+        <td class="normal_gray">Please see our Help page. If you can't find an answer there, please email us. We will do our bext to reply quickly, but please understand it may take some time because we get a lot of email :) <%= link_to_function 'Support@postif.com', "new_tab('email', '', 'Support@postif.com')" %></td>
       </tr>
     </table>
   </div>
@@ -316,8 +323,15 @@ $(document).ready(function() {
 <div id="feedback" class="fb_nav" style="display:none">
   <div class="fb_nav_header">
     <h1 class="red">Feedback</h1>
-    <%= render 'feedbacks/submitFeedback' %>
   </div>
+    
+    <div class="green feedback_survey">
+    Take our 6 question <%= link_to 'survey', 'http://www.surveymonkey.com/s/2WFHQ58', :target => 'blank' %><br/><br/>
+      and / or <br/><br/>
+      Post your suggestions, comments or whatever below...<br/><br/>
+    </div>
+    
+    <%= render 'feedbacks/submitFeedback' %>
 </div>
 
 <div id="subscribe" class="fb_nav" style="display:none">
@@ -327,14 +341,21 @@ $(document).ready(function() {
   <%= render 'users/subscribe' %>
 </div>
 
+<div id="email" class="fb_nav" style="display:none">
+  <div class="fb_nav_header">
+    <h1 class="red">Send Us An Email</h1>
+  </div>
+  <%= render 'emails/submitEmail' %>
+</div>
+
 
 <div class="tell_friends">
     Tell your friends about postif.com
     <%= link_to image_tag('facebook.png'), 'http://www.facebook.com/sharer/sharer.php?u=http://www.postif.com&t=I found this really useful site: www.postif.com ', :target => 'blank' %>
     <%= link_to image_tag('twitter.png'), 'http://twitter.com/home?status=I found this really useful site: www.postif.com ', :target => 'blank' %>
-    <%= link_to image_tag('linkedIn.png'), 'http://www.linkedin.com/company/2352726', :target => 'blank' %>
+    <%= link_to image_tag('linkedIn.png'), 'http://www.linkedin.com/shareArticle?mini=true&url=http://www.postif.com&title=postif.com&summary=I found this really useful site: www.postif.com &source=http://www.postif.com', :target => 'blank' %>
     <%= link_to image_tag('google.png'), 'https://m.google.com/app/plus/x/?v=compose&content=I found this really useful site: www.postif.com ', :target => 'blank' %>
-    <%= link_to image_tag('mail.png'), 'mailto:benhall2121@yahoo.com', :target => 'blank' %>
+    <%= link_to_function image_tag('mail.png'), "new_tab('email', '', 'contactUs@postif.com')" %>
     
     <%= link_to image_tag('twitter_follow_us.png', :id => 'twitter_follow_us'), 'http://twitter.com/postifcom', :target => 'blank' %>
     <%= link_to_function image_tag('subscribe.png', :id => 'subscribe'), "new_tab('subscribe')" %>

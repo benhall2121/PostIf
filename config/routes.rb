@@ -1,4 +1,6 @@
 Postif::Application.routes.draw do
+  resources :emails
+
   resources :feedbacks
 
   resources :users
@@ -9,6 +11,7 @@ Postif::Application.routes.draw do
   
   match '/users/add_subscriber' => 'users#add_subscriber'
   match '/feedbacks/add_feedback' => 'feedbacks#add_feedback'
+  match '/emails/add_email' => 'emails#add_email'
   
   root :to => "posts#new"
   match '/posts/create' => 'posts#create'

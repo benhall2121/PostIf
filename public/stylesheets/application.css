@@ -142,26 +142,30 @@ div.button_selected{
  .text_middle{
    font-size:26px;
    font-weight:200;
- }
+}
  
- .watch_youtube{
+.watch_youtube{
    text-align:center;
    margin: 50px 0;
- }
+}
  
 .create_a_page_div{
    text-align:center;
    margin: 50px 0;
- }
- 
- .text_bottom{
+}
+
+.create_a_page_button:hover{
+  cursor:pointer;
+}
+
+.text_bottom{
    font-size:32px;
    font-weight:600;
    font-style:italic;
- }
+}
  
  .tell_friends{
-   margin:0 20px 5px 20px;
+   margin:20px 20px 5px 20px;
    font-size:14px;
    color:#78B4FF;
    font-weight:300;
@@ -341,6 +345,11 @@ div.button_selected{
 
 /****************     feedbacks/_submitFeedback.html.erb    ****************/ 
 
+.feedback_survey{
+  text-align:center;
+  margin-top:20px;
+}
+
 .feedback_form_wrapper{
   border:1px solid #AAA;
   padding:15px 15px 7px 15px;
@@ -453,5 +462,88 @@ img.asterisk{
   font-size:11px;
 }
 
+
+
 /****************     End feedbacks/_submitFeedback.html.erb    ****************/ 
+
+
+
+/****************     emails/_submitFeedback.html.erb    ****************/ 
+
+.email_form_wrapper{
+  border:1px solid #AAA;
+  padding:15px 15px 7px 15px;
+  font-size:14px;
+  margin-top:20px;
+  
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  
+  background: #ffffff; /* Old browsers */
+  background: -moz-linear-gradient(top, #ffffff 0%, #eeeeee 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #ffffff 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #ffffff 0%,#eeeeee 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #ffffff 0%,#eeeeee 100%); /* IE10+ */
+  background: linear-gradient(top, #ffffff 0%,#eeeeee 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+  
+}
+
+.email_label_wrapper{
+  color: #5E81C1;
+  margin:3px 3px 3px 7px;
+  vertical-align:top;
+}
+
+
+.email_field{  
+  width:50%;
+}
+
+.email_subject_field{
+  width:100%;	
+}
+
+.email_message_field{
+  width:100%;
+  height:100px;
+}
+
+.email_submit_wrapper{
+  text-align:right;	
+}
+
+.email_submit_wrapper button{
+  font-size:14px;
+  padding:4px 25px;
+  margin:2px 5px;
+  border:1px solid #5E81C1;
+  color:#333;
+  
+  -moz-border-radius: 9px;
+  -webkit-border-radius: 9px;
+  -khtml-border-radius: 9px;
+  border-radius: 9px;
+  
+  background: #EAF6FF; /* Old browsers */
+  background: -moz-linear-gradient(top, #EAF6FF 0%, #91BFE2 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#EAF6FF), color-stop(100%,#91BFE2)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #EAF6FF 0%,#91BFE2 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #EAF6FF 0%,#91BFE2 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #EAF6FF 0%,#91BFE2 100%); /* IE10+ */
+  background: linear-gradient(top, #EAF6FF 0%,#91BFE2 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#EAF6FF', endColorstr='#91BFE2',GradientType=0 ); /* IE6-9 */
+}
+
+.email_submit_wrapper button:hover{
+  cursor:pointer;
+  border:1px solid #1352BF;	
+}
+
+/****************     end emails/_submitFeedback.html.erb    ****************/ 
+
+
  
