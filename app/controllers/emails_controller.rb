@@ -7,7 +7,7 @@ class EmailsController < ApplicationController
     
     PostifMailer.emailMe(@emails).deliver
     
-    if params[:cc]
+    if params[:cc] == "true"
       PostifMailer.emailUser(@emails).deliver    
     end
     

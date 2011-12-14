@@ -24,9 +24,16 @@
     if(tab == 'email'){
       $('#email_to_id').val(email_to);
       if(email_to == ''){
-        $('.send_email').html('Tell your friends about postif');   
+        $('.send_email').html('Email someone about postif...');   
+        $('#email_subject_id').val('Check out postif.com!'); 
+        $('#email_cc').hide(); //Email Checkbox
+        $('.email_cc').hide(); //Email Checkbox Text
+        $('#email_cc').attr('checked', false);
       } else {
-        $('.send_email').html('Send Us An Email');       
+        $('.send_email').html('Send Us An Email');  
+        $('#email_subject_id').val('');        
+        $('#email_cc').show(); //Email Checkbox
+        $('.email_cc').show(); //Email Checkbox Text
       }
     }
     
@@ -34,7 +41,7 @@
       //Reset to the top	    
       $('.home_wrapper').animate({ scrollTop: 0 }, 0);
       //Go to the anchor -100 since the header is fixed
-      $('.home_wrapper').animate({scrollTop: $("#"+anchor_name).offset().top-100},0);
+      $('.home_wrapper').animate({scrollTop: $("#"+anchor_name).offset().top-150},0);
     } else {
       $('.home_wrapper').animate({ scrollTop: 0 }, 0);
     }

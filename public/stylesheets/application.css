@@ -99,18 +99,23 @@ div.button_selected{
   margin:0px;
 }
  
-.navigation{
+.navigation, .navigation_layout{
   background-color: #A4E63A;
   border-bottom:1px solid #7E9C3F;
   padding:10px;
 }
  
+.navigation_layout{
+  border:1px solid #7E9C3F;
+  overflow:auto;
+}
+
 .sticky_nav{
   position:absolute;
   width:715px;
 }
 
- .navigation a{
+ .navigation a, .navigation_layout a{
    font-size:20px;	
    color:#7A3F15;
    padding: 0 5px 0 5px;
@@ -124,7 +129,7 @@ div.button_selected{
  
  .postif_logo_div{
    text-align:center;
-   margin: 50px 0;
+   margin: 0 0 50px 0;
  }
  
  .text_wrapper{
@@ -206,12 +211,16 @@ div.button_selected{
  
 .fb_nav{
   padding:5px 15px;
-  margin-top:53px;  	 
+  margin-top:106px;  	 
 }
 
 .fb_nav_header{
   padding:2px 0;
-  border-bottom: 1px solid #668A3A;	
+  border-bottom: 1px solid #668A3A;
+  position:absolute;
+  top:58px;
+  background-color:#FFFFFF;
+  width:705px;
 }
 
 .section{

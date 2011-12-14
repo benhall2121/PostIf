@@ -74,14 +74,19 @@
 </head>
 <body>
 
-<div>
+<div class="navigation_layout">
   <%= link_to 'Home', home_path(:which => 'home'), :class => 'header_nav', :id => 'popHome' %>
   <%= link_to 'Create', root_path(), :id => 'popcreate_nav' %>
   <%= link_to 'About', home_path(:which => 'about'), :class => 'header_nav', :id => 'popAbout' %>
   <%= link_to 'Help', home_path(:which => 'help'), :class => 'header_nav', :id => 'popHelp' %>
   <%= link_to 'Feedback', home_path(:which => 'feedback'), :class => 'header_nav', :id => 'popFeedback' %>
   <%= link_to 'Save', '#', :class => 'save_canvas' %>
+  
+  <%= link_to image_tag('smallLogo_greenBackground.png', :style => 'float:right;'), home_path(:which => 'home'), :class => 'header_nav' %>
+  <%= link_to image_tag('beta.png', :style => 'float:right; padding-right:8px;'), home_path(:which => 'home'), :class => 'header_nav' %>
 </div>
+
+
 
 <%= yield %>
 
