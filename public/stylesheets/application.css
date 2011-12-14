@@ -21,6 +21,10 @@ textarea{
  resize: none;	
 }
 
+.center{
+  text-align:center;	
+}
+
 #container{
   width:905px;
   margin: 0 auto;
@@ -89,18 +93,23 @@ div.button_selected{
 /****************     Home    ****************/
  
 .home_wrapper{
-   width:750px;	 
-   overflow:auto;
-   border:2px solid #7E9C3F;
-   margin:0px;
- }
+  width:750px;	 
+  overflow-y: scroll;
+  border:2px solid #7E9C3F;
+  margin:0px;
+}
  
 .navigation{
-   background-color: #A4E63A;
-   border-bottom:1px solid #7E9C3F;
-   padding:10px;
- }
+  background-color: #A4E63A;
+  border-bottom:1px solid #7E9C3F;
+  padding:10px;
+}
  
+.sticky_nav{
+  position:absolute;
+  width:715px;
+}
+
  .navigation a{
    font-size:20px;	
    color:#7A3F15;
@@ -196,7 +205,8 @@ div.button_selected{
  }
  
 .fb_nav{
-  padding:5px 15px; 	 
+  padding:5px 15px;
+  margin-top:53px;  	 
 }
 
 .fb_nav_header{
@@ -327,7 +337,7 @@ div.button_selected{
 }
 
 .subscribe_email_textfield{
-  width:332px;	
+  width:270px;	
   height:30px;
   font-size:13px;
   border:1px solid #C9C9C9;
@@ -521,7 +531,7 @@ img.asterisk{
   text-align:right;	
 }
 
-.email_submit_wrapper button{
+.email_submit_wrapper button, .subscribe_submit_email_wrapper button{
   font-size:14px;
   padding:4px 25px;
   margin:2px 5px;

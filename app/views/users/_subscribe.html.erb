@@ -1,9 +1,23 @@
 <div class="subscribe_wrapper">
-  <div class="subscribe_email_div">
-    <%= text_field_tag :email, '', :class => 'subscribe_email_textfield', :id => 'subscribe_email_textfield_id', :placeholder => 'Enter Your Email Address To Receive Future Updates' %>
+  <div class="green center">
+    Subscribe to our mailing list to<br/>
+    receive news about enhancements,<br/>
+    tips, how-tos, etc.
+    <br/><br/>
+    No more than once per week<br/>
+    and no ads/spam.
   </div>
+    <br/>
+  <div class="subscribe_email_div">
+    <%= text_field_tag :email, '', :class => 'subscribe_email_textfield', :id => 'subscribe_email_textfield_id', :placeholder => 'enter your email address' %>
+    <br/><br/>
+    <%= text_field_tag :email_again, '', :class => 'subscribe_email_textfield', :id => 'subscribe_email_textfield_id_again', :placeholder => 're-enter your email address' %>
+  </div>
+    <br/>
   <div class="subscribe_submit_email_wrapper">
-    <button type="button" id="subscribe_submit_email" class="subscribe_submit_email_button">Submit Email</button>
+    <button type="button" id="subscribe_submit_email" class="subscribe_submit_email_button">Subscribe</button>
+    <button type="button" id="subscribe_cancel_email" class="subscribe_cancel_email_button">Cancel</button>
   </div>  
+  <br/>
   <div class="subscribe_warning_message_div red">&nbsp</div>
 </div>

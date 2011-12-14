@@ -23,14 +23,19 @@
     
     if(tab == 'email'){
       $('#email_to_id').val(email_to);
-      return false;
+      if(email_to == ''){
+        $('.send_email').html('Tell your friends about postif');   
+      } else {
+        $('.send_email').html('Send Us An Email');       
+      }
     }
     
     if(anchor_name != undefined){
-      window.location.hash=anchor_name; 
-      parent.$.fancybox.css('padding-top','10px');	    
+      //Reset to the top	    
+      $('.home_wrapper').animate({ scrollTop: 0 }, 0);
+      //Go to the anchor -100 since the header is fixed
+      $('.home_wrapper').animate({scrollTop: $("#"+anchor_name).offset().top-100},0);
     } else {
-      window.location.hash='';  
       $('.home_wrapper').animate({ scrollTop: 0 }, 0);
     }
   }
@@ -64,7 +69,7 @@ $(document).ready(function() {
 });
 </script>
 
-<div class="navigation">
+<div class="navigation sticky_nav">
   <%= link_to_function 'Home', "new_tab('home')", :id => "home_nav" %>
   <%= link_to_function 'Create', "new_tab('create')", :id => "create_nav" %>
   <%= link_to_function 'About', "new_tab('about')", :id => "about_nav" %>
@@ -146,7 +151,7 @@ $(document).ready(function() {
   </div>
   
   <div class="section">
-    <h1 class="green"><a name="beta"></a>Beta</h1>
+    <h1 class="green"><a name="beta" id="beta"></a>Beta</h1>
     
     <p class="normal_gray">We consider postif to be in Beta mainly because we are not finished adding all its features. The most important features are here and work great. So we think you will find postif is a trouble-free tool you can trust for posting your impoetant info!</p>
     <p class="normal_gray">We will be adding lots of <%= link_to_function 'new features', "new_tab('help', 'coming_soon')" %>. If you have any suggestions on ways to make postif beter, please post it on our <%= link_to_function 'Feedback', "new_tab('feedback')" %> page.</p>
@@ -168,7 +173,7 @@ $(document).ready(function() {
   </div>
   
   <div class="section">
-    <h1 class="green"><a name="rules"></a>Rules</h1>
+    <h1 class="green"><a name="rules" id="rules"></a>Rules</h1>
     
     <p class="normal_gray">By using postif, you agree to abide by the site rules. Using the site in any of the following ways is against the rules and will result in immediate deletion of the offending page without notice:</p>
     <ul class="normal_gray">
@@ -183,7 +188,7 @@ $(document).ready(function() {
   </div>
   
   <div class="section">
-    <h1 class="green"><a name="privacy_policy"></a>Privacy Policy</h1>
+    <h1 class="green"><a name="privacy_policy" id="privacy_policy"></a>Privacy Policy</h1>
     
     <p class="normal_gray"><b>We do not share your info with anybody</b>. You can feel 100% safe and here's why:  For users who don't register, the only info to protect is your email address, should you choose to provide it (for purposes of being notified when your page expires). We do not share your email address with anybody.</p>
     <p class="normal_gray">In the future when users can register and subscribe if they want to, we will not share their info with any third parties.</p>
@@ -231,7 +236,7 @@ $(document).ready(function() {
     
     
     <div class="section">
-      <h1 class="green"><a name="coming_soon"></a>Coming Soon!</h1>
+      <h1 class="green"><a name="coming_soon" id="coming_soon"></a>Coming Soon!</h1>
       
       <p class="normal_gray">Here's a few enhancements to postif we are working on. We will be implementing them one at a time as they are ready:</p>
       <ul class="normal_gray">
@@ -343,7 +348,7 @@ $(document).ready(function() {
 
 <div id="email" class="fb_nav" style="display:none">
   <div class="fb_nav_header">
-    <h1 class="red">Send Us An Email</h1>
+    <h1 class="red send_email">Send Us An Email</h1>
   </div>
   <%= render 'emails/submitEmail' %>
 </div>
@@ -351,11 +356,11 @@ $(document).ready(function() {
 
 <div class="tell_friends">
     Tell your friends about postif.com
-    <%= link_to image_tag('facebook.png'), 'http://www.facebook.com/sharer/sharer.php?u=http://www.postif.com&t=I found this really useful site: www.postif.com ', :target => 'blank' %>
+    <a href="http://www.facebook.com/sharer.php?s= 100&amp;p[title]=postif&amp;p[url]=http://www.postif.com&amp;p[images][0]=http://www.postif.com/images/logo.png&amp;p[summary]=I found this really useful site: www.postif.com&amp;p[content]=awesome content" target="_blank"><%= image_tag('facebook.png') %></a>
     <%= link_to image_tag('twitter.png'), 'http://twitter.com/home?status=I found this really useful site: www.postif.com ', :target => 'blank' %>
     <%= link_to image_tag('linkedIn.png'), 'http://www.linkedin.com/shareArticle?mini=true&url=http://www.postif.com&title=postif.com&summary=I found this really useful site: www.postif.com &source=http://www.postif.com', :target => 'blank' %>
     <%= link_to image_tag('google.png'), 'https://m.google.com/app/plus/x/?v=compose&content=I found this really useful site: www.postif.com ', :target => 'blank' %>
-    <%= link_to_function image_tag('mail.png'), "new_tab('email', '', 'contactUs@postif.com')" %>
+    <%= link_to_function image_tag('mail.png'), "new_tab('email', '', '')" %>
     
     <%= link_to image_tag('twitter_follow_us.png', :id => 'twitter_follow_us'), 'http://twitter.com/postifcom', :target => 'blank' %>
     <%= link_to_function image_tag('subscribe.png', :id => 'subscribe'), "new_tab('subscribe')" %>

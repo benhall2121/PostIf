@@ -4,6 +4,9 @@
 </head>
 
 <body>
+
+<% if @email.to.split("@").last == "postif.com" %>
+
 Mark,<br/><br/>
 
 You got a new email from postif. It is from <%= @email.from %> and it is being sent to <%= @email.to %>.
@@ -12,10 +15,25 @@ You got a new email from postif. It is from <%= @email.from %> and it is being s
 
 <b>Subject:</b> <%= @email.subject %>
 
-<br/><br/>
+<br/>
 
 <b>Message:</b><br/> 
 <%= @email.message %>
+
+<% else %>
+Hi <%= @email.to %>,<br/><br/>
+
+Your friend <%= @email.from %> wanted to tell you about <a href="http://www.postif.com">postif.com</a>!<br/><br/>
+
+<div style="border:1px solid #CCCCCC; padding:10px; background:#EEEEEE">
+<%= @email.message %>
+</div>
+<br /><br />
+<div>
+ Join Us at <a href="http://www.postif.com">postif.com</a>
+</div>
+
+<% end %>
 
 </body>
 </html>

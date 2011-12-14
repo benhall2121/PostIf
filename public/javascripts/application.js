@@ -33,17 +33,30 @@ $(document).ready(function() {
   //Submit Subscribe
   $('#subscribe_submit_email').live('click',function(){
       var email_address = $('#subscribe_email_textfield_id').val();
-      
+      var email_address_again = $('#subscribe_email_textfield_id_again').val();
         
       if(email_address.indexOf("@") == -1){ 
         $('.subscribe_warning_message_div').html('Please enter a valid email address');
+        return false;
+      }
+      
+      if(email_address != email_address_again){ 
+        $('.subscribe_warning_message_div').html('The email addresses you entered do not match. Please try again.');
         return false;
       }
   		
       $.post('/users/add_subscriber', {"email_address": email_address }, function(response) { 
         $('.subscribe_warning_message_div').html("Thanks for signing up! You'll hear from us soon");
         $('#subscribe_email_textfield_id').val('');
+        $('#subscribe_email_textfield_id_again').val('');
       });
+  });
+  
+  //Cancel Subscribe
+  $("#subscribe_cancel_email").live('click',function(){
+      $('#subscribe_email_textfield_id').val('');
+      $('#subscribe_email_textfield_id_again').val('');
+      $('.subscribe_warning_message_div').html("&nbsp");
   });
   
   //Submit feedback
