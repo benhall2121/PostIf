@@ -33,6 +33,7 @@ Your friend <%= @email.from %> wanted to tell you about <a href="http://www.post
 
 <br/><br/>
 
+<% if @email.to.split("@").last != "postif.com" %>
 <table style='text-align:center; color:#668A3A;'>
   <tr>
     <td>"Got something you need to share?</td>
@@ -47,7 +48,7 @@ Your friend <%= @email.from %> wanted to tell you about <a href="http://www.post
   <td><%= link_to image_tag('http://www.postif.com/images/logo.png'), 'http://www.postif.com' %></td>
   </tr>
 </table>
-
+<% end %>
 
 
 </body>

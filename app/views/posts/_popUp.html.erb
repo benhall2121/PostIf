@@ -4,11 +4,17 @@
   $('.home_wrapper').css({'max-height': window_height});
   
  
-  
+  var prev_tab = ''
   function new_tab(tab, anchor_name, email_to)
-  {   
+  {     
     if(tab == ''){
       tab = 'home';	  	  
+    }
+    
+    if($(".navigation a.selected").attr('id') == undefined){
+    	prev_tab = '';    
+    }else{
+        prev_tab = $(".navigation a.selected").attr('id').replace('_nav','');
     }
     
     if(tab == 'create'){	
@@ -16,10 +22,12 @@
       return false;
     } else {  
       $(".fb_nav").hide();
+      //prev_tab = $(".navigation a.selected").attr('id').replace('_nav','');
       $(".navigation a").removeClass('selected');
       $("#" + tab + "_nav").addClass('selected');
       $("#" + tab).show();
     }
+    
     
     if(tab == 'email'){
       $('#email_to_id').val(email_to);
@@ -289,7 +297,7 @@ $('.prev').click(function() {
       </tr>
       <tr>
         <td class="larger_gray">Tech Support:</td>
-        <td class="normal_gray">Please see our Help page. If you can't find an answer there, please email us. We will do our bext to reply quickly, but please understand it may take some time because we get a lot of email :) <%= link_to_function 'Support@postif.com', "new_tab('email', '', 'Support@postif.com')" %></td>
+        <td class="normal_gray">Please see our Help page. If you can't find an answer there, please email us. We will do our best to reply quickly, but please understand it may take some time because we get a lot of email :) <%= link_to_function 'Support@postif.com', "new_tab('email', '', 'Support@postif.com')" %></td>
       </tr>
     </table>
   </div>

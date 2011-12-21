@@ -596,7 +596,7 @@ img.asterisk{
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#EAF6FF', endColorstr='#91BFE2',GradientType=0 ); /* IE6-9 */
 }
 
-.email_submit_wrapper button:hover{
+.email_submit_wrapper button:hover, .subscribe_submit_email_wrapper button:hover{
   cursor:pointer;
   border:1px solid #1352BF;	
 }

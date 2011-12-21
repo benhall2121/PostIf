@@ -57,6 +57,9 @@ $(document).ready(function() {
       $('#subscribe_email_textfield_id').val('');
       $('#subscribe_email_textfield_id_again').val('');
       $('.subscribe_warning_message_div').html("&nbsp");
+      
+      
+      $.fancybox.close();
   });
   
   //Submit feedback
@@ -72,8 +75,14 @@ $(document).ready(function() {
       
       $.post('/feedbacks/add_feedback', {"feedback": {"name": name, "subject": subject, "message": message} }, 'script');
       $('#feedback_name_id').val('');
-        $('#feedback_subject_id').val('');
-        $('#feedback_message_id').val('');
+      $('#feedback_subject_id').val('');
+      $('#feedback_message_id').val('');
+        
+      //if(prev_tab == ''){
+      //	$.fancybox.close();    
+      //} else {
+      //  new_tab(prev_tab);
+      //}
   });
   
   //Cancel feedback
@@ -81,6 +90,12 @@ $(document).ready(function() {
       $('#feedback_name_id').val('');
       $('#feedback_subject_id').val('');
       $('#feedback_message_id').val('');
+     
+      if(prev_tab == ''){
+      	$.fancybox.close();    
+      } else {
+        new_tab(prev_tab);
+      }
   });
   
   //Submit Email
@@ -101,7 +116,12 @@ $(document).ready(function() {
       $('#email_subject_id').val('');
       $('#email_message_id').val('');
       $('#email_cc').attr('checked', false);
-
+      
+      if(prev_tab == ''){
+      	$.fancybox.close();    
+      } else {
+        new_tab(prev_tab);
+      }
   });
   
   //Cancel Email
@@ -110,6 +130,12 @@ $(document).ready(function() {
       $('#email_subject_id').val('');
       $('#email_message_id').val('');
       $('#email_cc').attr('checked', false);
+      
+      if(prev_tab == ''){
+      	$.fancybox.close();    
+      } else {
+        new_tab(prev_tab);
+      }
   });
   
 });
