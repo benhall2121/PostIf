@@ -90,6 +90,40 @@ div.button_selected{
 /****************     End FancyBox    ****************/
  
  
+.highlighted{
+  background-color:#A4E63A;
+}
+
+.help_header{
+  display:inline-block;	
+}
+
+.help_search{
+  display:inline-block; 
+  float:right; 
+  margin-top:6px;
+  vertical-align:middle;
+  color:#444;
+}
+
+.search_help{
+  width:75px;
+  height:20px;
+  border:1px solid #444;
+  vertical-align:middle;
+  font-size:10px; 
+  
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -khtml-border-radius: 6px;
+  border-radius: 6px;
+}
+
+.arrow{
+  vertical-align:middle;
+  padding:0 1px;	
+}
+
 /****************     Home    ****************/
  
 .home_wrapper{

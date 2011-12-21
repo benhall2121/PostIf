@@ -46,12 +46,20 @@
       $('.home_wrapper').animate({ scrollTop: 0 }, 0);
     }
   }
+  
+  function jumpTo(high_value){
+    //Reset to the top	    
+    $('.home_wrapper').animate({ scrollTop: 0 }, 0);
+    //Go to the anchor -100 since the header is fixed
+    $('.home_wrapper').animate({scrollTop: $("#high_"+high_value).offset().top-150},0);
+  }
  
 $.ajaxSetup({
   beforeSend: function(xhr) {
     xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
   }
 }); 
+
   
 $(document).ready(function() {  
 
@@ -72,6 +80,71 @@ $(document).ready(function() {
     
     $(this).html(text);
   });
+  
+var search_length=0; 
+var where_are_we=1;
+  
+  $(".search_help").keyup(function(){
+    var phrase = $(this).val();//.replace(/^\s+|\s+$/g, "");  
+  
+    $("span.highlighted").contents().unwrap();
+    search_length = 0;
+    where_are_we = 1;
+    
+   // phrase = phrase.replace(/\s+/g, "|");
+ 
+    //make sure there are a couple letters
+    if (phrase.length < 3) { return; }           
+ 
+    //append the rest of the expression
+    //phrase = ["\\b(", phrase, ")"].join("");
+    
+    var split_string = phrase.split(' ');
+   var item = phrase;
+    //jQuery.each(split_string, function(index, item) {
+     // if(item == ""){ return false; }	
+      //"(?<!<[^>]*)Jon Doe(?<![^>]*<)"
+      //"[^</?\w+\s+[^>]*>]"
+      var pattern = "<?[^.*>]" + item;// + "[^<\/.*??>]??";//"?<!<[^>]*" + item + "?<![^>]*<";
+      $('div#help :contains("'+item+'")').each(function(){
+        $(this).html($(this).html().replace(new RegExp(pattern, 'g'), ' <span class="highlighted">'+item+'</span>'));
+      });
+    //});
+    
+    var id = 1;
+    $('.highlighted').each(function(){
+      $(this).attr("id", 'high_'+id);
+      id++;
+    });
+    
+    search_length = $('span.highlighted').length;
+    jumpTo(where_are_we);
+    where_are_we++;
+  });
+  
+  
+$('.next').live('click', function() {	
+		
+  if(where_are_we > search_length){
+    where_are_we = 1;
+  }
+  
+  jumpTo(where_are_we);
+  where_are_we++;
+    
+});
+
+
+$('.prev').click(function() {
+  
+  if(where_are_we == 0){
+    where_are_we = search_length;
+  }
+  
+
+  jumpTo(where_are_we);
+  where_are_we--;
+});
   
 });
 </script>
@@ -226,7 +299,11 @@ $(document).ready(function() {
 
 <div id="help" class="fb_nav" style="display:none">
   <div class="fb_nav_header">
-    <h1 class="red">Help</h1>
+    <h1 class="red help_header">Help</h1>
+    <div class="help_search">Search Help <input type="text" class="search_help" />
+    <span class="prev" style="cursor:pointer;"><%= image_tag('arrowLeft.png', :class => 'arrow') %></span>
+    <span class="next" style="cursor:pointer;"><%= image_tag('arrowRight.png', :class => 'arrow') %></span>
+    </div>
   </div>
   
     <div class="section">
