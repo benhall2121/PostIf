@@ -1,11 +1,38 @@
-<div>
-  <%= form_tag search_post_path, :method => 'get', :id => "search_post" do %>
-  <div>
-    <%= text_field_tag :search, params[:search], :id => 'post_url' %>
-    <span id="url_ok"></span>
+<div class="create_header">
+
+  <div class="create_header_left_div">
+    <%= form_tag search_post_path, :method => 'get', :id => "search_post" do %>
+      <div class="post_url_div">www.postif.com/<%= text_field_tag :search, params[:search], :id => 'post_url', :placeholder => 'type a page for your url here' %></div>
+      <div class="url_ok_div"><span id="url_ok">&nbsp;</span></div>
+      <%= hidden_field_tag 'valid_url', 'false', :id => 'valid_url' %>
+    <% end %>
   </div>
-  <% end %>
+  
+  <div class="create_header_right_div">
+    <script type="text/javascript">
+      
+        google_ad_client = "ca-pub-1677570997517028"; 
+        google_ad_slot = "4494111324";
+        google_ad_width = 468;
+        google_ad_height = 65;
+    </script>
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+  </div>
+  
 </div>
+
+<div class="ipaint_navigation">
+  <div><%= link_to 'New Page', '#' %></div>
+  <div><%= link_to 'Open Page', '#' %></div>
+  <div><%= link_to 'Save', '#' %></div>
+  <div><%= link_to 'Preview', '#' %></div>
+  <div><%= link_to 'Post', '#' %></div>
+  <div><%= link_to 'Share', '#' %></div>
+  <div><%= link_to 'Renew', '#' %></div>
+  <div><%= link_to 'Delete', '#' %></div>
+</div>
+
 <div>
   <%= render 'shared/iPaint_canvas' %>
 </div>

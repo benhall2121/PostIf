@@ -215,11 +215,25 @@ function iPaintApp(ipaint_frame,width, height,trackingCursorPosition,trackingObj
 
 iPaintApp.prototype.setupFrame = function(oProp){
    var w = 0,h = 0;
-   var margin = 5; // Same as defined in {body} element
+   var margin = 0; // Same as defined in {body} element
 
    if ( !this.isMobileDevice() ){
-      w = $(window).width() - margin * 2;
-      h = $(window).height() - margin * 2;
+      var ipaint_height = $("#ipaint_frame").outerHeight();
+      var window_height = $(window).height();
+      var body_height = $('body').outerHeight();
+   	   
+      //I can't find where the canvas is adding 18px on page load
+      var canvas_height = $('#canvas_container').innerHeight();
+      var remove_extra = 0;
+      if(canvas_height == 0){
+   	remove_extra = 18;  
+      }else{
+        remove_extra = 0;
+      }
+   
+      var canvas_height = window_height - (body_height - ipaint_height)-remove_extra;
+      w = $(window).width();
+      h = canvas_height;//$(window).height() - margin * 2;
       this.topMargin = 0;
    }else{
       if ( iOS ){
@@ -268,14 +282,12 @@ iPaintApp.prototype.setupFrame = function(oProp){
       }
    }
 
-   $("#ipaint_frame").css({width:(w-2)+"px",height:(h-2)+"px"});
+   $("#ipaint_frame").css({width:w+"px",height:h+"px"});
    var hCanvas = $("#ipaint_frame").innerHeight() - 
                  $("#menu_bar").outerHeight() - 
                  nToolbarHeight - 
                  $("#status_bar").outerHeight();
 
-   
-   
    $("#canvas_container").css({height:hCanvas+"px"});
 
    $("#inner_container").css({

@@ -1,7 +1,7 @@
 ActionMailer::Base.smtp_settings = {
   :address              => "smtp.gmail.com",
   :port                 => 587,
-  :domain               => "benerino.com",
+  :domain               => "postif.com",
   :user_name            => "info@postif.com",
   :password             => "postifMark",
   :authentication       => "plain",

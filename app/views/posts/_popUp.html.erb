@@ -31,7 +31,7 @@
     
     if(tab == 'email'){
       $('#email_to_id').val(email_to);
-      if(email_to == ''){
+      if(email_to == '' || email_to == undefined){
         $('.send_email').html('Email someone about postif...');   
         $('#email_subject_id').val('Check out postif.com!'); 
         $('#email_cc').hide(); //Email Checkbox
@@ -164,8 +164,8 @@ $('.prev').click(function() {
   <%= link_to_function 'Help', "new_tab('help')", :id => "help_nav" %>
   <%= link_to_function 'Feedback', "new_tab('feedback')", :id => "feedback_nav" %>
   
-  <%= link_to_function image_tag('smallLogo_greenBackground.png', :style => 'float:right;'), "new_tab('home')" %>
-  <%= link_to_function image_tag('beta.png', :style => 'float:right; padding-right:8px;'), "new_tab('home')" %>
+  <%= link_to_function image_tag('smallLogo_greenBackground103x25.png', :style => 'float:right;'), "new_tab('home')" %>
+  <%= link_to_function image_tag('beta32x19.png', :style => 'float:right; padding-right:8px;'), "new_tab('home')" %>
   
 </div>
 
@@ -455,7 +455,7 @@ $('.prev').click(function() {
     <%= link_to_function image_tag('mail.png'), "new_tab('email', '', '')" %>
     
     <%= link_to image_tag('twitter_follow_us.png', :id => 'twitter_follow_us'), 'http://twitter.com/postifcom', :target => 'blank' %>
-    <%= link_to_function image_tag('subscribe.png', :id => 'subscribe'), "new_tab('subscribe')" %>
+    <%= link_to_function image_tag('subscribe.png', :id => 'subscribe_to_postif'), "new_tab('subscribe')" %>
 </div>
 
 <div class="footer">

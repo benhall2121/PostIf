@@ -431,7 +431,7 @@ jsWindow.prototype.createDialog = function(id,title,w,h,type){
          this.winManager.modalDialog[nCount-1].jwindow.inactiveWindow();
          
       }
-      root = document.body;
+      root = document.getElementById('ipaint_frame');
    }
    
    $(root)

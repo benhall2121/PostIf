@@ -1,3 +1,13 @@
-$("#url_ok").html("<%= escape_javascript(render("shared/search")) %>");
+<% if !@posts.empty? %>
+  $("#url_ok").html("That URL is not available");
+  $('#url_ok').removeClass('light_green');	
+  $('#url_ok').addClass('light_red');
+  $('#valid_url').val('false');
+<% else %>
+  $("#url_ok").html("That URL is available");	
+  $('#url_ok').removeClass('light_red');	
+  $('#url_ok').addClass('light_green');
+  $('#valid_url').val('true');
+<% end %>
 
 

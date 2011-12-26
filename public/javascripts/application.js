@@ -18,6 +18,12 @@ $(document).ready(function() {
   	aa = $('canvas#ipaint_frame_canvas').get();
 	canvas_html=aa[0].toDataURL('image/png');	
   	url = $('#post_url').val();
+  	valid_url = $('#valid_url').val();
+  	
+  	if(url == '' || valid_url == 'false'){
+  	  alert("Please Enter a Valid URL");
+  	  return false;
+  	}
   	
       $.post('/posts/create', {post:{"canvas_html": canvas_html, "url": url }}, function(response) { 
         //$('.test_div').html("Thanks");
@@ -26,6 +32,19 @@ $(document).ready(function() {
   
   
   $("#search_post input").keyup(function() {
+  		  
+        url = $('#post_url').val().replace(/ /g,'');
+        
+        $('#post_url').val(url);
+        
+  	if(url == ''){
+  	  $('#url_ok').html('&nbsp;');	
+  	  $('#url_ok').removeClass('light_red');		
+  	  $('#url_ok').removeClass('light_green');
+  	  $('#valid_url').val('false');
+  	  return false;
+  	}
+  		  
     $.get($("#search_post").attr("action"), $("#search_post").serialize(), null, "script");
     return false;
   });

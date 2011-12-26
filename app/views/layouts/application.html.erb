@@ -12,8 +12,8 @@
     <%= javascript_include_tag 'rails' %>
     
     <meta property="og:image" content='<%= image_tag('logo.ong') %>' id="fb_content_image" />
-    <meta property="og:title" content='I found this really useful site: www.postif.com ' id="fb_content_title" />
-    <meta property="og:description" content='I found this really useful site: www.postif.com ' id="fb_content_description" />
+    <meta property="og:title" content='I found this really useful site: <%= request.url %> ' id="fb_content_title" />
+    <meta property="og:description" content='I found this really useful site: <%= request.url %> ' id="fb_content_description" />
     
     <!-----  iPaint Files  ----->
         <link rel="stylesheet" type="text/css" href="/style/iPaint.css" />      
@@ -75,20 +75,40 @@
 <body>
 
 <div class="navigation_layout">
-  <%= link_to 'Home', home_path(:which => 'home'), :class => 'header_nav', :id => 'popHome' %>
-  <%= link_to 'Create', root_path(), :id => 'popcreate_nav' %>
-  <%= link_to 'About', home_path(:which => 'about'), :class => 'header_nav', :id => 'popAbout' %>
-  <%= link_to 'Help', home_path(:which => 'help'), :class => 'header_nav', :id => 'popHelp' %>
-  <%= link_to 'Feedback', home_path(:which => 'feedback'), :class => 'header_nav', :id => 'popFeedback' %>
-  <%= link_to 'Save', '#', :class => 'save_canvas' %>
+  <div class="header_left">
+    <div><%= link_to 'Home', home_path(:which => 'home'), :class => 'header_nav', :id => 'popHome' %></div>
+    <div><%= link_to 'Create', root_path(), :id => 'popcreate_nav' %></div>
+    <div><%= link_to 'About', home_path(:which => 'about'), :class => 'header_nav', :id => 'popAbout' %></div>
+    <div><%= link_to 'Help', home_path(:which => 'help'), :class => 'header_nav', :id => 'popHelp' %></div>
+    <div><%= link_to 'Feedback', home_path(:which => 'feedback'), :class => 'header_nav', :id => 'popFeedback' %></div>
+    <div><%= link_to 'Save', '#', :class => 'save_canvas' %></div>
+  </div>
   
-  <%= link_to image_tag('smallLogo_greenBackground.png', :style => 'float:right;'), home_path(:which => 'home'), :class => 'header_nav' %>
-  <%= link_to image_tag('beta.png', :style => 'float:right; padding-right:8px;'), home_path(:which => 'home'), :class => 'header_nav' %>
+  <div class="header_right">
+    <div><%= link_to image_tag('beta32x19.png'), home_path(:which => 'home'), :class => 'header_nav' %></div>
+    <div><%= link_to image_tag('smallLogo_greenBackground103x25.png'), home_path(:which => 'home'), :class => 'header_nav' %></div>
+  </div>
 </div>
 
 
 
 <%= yield %>
+
+<div class="tell_friends">
+    Tell your friends about postif.com
+    <a href="http://www.facebook.com/sharer.php?s= 100&amp;p[title]=postif&amp;p[url]=<%= request.url %>&amp;p[images][0]=http://www.postif.com/images/logo.png&amp;p[summary]=I found this really useful site: <%= request.url %>&amp;p[content]=awesome content" target="_blank"><%= image_tag('facebook.png') %></a>
+    <%= link_to image_tag('twitter.png'), 'http://twitter.com/home?status=I found this really useful site: ' + request.url, :target => 'blank' %>
+    <%= link_to image_tag('linkedIn.png'), 'http://www.linkedin.com/shareArticle?mini=true&url=' + request.url + '&title=postif.com&summary=I found this really useful site: ' + request.url + ' &source=' + request.url, :target => 'blank' %>
+    <%= link_to image_tag('google.png'), 'https://m.google.com/app/plus/x/?v=compose&content=I found this really useful site: ' + request.url, :target => 'blank' %>
+    <%= link_to image_tag('mail.png'), home_path(:which => 'email'), :class => 'header_nav' %>
+    
+    <%= link_to image_tag('twitter_follow_us.png', :id => 'twitter_follow_us'), 'http://twitter.com/postifcom', :target => 'blank' %>
+    <%= link_to image_tag('subscribe.png', :id => 'subscribe_to_postif'), home_path(:which => 'subscribe'), :class => 'header_nav' %>
+</div>
+
+<div class="footer">
+  (c) <%= Time.now.year %> postif.com. All rights reserved
+</div>
 
 </body>
 </html>

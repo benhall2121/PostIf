@@ -1,6 +1,7 @@
 body{
- background-color:gray;
  font-family:Arial, Helvetica, sans-serif;
+ margin:0;
+ padding:0;
 }
 
 h1{
@@ -19,6 +20,10 @@ a:hover{
 
 textarea{
  resize: none;	
+}
+
+textarea:focus, input:focus{
+    outline: none;
 }
 
 .center{
@@ -133,24 +138,49 @@ div.button_selected{
   margin:0px;
 }
  
-.navigation, .navigation_layout{
+.navigation{
   background-color: #A4E63A;
   border-bottom:1px solid #7E9C3F;
   padding:10px;
 }
- 
+
 .navigation_layout{
+  background-color: #A4E63A;
   border:1px solid #7E9C3F;
   overflow:auto;
+  padding:5px;
+  
+  -moz-border-radius-bottomright: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -khtml-border-radius-bottomleft: 3px;
+  -khtml-border-radius-bottomright: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.header_left{
+ width:75%;	
+  vertical-align:middle;
+}
+
+.header_right{
+  width:24%;
+  text-align:right;
+  vertical-align:middle;
 }
 
 .sticky_nav{
   position:absolute;
   width:715px;
 }
+.navigation_layout div{
+   display:inline-block;
+}
 
  .navigation a, .navigation_layout a{
-   font-size:20px;	
+   font-size:17px;	
    color:#7A3F15;
    padding: 0 5px 0 5px;
    text-decoration:none;
@@ -158,7 +188,7 @@ div.button_selected{
  
  a.selected{
    font-weight:600;	 
-   font-size:25px;
+   font-size:20px;
  }
  
  .postif_logo_div{
@@ -174,13 +204,21 @@ div.button_selected{
    margin: 20px 0;	 
  }
  
- .green{
-   color:#668A3A;	 
- }
+.green{
+  color:#668A3A;	 
+}
  
- .red{
-   color:#783F00;	 
- }
+.light_green{
+  color:#00D300;	 
+}
+
+.red{
+  color:#783F00;	 
+}
+
+.light_red{
+  color:#E90000;	 
+}
  
  .text_top{
    font-size:23px;
@@ -213,7 +251,7 @@ div.button_selected{
 }
  
  .tell_friends{
-   margin:20px 20px 5px 20px;
+   margin:10px 20px 5px 20px;
    font-size:14px;
    color:#78B4FF;
    font-weight:300;
@@ -225,7 +263,7 @@ div.button_selected{
   margin:0 2px;
  }
 
- img#subscribe{
+ img#subscribe_to_postif{
    float:right;	 
    margin-right:30px;
  }
@@ -237,10 +275,10 @@ div.button_selected{
 .footer{
    background-color: #A4E63A;
    border-top:1px solid #7E9C3F;
-   padding:7px;
+   padding:3px;
    text-align:center;
    color:#868F72;
-   font-size:12px;
+   font-size:10px;
  }
  
 .fb_nav{
@@ -603,5 +641,89 @@ img.asterisk{
 
 /****************     end emails/_submitFeedback.html.erb    ****************/ 
 
+
+
+
+/****************     Create PostIF Page - posts/new.html.erb    ****************/ 
+
+.create_header{
+  padding: 3px 10px;	
+  overflow:auto;
+}
+
+.create_header_left_div{
+  display:inline-block;	
+  padding:3px;
+  margin-top:15px;
+}
+
+.post_url_div{
+  width:400px;
+  border:2px solid #7E9C3F;
+  background-color: #D9F09A;
+  padding:5px 3px;
+  color:#AAA;
+  font-size:15px;
+  
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -khtml-border-radius: 6px;
+  border-radius: 6px;
+}
+
+#post_url{
+  border:none;
+  width:275px;
+  background-color: transparent;
+  text-decoration: none;
+  margin:0;
+  padding:0;
+  color:#783F00;
+}
+
+input#post_url::-webkit-input-placeholder {
+    color:    #783F00;
+}
+input#post_url:-moz-placeholder {
+    color:    #783F00;
+}
+
+.url_ok_div{
+  text-align:center; 
+  padding:3px;
+  font-size:14px;
+}
+
+.create_header_right_div{
+  display:inline-block;
+  border: 1px dashed #CCC;
+  padding:3px;	
+  float:right;
+}
+
+.ipaint_navigation{
+  background-color:#ECF5FD;
+  border:1px solid #A9A9A9;
+  margin:5px 10px;
+  font-size:14px;
+  padding: 5px 10px;
+  text-decoration:none;
+  
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -khtml-border-radius: 6px;
+  border-radius: 6px;
+}
+
+.ipaint_navigation div{
+  display:inline-block;
+  padding:0 8px;
+}
+
+.ipaint_navigation a{
+  color:#383A3C;
+}
+
+/****************     end Create PostIF Page - posts/new.html.erb    ****************/ 
 
  
