@@ -2,11 +2,11 @@
 <html>
 <head>
   <title>PostIf</title>
+    
     <%= stylesheet_link_tag 'fancybox/jquery.fancybox-1.3.4.css', 'application' %>
     <script type="text/javascript" src="/src/jquery-1.4.2.min.js"></script>
     
-    <%= javascript_include_tag 'application' %>
-    
+    <%= javascript_include_tag 'application' %> 
     <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js" %>
     <%= javascript_include_tag "fancybox/jquery.fancybox-1.3.4.pack.js" %>
     <%= javascript_include_tag 'rails' %>
@@ -74,6 +74,7 @@
 </head>
 <body>
 
+<% if !skip_layout %>
 <div class="navigation_layout">
   <div class="header_left">
     <div><%= link_to 'Home', home_path(:which => 'home'), :class => 'header_nav', :id => 'popHome' %></div>
@@ -81,19 +82,19 @@
     <div><%= link_to 'About', home_path(:which => 'about'), :class => 'header_nav', :id => 'popAbout' %></div>
     <div><%= link_to 'Help', home_path(:which => 'help'), :class => 'header_nav', :id => 'popHelp' %></div>
     <div><%= link_to 'Feedback', home_path(:which => 'feedback'), :class => 'header_nav', :id => 'popFeedback' %></div>
-    <div><%= link_to 'Save', '#', :class => 'save_canvas' %></div>
   </div>
   
   <div class="header_right">
-    <div><%= link_to image_tag('beta32x19.png'), home_path(:which => 'home'), :class => 'header_nav' %></div>
-    <div><%= link_to image_tag('smallLogo_greenBackground103x25.png'), home_path(:which => 'home'), :class => 'header_nav' %></div>
+    <div><%= link_to image_tag('beta32x19.png'), root_url %></div>
+    <div><%= link_to image_tag('smallLogo_greenBackground103x25.png'), root_url %></div>
   </div>
 </div>
-
+<% end %>
 
 
 <%= yield %>
 
+<% if !skip_layout %>
 <div class="tell_friends">
     Tell your friends about postif.com
     <a href="http://www.facebook.com/sharer.php?s= 100&amp;p[title]=postif&amp;p[url]=<%= request.url %>&amp;p[images][0]=http://www.postif.com/images/logo.png&amp;p[summary]=I found this really useful site: <%= request.url %>&amp;p[content]=awesome content" target="_blank"><%= image_tag('facebook.png') %></a>
@@ -109,6 +110,7 @@
 <div class="footer">
   (c) <%= Time.now.year %> postif.com. All rights reserved
 </div>
+<% end %>
 
 </body>
 </html>

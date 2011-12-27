@@ -446,21 +446,7 @@ $('.prev').click(function() {
 </div>
 
 
-<div class="tell_friends">
-    Tell your friends about postif.com
-    <a href="http://www.facebook.com/sharer.php?s= 100&amp;p[title]=postif&amp;p[url]=http://www.postif.com&amp;p[images][0]=http://www.postif.com/images/logo.png&amp;p[summary]=I found this really useful site: www.postif.com&amp;p[content]=awesome content" target="_blank"><%= image_tag('facebook.png') %></a>
-    <%= link_to image_tag('twitter.png'), 'http://twitter.com/home?status=I found this really useful site: www.postif.com ', :target => 'blank' %>
-    <%= link_to image_tag('linkedIn.png'), 'http://www.linkedin.com/shareArticle?mini=true&url=http://www.postif.com&title=postif.com&summary=I found this really useful site: www.postif.com &source=http://www.postif.com', :target => 'blank' %>
-    <%= link_to image_tag('google.png'), 'https://m.google.com/app/plus/x/?v=compose&content=I found this really useful site: www.postif.com ', :target => 'blank' %>
-    <%= link_to_function image_tag('mail.png'), "new_tab('email', '', '')" %>
-    
-    <%= link_to image_tag('twitter_follow_us.png', :id => 'twitter_follow_us'), 'http://twitter.com/postifcom', :target => 'blank' %>
-    <%= link_to_function image_tag('subscribe.png', :id => 'subscribe_to_postif'), "new_tab('subscribe')" %>
-</div>
-
-<div class="footer">
-  (c) <%= Time.now.year %> postif.com. All rights reserved
-</div>
+<%= render 'shared/popUpFooter' %>
 
 </div>
 

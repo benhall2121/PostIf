@@ -4,15 +4,14 @@ jQuery.ajaxSetup({
   'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
 })
 
-$(window).load(function () {
-			
+$(window).load(function () {	
   $("#popHome").fancybox().trigger('click');
 });
 
 $(document).ready(function() {	
-  $(".header_nav").fancybox({
-		  
-  });
+  $(".header_nav").fancybox({});
+  $(".pop").fancybox();
+  
   
   $(".save_canvas").click(function(){
   	aa = $('canvas#ipaint_frame_canvas').get();
@@ -37,14 +36,14 @@ $(document).ready(function() {
         
         $('#post_url').val(url);
         
-  	if(url == ''){
+  	if(url == '' || url == '&nbsp;'){
   	  $('#url_ok').html('&nbsp;');	
   	  $('#url_ok').removeClass('light_red');		
   	  $('#url_ok').removeClass('light_green');
   	  $('#valid_url').val('false');
   	  return false;
   	}
-  		  
+  		
     $.get($("#search_post").attr("action"), $("#search_post").serialize(), null, "script");
     return false;
   });

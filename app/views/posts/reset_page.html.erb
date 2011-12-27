@@ -1,0 +1,39 @@
+<div class="popUp_wrapper">
+<script type="text/javascript">
+
+$(document).ready(function() {  
+  $(".new_page_no").live('click', function(){
+    $.fancybox.close();
+  });
+  $(".new_page_yes").bind("click",function(){
+    $("#tb_tool .clear_image").trigger('click');
+    $('#post_url').val('').trigger('keyup');
+    $.fancybox.close();
+  });
+});
+
+</script>
+  
+  <div class="popUp_header">
+    New Page
+  </div>
+
+  <div class="popUpContent">
+    <div class="popUpText normal_gray">
+      <span>Do you want to leave the current page and open a blank page?</span><br/>
+      <span>Any unsaved data on the current page will be lost.</span><br/>
+    </div>
+    
+    <div class="popUpButtonDiv all_buttons">
+      <button type="button" id="new_page_yes" class="new_page_yes">Yes, continue</button>
+      <button type="button" id="new_page_no" class="new_page_no">No, cancel</button>
+    </div> 
+    
+    <div class="popUpTip small_gray">
+      <span>Tip: To create a new page from the current page,</span><br/>
+      <span>click cancel, then simply type a new</span><br/>
+      <span>URL in the green URL bar.</span>
+    </div>
+  </div>
+
+</div>

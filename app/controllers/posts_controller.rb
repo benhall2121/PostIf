@@ -23,6 +23,10 @@ class PostsController < ApplicationController
     render :layout => false	  
   end
   
+  def reset_page  
+    render :layout => false
+  end
+  
   def index
     @posts = Post.all
 
