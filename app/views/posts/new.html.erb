@@ -24,13 +24,14 @@
 
 <div class="ipaint_navigation">
   <div><%= link_to 'New Page', reset_page_path(), :class => 'pop' %></div>
-  <div><%= link_to 'Open Page', '#' %></div>
-  <div><%= link_to 'Save', '#', :class => 'save_canvas' %></div>
+  <div><%= link_to 'Open Page', open_page_path(), :class => 'pop' %></div>
+  <!-- See jquery with class 'save_canvas' for saving method -->
+  <div><%= link_to 'Save', save_page_path(), :class => 'pop' %></div>
   <div><%= link_to 'Preview', '#' %></div>
-  <div><%= link_to 'Post', '#' %></div>
-  <div><%= link_to 'Share', '#' %></div>
-  <div><%= link_to 'Renew', '#' %></div>
-  <div><%= link_to 'Delete', '#' %></div>
+  <div><%= link_to 'Post', post_page_path(), :class => 'pop' %></div>
+  <div><%= link_to 'Share', share_page_path(), :class => 'pop' %></div>
+  <div><%= link_to 'Renew', renew_page_path(), :class => 'pop' %></div>
+  <div><%= link_to 'Delete', delete_page_path(), :class => 'pop' %></div>
 </div>
 
 <div>

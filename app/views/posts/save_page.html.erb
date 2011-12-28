@@ -1,0 +1,70 @@
+<div class="popUp_wrapper">
+<script type="text/javascript">
+
+$(document).ready(function() {  
+  $("#cancel_button").live('click', function(){
+    $.fancybox.close();
+  });
+  
+  $("#save_button").live('click', function(){
+    alert("save button");
+  });
+  
+  $("#search_post_open input").keyup(function() {
+  		  
+        url = $('#post_url_open').val().replace(/ /g,'');
+        
+        $('#post_url_open').val(url);
+        
+  	if(url == '' || url == '&nbsp;'){
+  	  $('#url_ok_open').html('&nbsp;');	
+  	  $('#url_ok_open').removeClass('light_red');		
+  	  $('#url_ok_open').removeClass('light_green');
+  	  $('#valid_url_open').val('false');
+  	  return false;
+  	}
+  		
+    $.get($("#search_post_open").attr("action"), $("#search_post_open").serialize(), null, "script");
+    return false;
+  });
+  
+});
+
+</script>
+  
+  <div class="popUp_header">
+    Save a new page
+  </div>
+
+  <div class="popUpContent">
+    <div class="popUpText normal_gray">
+      <span>Enter a URL for your page.</span><br/>
+      <span>This is the link you will use to share your page</span><br/>
+      <%= form_tag search_post_open_path, :method => 'get', :id => "search_post_open" do %>
+        <div class="post_url_div" style="margin:0 auto;">www.postif.com/<%= text_field_tag :search, params[:search], :id => 'post_url_open', :placeholder => 'type a page for your url here' %></div>
+        <div class="url_ok_div"><span id="url_ok_open">&nbsp;</span></div>
+        <%= hidden_field_tag 'valid_url_open', 'false', :id => 'valid_url_open' %>
+      <% end %>
+      <br/>
+      <span>Create a password for your page</span><br/>
+      <span>so you can edit it later</span><br/>
+      <span><%= text_field_tag :password, '', :id => 'page_password_input', :placeholder => 'password', :class => 'green_input_field' %></span><br/>
+      <span class="smaller_light_gray password_optional">password is optional but highly recommended</span><br/>
+      <br/>
+      <span>Enter an email so we can email you</span><br/>
+      <span>a link to your page and notify you</span><br/>
+      <span>when your page expires in 90 days</span><br/>
+      <span class="smaller_light_gray password_optional">(we will not use it for other purposes or share it)</span><br/>
+      <span><%= text_field_tag :email, '', :id => 'email', :placeholder => 'email', :class => 'green_input_field' %></span><br/>
+      <span><%= text_field_tag :verify_email, '', :id => 'verify_email', :placeholder => 'verify email', :class => 'green_input_field' %></span><br/>
+      <span class="smaller_light_gray password_optional">email is optional but highly recommended</span><br/>
+      <span class="small_gray"><%= check_box_tag :receive_email, 'receive_email', :class => 'check_box' %> email me postif news (weekly at most)</span>
+    </div>
+    
+    <div class="popUpButtonDiv">
+      <button type="button" id="save_button" class="blue_button">Save</button>
+      <button type="button" id="cancel_button" class="blue_button">Cancel</button>
+    </div> 
+  </div>
+
+</div>

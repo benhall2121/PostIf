@@ -9,6 +9,12 @@ Postif::Application.routes.draw do
       
   match "home" => "posts#home", :as => "home"
   match "/post/reset_page" => "posts#reset_page", :as => "reset_page"
+  match "/post/open_page" => "posts#open_page", :as => "open_page"
+  match "/post/save_page" => "posts#save_page", :as => "save_page"
+  match "/post/post_page" => "posts#post_page", :as => "post_page"
+  match "/post/share_page" => "posts#share_page", :as => "share_page"
+  match "/post/renew_page" => "posts#renew_page", :as => "renew_page"
+  match "/post/delete_page" => "posts#delete_page", :as => "delete_page"
   
   match '/users/add_subscriber' => 'users#add_subscriber'
   match '/feedbacks/add_feedback' => 'feedbacks#add_feedback'
@@ -16,7 +22,8 @@ Postif::Application.routes.draw do
   
   root :to => "posts#new"
   match '/posts/create' => 'posts#create'
-  get "search_post" => "posts#search_post", :as => "search_post"
+  get "/post/search_post" => "posts#search_post", :as => "search_post"
+  get "/post/search_post_open" => "posts#search_post_open", :as => "search_post_open"
   get 'secret/secret_test' => "posts#secret_test", :as => 'secret_test'
   match '/secret/check_secret' => "posts#check_secret", :as => 'check_secret'
   

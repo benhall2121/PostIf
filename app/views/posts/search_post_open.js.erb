@@ -1,0 +1,13 @@
+<% if !@posts.empty? %>
+  $("#url_ok_open").html("That URL is not available");
+  $('#url_ok_open').removeClass('light_green');	
+  $('#url_ok_open').addClass('light_red');
+  $('#valid_url_open').val('false');
+<% else %>
+  $("#url_ok_open").html("That URL is available");	
+  $('#url_ok_open').removeClass('light_red');	
+  $('#url_ok_open').addClass('light_green');
+  $('#valid_url_open').val('true');
+<% end %>
+
+

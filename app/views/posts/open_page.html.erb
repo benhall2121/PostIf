@@ -1,0 +1,90 @@
+<div class="popUp_wrapper">
+<script type="text/javascript">
+
+$(document).ready(function() {  
+  $("#cancel_button").live('click', function(){
+    $.fancybox.close();
+  });
+  
+  $("#open_read_only_button").live('click', function(){
+    alert("open_read_only_button");	  
+  });
+  
+  $("#open_button").live('click', function(){
+    alert("open_button");	  
+  });
+  
+  $(".open_forgot").live('click', function(){
+    alert("open_forgot");
+    return false;
+  });
+  
+  $("#search_post_open input").keyup(function() {
+  		  
+        url = $('#post_url_open').val().replace(/ /g,'');
+        
+        $('#post_url_open').val(url);
+        
+  	if(url == '' || url == '&nbsp;'){
+  	  $('#url_ok_open').html('&nbsp;');	
+  	  $('#url_ok_open').removeClass('light_red');		
+  	  $('#url_ok_open').removeClass('light_green');
+  	  $('#valid_url_open').val('false');
+  	  return false;
+  	}
+  		
+    $.get($("#search_post_open").attr("action"), $("#search_post_open").serialize(), null, "script");
+    return false;
+  });
+});
+
+</script>
+  
+  <div class="popUp_header">
+    Open Page
+  </div>
+
+  <div class="popUpContent">
+    <div class="popUpText normal_gray">
+      <span>Enter the URL for the page you want to open</span><br/>
+      <%= form_tag search_post_open_path, :method => 'get', :id => "search_post_open" do %>
+        <div class="post_url_div" style="margin:0 auto;">www.postif.com/<%= text_field_tag :search, params[:search], :id => 'post_url_open', :placeholder => 'type a page for your url here' %></div>
+        <div class="url_ok_div"><span id="url_ok_open">&nbsp;</span></div>
+        <%= hidden_field_tag 'valid_url_open', 'false', :id => 'valid_url_open' %>
+      <% end %>
+      <br/>
+      <span>then...</span>
+      <br/>
+      <br/>
+      <br/>
+      <table class="open_table">
+        <tr>
+          <td class="open_table_border">
+            <div class="open_table_border_inner_div">
+            <span>Enter the password for the page</span><br/>
+            <span><%= text_field_tag :password, '', :id => 'page_password_input', :class => 'green_input_field' %></span><br/>
+            <span><%= link_to "I forgot the password!", '#', :class => 'open_forgot' %></span><br/>
+            </div>
+            <button type="button" id="open_button" class="blue_button">Open</button>
+          </td>
+          <td class="open_table_or">or</td>
+          <td class="open_table_border">
+            <div class="open_table_border_inner_div">
+            <span>No password?</span><br/>
+            <span>You can still open it as</span><br/>
+            <span>Read-Only, then give it a</span><br/>
+            <span>new URL to make a copy</span><br/>
+            <span>you can edit</span><br/>
+            </div>
+            <button type="button" id="open_read_only_button" class="blue_button">Open as Read-Only</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    
+    <div class="popUpButtonDiv">
+      <button type="button" id="cancel_button" class="blue_button">Cancel</button>
+    </div> 
+  </div>
+
+</div>

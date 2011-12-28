@@ -27,6 +27,30 @@ class PostsController < ApplicationController
     render :layout => false
   end
   
+  def open_page  
+    render :layout => false
+  end
+  
+  def save_page  
+    render :layout => false
+  end
+  
+  def post_page  
+    render :layout => false
+  end
+  
+  def share_page  
+    render :layout => false
+  end
+  
+  def renew_page  
+    render :layout => false
+  end
+  
+  def delete_page  
+    render :layout => false
+  end
+  
   def index
     @posts = Post.all
 
@@ -103,6 +127,10 @@ class PostsController < ApplicationController
   end
 
   def search_post
+    @posts = Post.search(params[:search])
+  end
+  
+  def search_post_open
     @posts = Post.search(params[:search])
   end
   

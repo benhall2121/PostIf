@@ -87,6 +87,33 @@ div.button_selected{
  }
  
  
+/******* Notes *******/
+
+.note_ready{
+ position:absolute;
+ top:60px;
+ left:170px;
+ z-index:1000;
+}
+
+.note_welcome{
+ position:absolute;
+ top:150px;
+ left:450px;
+ z-index:1000;
+}
+
+.note_tip{
+ position:absolute;
+ bottom:75px;
+ left:60px;
+ z-index:1000;	
+}
+
+
+/******* End Notes *******/
+ 
+ 
 /****************     FancyBox    ****************/
 #fancybox-wrap {
   position: absolute;
@@ -304,21 +331,28 @@ div.button_selected{
    font-weight:600;
 }
 
-
-.larger_gray, .normal_gray, .small_gray{
+.larger_gray, .normal_gray, .small_gray, .smaller_gray{
   color: #666666;
 }
 
-.larger_gray{
+.larger_light_gray, .normal_light_gray, .small_light_gray, .smaller_light_gray{
+  color: #BBB;
+}
+
+.larger_gray, .larger_light_gray{
   font-size: 18px;
 }
 
-.normal_gray{
+.normal_gray, .normal_light_gray{
   font-size: 16px;
 }
 
-.small_gray{
+.small_gray, .small_light_gray{
   font-size: 14px;
+}
+
+.smaller_gray, .smaller_light_gray{
+  font-size: 12px;
 }
 
 .indented{
@@ -616,7 +650,7 @@ img.asterisk{
   text-align:right;	
 }
 
-.email_submit_wrapper button, .subscribe_submit_email_wrapper button, .all_buttons button{
+.email_submit_wrapper button, .subscribe_submit_email_wrapper button, .all_buttons button, .blue_button{
   font-size:14px;
   padding:4px 25px;
   margin:2px 5px;
@@ -638,7 +672,7 @@ img.asterisk{
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#EAF6FF', endColorstr='#91BFE2',GradientType=0 ); /* IE6-9 */
 }
 
-.email_submit_wrapper button:hover, .subscribe_submit_email_wrapper button:hover, .all_buttons button:hover{
+.email_submit_wrapper button:hover, .subscribe_submit_email_wrapper button:hover, .all_buttons button:hover, .blue_button:hover{
   cursor:pointer;
   border:1px solid #1352BF;	
 }
@@ -675,7 +709,7 @@ img.asterisk{
   border-radius: 6px;
 }
 
-#post_url{
+#post_url, #post_url_open{
   border:none;
   width:275px;
   background-color: transparent;
@@ -685,10 +719,14 @@ img.asterisk{
   color:#783F00;
 }
 
-input#post_url::-webkit-input-placeholder {
+#post_url_open{
+	
+}
+
+input#post_url::-webkit-input-placeholder, input#post_url_open::-webkit-input-placeholder{
     color:    #783F00;
 }
-input#post_url:-moz-placeholder {
+input#post_url:-moz-placeholder, input#post_url_open:-moz-placeholder{
     color:    #783F00;
 }
 
@@ -763,10 +801,71 @@ input#post_url:-moz-placeholder {
 }
 
 /*** New Page - posts/reset_page.html.erb ***/
-
-
-
 /*** End New Page - posts/reset_page.html.erb ***/
+
+
+
+/*** Open Page - posts/open_page.html.erb ***/
+
+.open_table td{
+  padding:15px;	
+}
+
+.open_table_border{
+  border:2px solid #666;
+  width:250px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.open_table_border_inner_div{
+  height:105px;	
+}
+
+#page_password_input, .green_input_field{
+  border:2px solid #7E9C3F;
+  background-color: #D9F09A;
+  padding:3px 3px;
+  color:#AAA;
+  font-size:13px;
+  color:#783F00;
+  width:70%;
+  text-align:center;
+  
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -khtml-border-radius: 6px;
+  border-radius: 6px;
+}
+
+.open_forgot{
+  font-size:11px;	
+}
+
+input.green_input_field::-webkit-input-placeholder{
+    text-align:center;
+    font-style:italic;
+    
+}
+input.green_input_field:-moz-placeholder{
+    text-align:center;
+    font-style:italic;
+}
+
+/*** End Open Page - posts/open_page.html.erb ***/
+
+
+
+
+/*** Save Page - posts/save_page.html.erb ***/
+
+.password_optional{
+  font-style:italic;
+}
+
+/*** End Save Page - posts/save_page.html.erb ***/
 
 
 

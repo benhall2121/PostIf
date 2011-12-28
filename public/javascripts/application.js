@@ -1,17 +1,36 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
+function setCookie(c_name,value,exdays){
+  var exdate=new Date();
+  exdate.setDate(exdate.getDate() + exdays);
+  var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+  document.cookie=c_name + "=" + c_value;
+}
+
+function getCookie(c_name){
+  var i,x,y,ARRcookies=document.cookie.split(";");
+  for (i=0;i<ARRcookies.length;i++){
+    x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+    y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+    x=x.replace(/^\s+|\s+$/g,"");
+    if (x==c_name){
+      return unescape(y);
+    }
+  }
+}
+
 jQuery.ajaxSetup({ 
   'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
 })
 
-$(window).load(function () {	
-  $("#popHome").fancybox().trigger('click');
-});
-
 $(document).ready(function() {	
-  $(".header_nav").fancybox({});
+  $(".header_nav").fancybox();
   $(".pop").fancybox();
   
+  $('.note').click(function(){	 
+    $('.tips_wrapper').hide();		  
+    return false;
+  });
   
   $(".save_canvas").click(function(){
   	aa = $('canvas#ipaint_frame_canvas').get();
@@ -158,6 +177,19 @@ $(document).ready(function() {
   
 });
 
-
+$(window).load(function () {	
+    var showPopUp = getCookie('show_PopUp'); 
+    var showTips = getCookie('show_Tips'); 
+    
+    if(showPopUp != 'true'){
+      setCookie('show_PopUp', 'true21', '3');  
+      $("#popHome").fancybox().trigger('click');
+    }	
+    
+    if(showTips != 'true'){
+      setCookie('show_Tips', 'true', '3');  
+      $('.tips_wrapper').show();
+    }
+});
 
 
