@@ -1,5 +1,7 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
+var redirect_to = ""
+
 function setCookie(c_name,value,exdays){
   var exdate=new Date();
   exdate.setDate(exdate.getDate() + exdays);
@@ -24,8 +26,20 @@ jQuery.ajaxSetup({
 })
 
 $(document).ready(function() {	
+
+		$("#calendar").datepicker({
+  	  inline:true
+  	  	});
+		
   $(".header_nav").fancybox();
-  $(".pop").fancybox();
+  $(".pop").fancybox({
+    onClosed: function(currentArray, currentIndex, currentOpts){
+      if(redirect_to == 'feedback'){
+        setTimeout(function(){$("#popFeedback").fancybox().trigger('click');},currentOpts.speedOut);
+        redirect_to = ''
+      }
+    }
+  });
   
   $('.note').click(function(){	 
     $('.tips_wrapper').hide();		  

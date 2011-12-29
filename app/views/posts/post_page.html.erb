@@ -2,7 +2,7 @@
 <script type="text/javascript">
 
 $(document).ready(function() {  
-  $("#cancel_button").live('click', function(){
+  $("#close_button").live('click', function(){
     $.fancybox.close();
   });
   
@@ -16,11 +16,26 @@ $(document).ready(function() {
 
   <div class="popUpContent">
     <div class="popUpText normal_gray">
+      <span><b>Here is your page!</b></span><br/>
+      <span><b>It has posted successfully</b></span><br/>
+      <br/>
+      <span>It is on the internet and viewable</span><br/>
+      <span>by anyone who has the link</span><br/>
+      <br/>
+      <span>Use the share buttons at the bottom of</span><br/>
+      <span>your page to send the link to people</span><br/>
+      <br/>
+      <span>Or simple copy the link and paste it</span><br/>
+      <span>in an email, tweet or whereever!</span><br/>
       
+      <div class="post_border">
+        <span>The link for your page is...</span></br>
+        <span class="very_large_green">www.postif.com/linkabc</span>
+      </div>
     </div>
     
     <div class="popUpButtonDiv">
-      <button type="button" id="cancel_button" class="blue_button">Cancel</button>
+      <button type="button" id="close_button" class="blue_button">Close</button>
     </div> 
   </div>
 

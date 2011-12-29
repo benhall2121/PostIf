@@ -1,3 +1,12 @@
+<%= stylesheet_link_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css' %>
+
+<style type="text/css">
+  div.ui-datepicker{
+   font-size:10px;
+   margin:3px auto 0 auto;
+  }
+</style>
+
 <div class="popUp_wrapper">
 <script type="text/javascript">
 
@@ -6,22 +15,92 @@ $(document).ready(function() {
     $.fancybox.close();
   });
   
+  $("#save_button").live('click', function(){
+  	alert('saving...');	  
+  });
+  
+  $(".feedback").live('click', function(){
+    redirect_to = 'feedback'  
+    $.fancybox.close();
+    return false;
+  });
+  
+  $("#reset_button").live('click', function(){
+    var plus_90 = $("#time_to_set_plus_90_days").html();		  
+    $("#time_to_set").html(plus_90);	  
+  });
+  
+  $("#calendar").datepicker({
+     minDate: 0,
+     maxDate: '90D',
+     onSelect: function(dateText, inst){
+       var plus_90 = $("#time_to_set_plus_90_days").html();
+       var plus_90_as_date = new Date(plus_90);
+       var dateText_as_date = new Date(dateText);
+       
+       if(dateText_as_date > plus_90_as_date){
+       	 alert("Renewal date cannot be greater than 90 days from today");
+       	 $("#time_to_set").html(plus_90);
+       } else {   
+       	 $("#time_to_set").html(dateText);
+       }
+       
+       return false;
+     }
+  });
+  
 });
 
 </script>
   
   <div class="popUp_header">
-    Renew Page
+    Renew page expiration date
   </div>
 
   <div class="popUpContent">
     <div class="popUpText normal_gray">
+      <span>This page is current set to expire on</span><br/>
+      <br/>
+      <span id="time_to_set"><%= Time.now.strftime('%m/%d/%Y') %></span><br/>
+      <br/>
+      
+      <table class="open_table">
+        <tr>
+          <td class="open_table_border">
+            <div class="">
+              <span>Reset the page to expire</span><br/>
+              <span>90 days from now</span><br/>
+              <br/>
+              <span id="time_to_set_plus_90_days"><%= (Time.now + 90.days).strftime('%m/%d/%Y') %></span><br/>
+            </div>
+            <button type="button" id="reset_button" class="blue_button">Reset</button>
+          </td>
+          <td class="open_table_or">or</td>
+          <td class="open_table_border">
+            <div class="">
+              <span>Enter another expiration date</span><br/>
+              <span class="smaller_gray">(max of 90 days from today)</span><br/>
+              <span id="calendar"></span>
+            </div>
+          </td>
+        </tr>
+      </table>
       
     </div>
     
     <div class="popUpButtonDiv">
+      <button type="button" id="save_button" class="blue_button">Save</button>
       <button type="button" id="cancel_button" class="blue_button">Cancel</button>
     </div> 
+    
+    <div class="popUpTip small_gray">
+      <br/>
+      <span>Tip: You can extend your expiration date as often and as many times as you like.</span><br/>
+      <span>We will soon be making it possible to set expiration dates beyond 90 days</span><br/>
+      <span>for a small fee. Send us some <%= link_to 'feedback', '', :class => 'feedback' %> if you think</span><br/>
+      <span>that's something you would use.</span><br/>
+    </div>
+    
   </div>
 
 </div>

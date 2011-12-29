@@ -231,7 +231,7 @@ div.button_selected{
    margin: 20px 0;	 
  }
  
-.green{
+.green, .very_large_green, .larger_green, .normal_green, .small_green, .smaller_green{
   color:#668A3A;	 
 }
  
@@ -339,19 +339,23 @@ div.button_selected{
   color: #BBB;
 }
 
-.larger_gray, .larger_light_gray{
+.very_large_green{
+  font-size:24px;	
+}
+
+.larger_gray, .larger_light_gray, .larger_green{
   font-size: 18px;
 }
 
-.normal_gray, .normal_light_gray{
+.normal_gray, .normal_light_gray, .normal_green{
   font-size: 16px;
 }
 
-.small_gray, .small_light_gray{
+.small_gray, .small_light_gray, .small_green{
   font-size: 14px;
 }
 
-.smaller_gray, .smaller_light_gray{
+.smaller_gray, .smaller_light_gray, .smaller_green{
   font-size: 12px;
 }
 
@@ -446,6 +450,107 @@ div.button_selected{
 /****************     End Home    ****************/ 
 
 
+/****************     Show Posts    ****************/ 
+
+.naigation_layout_show_pages{
+  background-color: #CCCCCC;
+  border:1px solid #7E9C3F;
+  overflow:auto;
+  padding:0;
+  color:#ffffff;
+  font-size:14px;
+  vertical-align:middle;
+  text-align:right;
+  
+  -moz-border-radius-bottomright: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -khtml-border-radius-bottomleft: 3px;
+  -khtml-border-radius-bottomright: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.show_sticky_nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 107px;
+  width:100%;
+}
+
+.show_logo{
+  vertical-align:middle;
+}
+
+.show_page_ads_wrapper{
+  border:1px solid #7E9C3F;
+  padding:7px 20px;
+  text-align:center;
+}
+
+.show_page_ads_div{
+  border: 1px dashed #CCC;
+  padding:3px;	
+}
+
+.show_tell_friends{
+  margin:5px 20px;
+  font-size:14px;
+  color:#78B4FF;
+  font-weight:300;
+  font-style:italic;
+}
+
+.show_tell_friends img{
+  vertical-align:middle;
+  margin:0 2px;
+}
+
+.show_tell_friends_left, .show_tell_friends_center, .show_tell_friends_right{
+  display:inline-block;
+  width:33%;
+}
+
+.show_tell_friends_left{
+  text-align:left;	
+}
+
+.show_tell_friends_center{
+  text-align:center;
+}
+
+.show_tell_friends_center a{
+  font-weight:bold;
+  color:#7A3F15;
+}
+
+.show_tell_friends_right{
+  text-align:right;	
+}
+
+.show_footer{
+   background-color: #CCCCCC;
+   border-top:1px solid #7E9C3F;
+   height:15px;
+   
+   
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-topleft: 3px;
+  -webkit-border-top-right-radius: 3px;
+  -webkit-border-top-left-radius: 3px;
+  -khtml-border-radius-topleft: 3px;
+  -khtml-border-radius-topright: 3px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.show_wrapper{
+  margin-top:26px;
+}
+ 
+/****************    End Show Posts    ****************/ 
 
 
 /****************     users/_subscribe.html.erb    ****************/ 
@@ -803,6 +908,20 @@ input#post_url:-moz-placeholder, input#post_url_open:-moz-placeholder{
 /*** New Page - posts/reset_page.html.erb ***/
 /*** End New Page - posts/reset_page.html.erb ***/
 
+
+/*** Post Page - posts/post_page.html.erb ***/
+
+.post_border{
+  border:2px solid #666;
+  margin:25px 10px;
+  padding:20px 30px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  border-radius: 4px;
+}
+
+/*** End Post Page - posts/post_page.html.erb ***/
 
 
 /*** Open Page - posts/open_page.html.erb ***/
