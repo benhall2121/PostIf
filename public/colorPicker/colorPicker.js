@@ -118,7 +118,7 @@ function colorPickerNamespace(){
 	function createColorPicker(){
 		if(cp) return;
 
-		var imgBase = './colorPicker';
+		var imgBase = '/colorPicker';
 
 		cp = $DOM(
 			['DIV', {style:'position:absolute;font-family:tahoma,verdana,sans-serif;font-size:10px;', ref:'ColorPicker'},

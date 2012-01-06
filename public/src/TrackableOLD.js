@@ -2308,7 +2308,7 @@ AddHyperlinkObject.prototype.mouseUp = function(evt,x,y,callbackCancel) {
    
    new jsWindow(this.paintApp.winMgr)
       .createDialog("insertlink", "Insert link", 380, 150)
-      .load("/dialog/insert-link.html", 
+      .load("dialog/insert-link.html", 
       function(jWin){
          if ( dialog ){
             dialog.open(jWin,_this.paintApp,callbackOk,callbackCancel, _this.shape.link);

@@ -7,7 +7,14 @@ $(document).ready(function() {
   });
   
   $("#yes_button").live('click', function(){
-    alert("Posting...");
+    var id = top.window.$("#post_id").val();
+  		
+    if(id == ''){
+      alert("You have to save your page before you post it.");
+      return false;	    
+    }
+    
+    update_drawing("post","post");
     return false;
   });
   

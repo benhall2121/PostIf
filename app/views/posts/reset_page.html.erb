@@ -8,7 +8,7 @@ $(document).ready(function() {
   $(".new_page_yes").bind("click",function(){
     $("#tb_tool .clear_image").trigger('click');
     $('#post_url').val('').trigger('keyup');
-    $.fancybox.close();
+    window.location.href='/';
   });
 });
 

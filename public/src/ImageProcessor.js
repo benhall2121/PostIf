@@ -248,7 +248,7 @@ ImageProcessor.prototype.cut = function(x,y,w,h){
 ImageProcessor.prototype.rotate = function(degree){
    var cx = this.ImageData.width / 2,
        cy = this.ImageData.height / 2;
-   
+       
    var arr = [
       this._rotate(0,0,cx,cy,degree),
       this._rotate(this.ImageData.width,0,cx,cy,degree),

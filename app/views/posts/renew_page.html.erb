@@ -11,12 +11,23 @@
 <script type="text/javascript">
 
 $(document).ready(function() {  
-  $("#cancel_button").live('click', function(){
-    $.fancybox.close();
-  });
   
-  $("#save_button").live('click', function(){
-  	alert('saving...');	  
+  //expiration_date
+  parent_expiration_date = top.window.$('#expiration_date').val();		  
+  $("#time_to_set").html(parent_expiration_date);	
+
+  $("#renew_cancel_button").live('click', function(){
+    $.fancybox.close();
+  });  
+  
+  $("#renew_save_button").live('click', function(){
+    var id = top.window.$("#post_id").val();
+    var expiration_date = $("#time_to_set").html();	  
+  		  
+    $.post('/post/update_js/' + id, {post:{"expiration_date": expiration_date }}, function(response) { 
+      alert("Your postif page renew date has been saved.");
+      $.fancybox.close();
+    });	  
   });
   
   $(".feedback").live('click', function(){
@@ -89,8 +100,8 @@ $(document).ready(function() {
     </div>
     
     <div class="popUpButtonDiv">
-      <button type="button" id="save_button" class="blue_button">Save</button>
-      <button type="button" id="cancel_button" class="blue_button">Cancel</button>
+      <button type="button" id="renew_save_button" class="blue_button">Save</button>
+      <button type="button" id="renew_cancel_button" class="blue_button">Cancel</button>
     </div> 
     
     <div class="popUpTip small_gray">

@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_filter :require_secret
+  #before_filter :require_secret
   protect_from_forgery
   
   def require_secret

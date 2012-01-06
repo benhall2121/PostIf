@@ -1,5 +1,11 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
+
+jQuery.ajaxSetup({ 
+  'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
+})
+
+
 var redirect_to = ""
 
 function setCookie(c_name,value,exdays){
@@ -21,18 +27,48 @@ function getCookie(c_name){
   }
 }
 
-jQuery.ajaxSetup({ 
-  'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
-})
+function getDrawnHistory(){
+    //Get history of how the canvas was drawn
+    var s = window.localStorage.getItem("baseattr") + " :!: ";
+    var nTotal = window.localStorage.getItem("totalentry");
+    if ( nTotal ){
+      nTotal = parseInt(nTotal,10);
+    }else{
+      nTotal = 0;
+    }
+    
+    for ( i = 0; i < nTotal; i ++ ){
+      s += window.localStorage.getItem("hist_" + i) + " :!: ";
+    }
+    //End Get history of how the canvas was drawn
+    
+    return s
+}
+
+function update_drawing(calling, status){
+    var id = $("#post_id").val();
+    var s = getDrawnHistory();
+    
+    $.post('/post/update_js/' + id, {post:{"canvas_html": s, "status": status }}, function(response) { 
+      if(calling=="post"){
+        var url = "/" + $('#post_url').val() + '?popup=true';
+        window.open(url);    	    
+      } else {
+        alert("Your postif page has been saved.");    
+      }
+    });
+}
 
 $(document).ready(function() {	
-
-		$("#calendar").datepicker({
-  	  inline:true
-  	  	});
+		
+  $("#calendar").datepicker({
+    inline:true
+  });
 		
   $(".header_nav").fancybox();
   $(".pop").fancybox({
+    onStart: function(){
+    },
     onClosed: function(currentArray, currentIndex, currentOpts){
       if(redirect_to == 'feedback'){
         setTimeout(function(){$("#popFeedback").fancybox().trigger('click');},currentOpts.speedOut);
@@ -46,22 +82,30 @@ $(document).ready(function() {
     return false;
   });
   
-  $(".save_canvas").click(function(){
-  	aa = $('canvas#ipaint_frame_canvas').get();
-	canvas_html=aa[0].toDataURL('image/png');	
-  	url = $('#post_url').val();
-  	valid_url = $('#valid_url').val();
-  	
-  	if(url == '' || valid_url == 'false'){
-  	  alert("Please Enter a Valid URL");
-  	  return false;
-  	}
-  	
-      $.post('/posts/create', {post:{"canvas_html": canvas_html, "url": url }}, function(response) { 
-        //$('.test_div').html("Thanks");
-      });
+  $(".save_without_popup").click(function(){
+    update_drawing('save');	
+    return false;
   });
   
+  $(".preview_canvas").click(function(){
+    var canvas = getDrawnHistory();
+    var url = "/post/preview/" + encodeURI(canvas);
+    window.open(url);
+    return false;
+  });
+  
+  $(".post_page").click(function(){
+    var id = $("#post_id").val();
+  		
+    if(id == ''){
+      alert("You have to save your page before you post it.");
+      return false;	    
+    }
+    
+    update_drawing("post","post");
+    return false;
+    
+  });
   
   $("#search_post input").keyup(function() {
   		  

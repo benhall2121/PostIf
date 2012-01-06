@@ -2,9 +2,19 @@
 <script type="text/javascript">
 
 $(document).ready(function() {  
+  
+  parent_url = top.window.$('#post_url').val();
+  var full_url = 'www.postif.com/' + parent_url;
+  
+  $('#url_span').val(full_url).width(((full_url.length*14)) + "px");
+	
   $("#close_button").live('click', function(){
     $.fancybox.close();
   });
+  
+  $('#url_span').keydown(function(e){
+    e.preventDefault();
+});
   
 });
 
@@ -25,12 +35,12 @@ $(document).ready(function() {
       <span>Use the share buttons at the bottom of</span><br/>
       <span>your page to send the link to people</span><br/>
       <br/>
-      <span>Or simple copy the link and paste it</span><br/>
-      <span>in an email, tweet or whereever!</span><br/>
+      <span>Or simply copy the link and paste it</span><br/>
+      <span>in an email, tweet or wherever!</span><br/>
       
       <div class="post_border">
         <span>The link for your page is...</span></br>
-        <span class="very_large_green">www.postif.com/linkabc</span>
+        <span class="very_large_green"><input type="text" id="url_span" style="width:100%;border:none;" class="very_large_green"></span>
       </div>
     </div>
     

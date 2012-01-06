@@ -2116,7 +2116,7 @@ iPaintApp.prototype.insertImageDialog = function(){
    var app = this;
    new jsWindow(this.winMgr)
       .createDialog("insertimage","Insert image",424,300)
-      .load("dialog/insert-image.html",
+      .load("/dialog/insert-image.html",
             function(jWin,sHTML){
                
                var oFormInitValue = 
@@ -2649,3 +2649,47 @@ iPaintApp.prototype.rotateSelection = function(str) {
                   
 
 };
+
+iPaintApp.prototype.initHistoryEdit = function(str){
+   var main_attr = [];
+   main_attr = str.split(' :!: ');
+   var base_attr = main_attr[0];
+   var nTotal = main_attr.length;
+   
+   this.stopLogging();
+   window.localStorage.setItem("baseattr",base_attr);
+   
+   this.canvas_history.synchronizeHistoryEdit(main_attr);
+   
+   this.canvas_history.startLogging();
+   
+};
+
+iPaintApp.prototype.restoreHistoryRangeEdit = function(start,nTotal){
+   if (start >= nTotal){
+      return;
+   }
+   
+   this.canvas_history.stopLogging();
+    
+   var _this = this;
+   var callback = function() {
+      _this.context.drawImage(_this.canvas_draft,0,0);
+      _this.context_draft.clearRect(0,0,_this.width,_this.height);
+
+      var next = parseInt(start) + 1;
+      if(next < nTotal) {
+         _this.restoreHistoryRangeEdit(next, nTotal);
+      }
+   };
+   
+   var key = "hist_" + start;
+   var s = window.localStorage.getItem(key); 
+   
+   if ( null != s ){
+      this.restoreStorage(s, callback);
+   }
+
+   this.canvas_history.startLogging();
+};
+

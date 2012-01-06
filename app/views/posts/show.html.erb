@@ -1,3 +1,157 @@
-<div class="show_wrapper">
-  <img src="<%= @post.canvas_html %>" />
+
+    <div class="show_sticky_nav">
+      <div class="naigation_layout_show_pages"> 
+      This page was created for free on <%= link_to image_tag('smallLogo_grayBackground107x25.png', :class => 'show_logo'), root_url %> 
+      </div>
+    </div>
+
+<%= hidden_field_tag 'post_url', @post.url, :id => 'post_url' %>    
+    
+<div class="show_wrapper" style="margin-top:25px;">
+    <% if @post.status == 'post' || !params[:canvas].blank? %>
+    
+<%= hidden_field_tag 'canvas_html', @post.canvas_html, :id => 'canvas_html' %>
+<div style="display:none;"><%= link_to 'Post', post_page_path(), :class => 'pop', :id => 'post_page_popup' %></div>
+
+<div id="ipaint_frame">
+
+	      
+	      <div id="tool_bar" style="height:0;">
+	         <div id="tb_color">
+	         	<div id="fore_color_border" style="position:absolute;left:35px;top:10px;width:24px;height:24px;overflow:hidden;background:#ffffff;border:1px solid black;z-index:2;">
+                  	<div id="fore_color" style="position:absolute;left:1px;top:1px;bottom:1px;right:1px;;overflow:hidden;background-color:none;cursor:pointer;" title="Set color for lines,borders, and text"></div>
+                  	</div>
+               
+               
+               		<div style="position:absolute;left:47px;top:20px;width:24px;height:24px;overflow:hidden;background:#ffffff;border:1px solid black;z-index:1;">                  
+                  	<div id="back_color" style="position:absolute;left:1px;top:1px;bottom:1px;right:1px;;overflow:hidden;background-color:#0000cc;cursor:pointer;" title="Set fill color for Shapes,Fill Bucket, and Background"></div>
+                  	</div>
+	         </div>
+	         
+	         
+	      </div>
+	<!----------------------------------------------   Canvas Container   ---------------------------------------------->       
+	      <div id="canvas_container">
+	      </div>
+	<!----------------------------------------------   End Canvas Container   ---------------------------------------------->
+	      
+	      
 </div>
+
+	<% else %>
+
+	  <div style="text-align:center;padding-top:75px;padding-bottom:75px;">
+	    <h1>This page has not been Posted yet</h1>
+	  </div>
+	
+	<% end %>
+</div>
+
+    <div class="show_page_ads_wrapper">
+      <div class="show_page_ads_div">  
+        <script type="text/javascript">
+    
+          google_ad_client = "ca-pub-1677570997517028";
+          google_ad_slot = "0671380950";
+          google_ad_width = 728;
+          google_ad_height = 90;
+        </script>
+        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+      </div>
+    </div>  
+    
+    <div class="show_tell_friends">
+      <div class="show_tell_friends_left">
+        Share this page
+        
+       <% if @post.status != 'post' %>
+        
+        <a href="http://www.facebook.com/sharer.php?s= 100&amp;p[title]=postif&amp;p[url]=www.postif.com&amp;p[images][0]=http://www.postif.com/images/logo.png&amp;p[summary]=I found this really useful site: www.postif.com&amp;p[content]=awesome content" target="_blank"><%= image_tag('facebook.png') %></a>
+        <%= link_to image_tag('twitter.png'), 'http://twitter.com/home?status=I found this really useful site: www.postif.com', :target => 'blank' %>
+        <%= link_to image_tag('linkedIn.png'), 'http://www.linkedin.com/shareArticle?mini=true&url=www.postif.com&title=postif.com&summary=I found this really useful site: www.postif.com &source=www.postif.com', :target => 'blank' %>
+        <%= link_to image_tag('google.png'), 'https://m.google.com/app/plus/x/?v=compose&content=I found this really useful site: www.postif.com', :target => 'blank' %>
+        <%= link_to image_tag('mail.png'), home_path(:which => 'email'), :class => 'header_nav' %> 
+        
+       <% else %>
+       
+        <a href="http://www.facebook.com/sharer.php?s= 100&amp;p[title]=postif&amp;p[url]=<%= request.url %>&amp;p[images][0]=http://www.postif.com/images/logo.png&amp;p[summary]=I found this really useful site: <%= request.url %>&amp;p[content]=awesome content" target="_blank"><%= image_tag('facebook.png') %></a>
+        <%= link_to image_tag('twitter.png'), 'http://twitter.com/home?status=I found this really useful site: ' + request.url, :target => 'blank' %>
+        <%= link_to image_tag('linkedIn.png'), 'http://www.linkedin.com/shareArticle?mini=true&url=' + request.url + '&title=postif.com&summary=I found this really useful site: ' + request.url + ' &source=' + request.url, :target => 'blank' %>
+        <%= link_to image_tag('google.png'), 'https://m.google.com/app/plus/x/?v=compose&content=I found this really useful site: ' + request.url, :target => 'blank' %>
+        <%= link_to image_tag('mail.png'), home_path(:which => 'email'), :class => 'header_nav' %>
+        
+       <% end %>
+      </div>
+      
+      <!-- Preview Cannot be reported or edited -->
+      <% if !params[:canvas].blank? %>
+      
+        <div class="show_tell_friends_center">
+          <%= link_to 'Report this page...', '', :onclick => 'alert("This is just a preview, it cannot be Reported."); return false;' %>
+        </div>
+        <div class="show_tell_friends_right">
+          <%= link_to 'Edit this page...', '', :onclick => 'alert("This is just a preview, it cannot be Edited."); return false;'  %>
+        </div>
+        
+      <% elsif @post.status != 'post' %>
+      
+        <div class="show_tell_friends_center">
+          <%= link_to 'Report this page...', '', :onclick => 'alert("This page still has not been posted, it cannot be Reported."); return false;' %>
+        </div>
+        <div class="show_tell_friends_right">
+          <%= link_to 'Edit this page...', edit_page_path(), :class => 'pop' %>
+        </div>
+        
+      <% else %>
+        
+        <div class="show_tell_friends_center">
+          <%= link_to 'Report this page...', flag_page_path(), :class => 'pop' %>
+        </div>
+        <div class="show_tell_friends_right">
+          <%= link_to 'Edit this page...', edit_page_path(), :class => 'pop' %>
+        </div>
+      
+      <% end %>
+      
+    </div>
+    
+    <div class="show_footer">
+    
+    </div>
+    
+    
+
+<script type="text/javascript">
+
+function getParameter(paramName) {
+  var searchString = window.location.search.substring(1),
+      i, val, params = searchString.split("&");
+
+  for (i=0;i<params.length;i++) {
+    val = params[i].split("=");
+    if (val[0] == paramName) {
+      return unescape(val[1]);
+    }
+  }
+  return null;
+}
+
+
+$(document).ready(function() {
+  
+  var show_pop_up = getParameter('popup');
+  
+  if(show_pop_up == 'true'){
+    $('#post_page_popup').trigger('click');
+  }
+  
+});
+  
+window.onload = function(){
+  
+};
+
+</script>
+
+

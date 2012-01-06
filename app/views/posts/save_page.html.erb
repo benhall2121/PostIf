@@ -1,13 +1,73 @@
 <div class="popUp_wrapper">
 <script type="text/javascript">
 
+jQuery.ajaxSetup({ 
+  'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
+})
+
 $(document).ready(function() {  
-  $("#cancel_button").live('click', function(){
+  
+  //expiration_date
+  parent_expiration_date = top.window.$('#expiration_date').val();		  
+  $("#time_to_set").html(parent_expiration_date);
+  status = "<%= params[:status] %>";
+  parent_post_url = top.window.$('#post_url').val();
+  parent_post_valid_url = top.window.$('#valid_url').val();
+  parent_url_ok = top.window.$('#url_ok').html();
+  parent_url_ok_class = top.window.$('#url_ok').attr('class');
+  $('#post_url_open').val(parent_post_url);
+  $('#valid_url_open').val(parent_post_valid_url);
+  $('#url_ok_open').html(parent_url_ok).addClass(parent_url_ok_class);
+  
+  
+  $("#save_cancel_button").live('click', function(){
     $.fancybox.close();
   });
   
-  $("#save_button").live('click', function(){
-    alert("save button");
+  $("#save_save_button").live('click', function(){
+    
+    url = $('#post_url_open').val();
+    
+    valid_url = $('#valid_url_open').val();
+    if(url == '' || valid_url == 'false'){
+      alert("Please Enter a Valid URL");
+      return false;
+    }
+    
+    var password = $('#page_password_input').val();
+    
+    if(password.length > 0 && password.length < 6){
+      alert('Password must be six characters or more.');
+      return false;
+    }
+    
+    var email = $('#email').val();
+    var verify_email = $('#verify_email').val();
+    
+    if((email != '' || verify_email != '')){
+    	    
+      if(email.indexOf("@") == -1 || verify_email.indexOf("@") == -1){ 
+        alert('Please enter a valid email address');
+        return false;
+      }	    
+    	    
+      if(email != verify_email){	    
+        alert("The email addresses entered do not match.");
+        return false;
+      }
+    } 
+    
+    var email_me = $('#receive_email').attr('checked');
+    
+    
+    s = getDrawnHistory();
+        
+    $.post('/posts/create', {post:{"email": email, "password": password, "canvas_html": s, "url": url, "email_me": email_me, "status": status, "expiration_date": parent_expiration_date }}, function(response) { 
+      alert("Your postif page has been saved.");
+      window.location.href='/post/post_name/' + url + '/edit';
+      //$.fancybox.close();
+    });
+    
   });
   
   $("#search_post_open input").keyup(function() {
@@ -48,7 +108,7 @@ $(document).ready(function() {
       <br/>
       <span>Create a password for your page</span><br/>
       <span>so you can edit it later</span><br/>
-      <span><%= text_field_tag :password, '', :id => 'page_password_input', :placeholder => 'password', :class => 'green_input_field' %></span><br/>
+      <span><%= password_field_tag :password, '', :id => 'page_password_input', :placeholder => 'password', :class => 'green_input_field' %></span><br/>
       <span class="smaller_light_gray password_optional">password is optional but highly recommended</span><br/>
       <br/>
       <span>Enter an email so we can email you</span><br/>
@@ -58,12 +118,12 @@ $(document).ready(function() {
       <span><%= text_field_tag :email, '', :id => 'email', :placeholder => 'email', :class => 'green_input_field' %></span><br/>
       <span><%= text_field_tag :verify_email, '', :id => 'verify_email', :placeholder => 'verify email', :class => 'green_input_field' %></span><br/>
       <span class="smaller_light_gray password_optional">email is optional but highly recommended</span><br/>
-      <span class="small_gray"><%= check_box_tag :receive_email, 'receive_email', :class => 'check_box' %> email me postif news (weekly at most)</span>
+      <span class="small_gray"><%= check_box_tag :receive_email, 'receive_email', :class => 'check_box email_me' %> email me postif news (weekly at most)</span>
     </div>
     
     <div class="popUpButtonDiv">
-      <button type="button" id="save_button" class="blue_button">Save</button>
-      <button type="button" id="cancel_button" class="blue_button">Cancel</button>
+      <button type="button" id="save_save_button" class="blue_button">Save</button>
+      <button type="button" id="save_cancel_button" class="blue_button">Cancel</button>
     </div> 
   </div>
 

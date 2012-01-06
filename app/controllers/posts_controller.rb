@@ -24,19 +24,23 @@ class PostsController < ApplicationController
   end
   
   def reset_page  
-    render :layout => false
+    render '/posts/reset_page.html.erb', :layout => false
   end
   
   def open_page  
-    render :layout => false
+    render '/posts/open_page.html.erb', :layout => false
+  end
+  
+  def edit_page  
+  	  render '/posts/edit_page.html.erb', :layout => false
   end
   
   def save_page  
-    render :layout => false
+    render '/posts/save_page.html.erb', :layout => false
   end
   
   def post_page  
-    render :layout => false
+    render '/posts/post_page.html.erb', :layout => false
   end
   
   def share_page  
@@ -51,6 +55,10 @@ class PostsController < ApplicationController
     render :layout => false
   end
   
+  def flag_page  
+    render '/posts/flag_page.html.erb', :layout => false
+  end
+  
   def index
     @posts = Post.all
 
@@ -63,7 +71,9 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.xml
   def show
-    if params[:url]
+    if params[:canvas]
+      @post = Post.new(:canvas_html => params[:canvas])
+    elsif params[:url]
       @post = Post.find_by_url(params[:url])
     else  
       @post = Post.find(params[:id])
@@ -78,7 +88,13 @@ class PostsController < ApplicationController
   # GET /posts/new
   # GET /posts/new.xml
   def new
-    @post = Post.new
+    if params[:url]
+      @new_canvas = Post.find_by_url(params[:url])
+      @post = Post.new(:canvas_html => @new_canvas.canvas_html)
+    else
+      @post = Post.new
+    end
+    @post.expiration_date = Time.now + 90.days
 
     respond_to do |format|
       format.html # new.html.erb
@@ -88,7 +104,23 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
-    @post = Post.find(params[:id])
+    if params[:url]	  	  
+      @post = Post.find_by_url(params[:url])
+    else
+      @post = Post.find(params[:id])
+    end
+    
+  end
+  
+  def valid_password
+    @auth = Post.authenticate(params[:url], params[:password])
+    
+    if(@auth)
+      @post = Post.find_by_url(params[:url])
+    else
+      puts 'else'
+      render '/posts/valid_password.js.erb'
+    end
   end
 
   # POST /posts
@@ -96,7 +128,7 @@ class PostsController < ApplicationController
   def create
   	
     session[:secret_ok] = true
-  	  
+    
     @post = Post.new(params[:post])
 
     respond_to do |format|
@@ -125,6 +157,20 @@ class PostsController < ApplicationController
       end
     end
   end
+  
+  def update_js
+    @post = Post.find(params[:id])
+
+    respond_to do |format|
+      if @post.update_attributes(params[:post])
+        format.html { redirect_to(@post, :notice => 'Post was successfully updated.') }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
 
   def search_post
     @posts = Post.search(params[:search])
@@ -132,6 +178,18 @@ class PostsController < ApplicationController
   
   def search_post_open
     @posts = Post.search(params[:search])
+  end
+  
+  def search_post_is_url
+    @posts = Post.search(params[:search])
+  end
+  
+  def report_url
+    @post = Post.find_by_url(params[:url])
+    @post.flags += 1
+    @post.save!
+    
+    render :nothing => true
   end
   
   # DELETE /posts/1

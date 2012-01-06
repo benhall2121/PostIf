@@ -225,3 +225,26 @@ History.prototype.removeEntry = function(){
       }         
    }
 };
+
+
+History.prototype.synchronizeHistoryEdit = function(main_attr){
+   var i, nTotal = main_attr.length-1;
+   this.stopLogging();
+   this.currentItem = 0;
+   this.history = [];
+   for ( i = 1; i < nTotal; i ++ ){
+      var s = main_attr[i];
+      
+      if ( s ){
+         s = s.split("@");
+         this.currentItem = this.history.length;
+         this.history.push({label:s[0],data:s[1]});
+         this.addToList(s[0],s[1]);
+         
+         window.localStorage.setItem("hist_" + (i-1),s[0] + "@" + s[1]);
+      }         
+   }
+   
+   this.paintApp.restoreHistoryRangeEdit(0,nTotal-1);
+};
+

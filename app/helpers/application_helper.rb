@@ -14,6 +14,19 @@ module ApplicationHelper
     return false
   end
   
+  def edit_page
+    c = params[:controller]
+    a = params[:action]
+  	  
+    if((c == "posts" && a == "edit"))
+      return true
+    else
+      return false
+    end
+
+    return false
+  end
+  
   def show_ipaint
     c = params[:controller]
     a = params[:action]

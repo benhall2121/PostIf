@@ -14,8 +14,8 @@
     <meta property="og:image" content='<%= image_tag('logo.ong') %>' id="fb_content_image" />
     <meta property="og:title" content='I found this really useful site: <%= request.url %> ' id="fb_content_title" />
     <meta property="og:description" content='I found this really useful site: <%= request.url %> ' id="fb_content_description" />
-    
-    <% if show_ipaint %>
+
+    <%# if show_ipaint %>
     <!-----  iPaint Files  ----->
         <link rel="stylesheet" type="text/css" href="/style/iPaint.css" />      
         <link rel="stylesheet" type="text/css" href="/style/window.css" /> 
@@ -56,7 +56,7 @@
 	<script type="text/javascript" src="/src/main.js"></script>
     
     <!-----  End iPaint Files  ----->
-    <% end %>
+    <%# end %>
 
     <%= csrf_meta_tag %>
     
@@ -95,13 +95,6 @@
       </div>
     </div>
 
-  <% else %>
-    
-    <div class="show_sticky_nav">
-      <div class="naigation_layout_show_pages"> 
-      This page was created for free on <%= link_to image_tag('smallLogo_grayBackground107x25.png', :class => 'show_logo'), root_url %> 
-      </div>
-    </div>
   <% end %>
 <% end %>
 
@@ -127,43 +120,7 @@
       (c) <%= Time.now.year %> postif.com. All rights reserved
     </div>
   
-  <% else %>  
-    <div class="show_page_ads_wrapper">
-      <div class="show_page_ads_div">  
-        <script type="text/javascript">
-    
-          google_ad_client = "ca-pub-1677570997517028";
-          google_ad_slot = "0671380950";
-          google_ad_width = 728;
-          google_ad_height = 90;
-        </script>
-        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-        </script>
-      </div>
-    </div>  
-    
-    <div class="show_tell_friends">
-      <div class="show_tell_friends_left">
-        Share this page
-        <a href="http://www.facebook.com/sharer.php?s= 100&amp;p[title]=postif&amp;p[url]=<%= request.url %>&amp;p[images][0]=http://www.postif.com/images/logo.png&amp;p[summary]=I found this really useful site: <%= request.url %>&amp;p[content]=awesome content" target="_blank"><%= image_tag('facebook.png') %></a>
-        <%= link_to image_tag('twitter.png'), 'http://twitter.com/home?status=I found this really useful site: ' + request.url, :target => 'blank' %>
-        <%= link_to image_tag('linkedIn.png'), 'http://www.linkedin.com/shareArticle?mini=true&url=' + request.url + '&title=postif.com&summary=I found this really useful site: ' + request.url + ' &source=' + request.url, :target => 'blank' %>
-        <%= link_to image_tag('google.png'), 'https://m.google.com/app/plus/x/?v=compose&content=I found this really useful site: ' + request.url, :target => 'blank' %>
-        <%= link_to image_tag('mail.png'), home_path(:which => 'email'), :class => 'header_nav' %>
-      </div>
-      <div class="show_tell_friends_center">
-        <%= link_to 'Report this page...', '' %>
-      </div>
-      <div class="show_tell_friends_right">
-        <%= link_to 'Edit this page...', '' %>
-      </div>
-    </div>
-    
-    <div class="show_footer">
-    
-    </div>
-  
-  <% end %>
+  <% end %>  
 <% end %>
 
 </body>

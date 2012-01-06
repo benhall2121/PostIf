@@ -108,8 +108,15 @@ jQuery(document).ready(function(){
           
    // Restore data from localStorage if there is any
    initGUI();
-   myApp.initHistory();
-   myApp.setAction("pencil");
+   
+   var ch = $('#canvas_html').val();
+   
+   if(ch != '' && ch != null){
+     myApp.initHistoryEdit(ch);
+   } else {
+     myApp.initHistory();
+     myApp.setAction("pencil");
+   }
    
    /**
    * TODO: these three operations should be done from menu, 

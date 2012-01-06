@@ -1,3 +1,58 @@
+<div class="create_header">
+
+  <div class="create_header_left_div">
+    <%= form_tag search_post_path, :method => 'get', :id => "search_post" do %>
+      <div class="post_url_div">www.postif.com/<%= text_field_tag :search, @post.url, :id => 'post_url', :placeholder => 'type a page for your url here' %></div>
+      <div class="url_ok_div"><span id="url_ok">&nbsp;</span></div>
+      <%= hidden_field_tag 'valid_url', 'false', :id => 'valid_url' %>
+    <% end %>
+  </div>
+  
+  <div class="create_header_right_div">
+    <script type="text/javascript">
+      
+        google_ad_client = "ca-pub-1677570997517028"; 
+        google_ad_slot = "4494111324";
+        google_ad_width = 468;
+        google_ad_height = 65;
+    </script>
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+  </div>
+  
+</div>
+
+<div class="ipaint_navigation">
+  <div><%= link_to 'New Page', reset_page_path(), :class => 'pop' %></div>
+  <div><%= link_to 'Open Page', open_page_path(), :class => 'pop' %></div>
+  
+  <% if edit_page %>
+    <div><%= link_to 'Save', '', :class => 'save_without_popup' %></div>
+  <% else %>
+    <div><%= link_to 'Save', save_page_path(), :class => 'pop' %></div>
+  <% end %>
+  <div><%= link_to 'Preview', '#', :class => 'preview_canvas' %></div>
+  <% if !@post.id.nil? %>
+    <div><%= link_to 'Post', '', :class => 'post_page' %></div>
+  <% else %>
+    <div><%= link_to 'Post', save_page_path(:status => 'post'), :class => 'pop' %></div>
+  <% end %>
+  
+  <% if !@post.status.blank? %>
+    <div><%= link_to 'Share', post_path(@post) %></div>
+  <% else %>
+    <div><%= link_to 'Share', share_page_path(), :class => 'pop' %></div>
+  <% end %>
+    
+  <div><%= link_to 'Renew', renew_page_path(), :class => 'pop' %></div>
+  <div><%= link_to 'Delete', delete_page_path(), :class => 'pop' %></div>
+</div>
+
+
+<%= hidden_field_tag 'expiration_date', @post.expiration_date.strftime('%m/%d/%Y'), :id => 'expiration_date' if @post.expiration_date %>
+<%= hidden_field_tag 'canvas_html', @post.canvas_html, :id => 'canvas_html' %>
+<%= hidden_field_tag 'post_id', @post.id, :id => 'post_id' %>
+
 <div class="tips_wrapper" style="display:none">
 	<%= image_tag('ready75.png', :class => 'note note_ready') %>
 	<%= image_tag('welcome75.png', :class => 'note note_welcome') %>
