@@ -549,7 +549,7 @@ function LineObject(){}
 
 LineObject.prototype.init = function(canvas){
    this.shape = new G_Line();
-   this.parent.init.call(this,canvas,"shape","Click and drag to draw line. Press SHIFT key to draw horizontal, vertical or diagnoal line.");
+   this.parent.init.call(this,canvas,"shape","Click and drag to draw line. Hold Shift while dragging to draw horizontal, vertical or diagonal line.");
    return this;
 };
 LineObject.prototype.deserialize = function(s){
@@ -572,7 +572,7 @@ EXTEND(RectangleObject,RectangularObject);
 function RectangleObject(){}
 RectangleObject.prototype.init = function(canvas){
    this.shape = new G_Rectangle();
-   this.parent.init.call(this,canvas,"shape","Click and drag to draw rectangle. Press SHIFT key to draw square.");
+   this.parent.init.call(this,canvas,"shape","Click and drag to draw a rectangle. Hold Shift while dragging to draw a square.");
    return this;
 };
 RectangleObject.prototype.deserialize = function(s){
@@ -596,7 +596,7 @@ EXTEND(RoundedRectangleObject,RectangularObject);
 function RoundedRectangleObject(){}
 RoundedRectangleObject.prototype.init = function(canvas){
    this.shape = new G_RoundedRectangle();
-   this.parent.init.call(this,canvas,"shape","Click and drag to draw rounded rectangle. Press SHIFT key to draw rounded square.");
+   this.parent.init.call(this,canvas,"shape","Click and drag to draw a rounded rectangle. Hold Shift while dragging to draw a rounded square.");
    return this;
 };
 RoundedRectangleObject.prototype.deserialize = function(s){
@@ -645,7 +645,7 @@ EXTEND(OvalObject,RectangularObject);
 function OvalObject(){}
 OvalObject.prototype.init = function(canvas){
    this.shape = new G_Oval();
-   this.parent.init.call(this,canvas,"shape","Click and drag to draw oval. Press SHIFT key to draw circle.");
+   this.parent.init.call(this,canvas,"shape"," Click and drag to draw an oval. Hold Shift while dragging to draw a circle.");
    return this;
 };
 OvalObject.prototype.deserialize = function(s){
@@ -780,7 +780,7 @@ function BezierCurveObject(){
 
 BezierCurveObject.prototype.init = function(canvas){
    this.shape = new G_Curve();
-   this.parent.init.call(this,canvas,"shape","Click and drag to draw the base line, then click and drag two times to curve the line.");
+   this.parent.init.call(this,canvas,"shape","Click and drag to draw a line, then click and drag to add a curve, then click and drag to add a second curve if you want.");
    
    return this;
 };
@@ -816,7 +816,7 @@ BezierCurveObject.prototype.mouseUp = function(event,x,y){
    if ( this.started() ){
       if ( this.nodeIndex === 3 ){
          this.complete();
-         this.help("Click and drag to draw the base line, then click and drag two times to curve the line.");
+         this.help("Click and drag to draw a line, then click and drag to add a curve, then click and drag to add a second curve if you want.");
          if ( typeof(this.shape.transform) === "function" ){
             this.shape = this.shape.transform();
          }
@@ -828,7 +828,7 @@ BezierCurveObject.prototype.mouseUp = function(event,x,y){
             this.help("Click and drag to curve the line");
          }
          if ( this.nodeIndex === 2){
-            this.help("Click and drag to curve the line second time.");
+            this.help("Click and drag to curve the line a second time.");
          }
          this.nodeIndex ++;
       }
@@ -870,7 +870,7 @@ PolylineShape.prototype.mouseUp = function(event,x,y){
    if ( !this.started() ){
       this.start();
       this.shape.addNode(new G_Point(x,y));
-      this.help("Click to add second vertex. Double click to finish " + this.shape.type );
+      this.help("Move cursor, then click to draw the leg. Repeat for additional legs. Double click to finish " + this.shape.type );
    }else{
       this.status = "drawing";
       
@@ -884,9 +884,9 @@ PolylineShape.prototype.mouseUp = function(event,x,y){
       
       var count = this.shape.nodesCount();
       if ( count === 2 ){
-         this.help("Click to add third vertex. Double click to finish " + this.shape.type );
+         this.help("Move cursor, then click to draw the leg. Repeat for additional legs. Double click to finish " + this.shape.type );
       }else{
-         this.help("Click to add " + (this.shape.nodesCount()+1) + "th vertex. Double click to finish " + this.shape.type);
+         this.help("Move cursor, then click to draw the leg. Repeat for additional legs. Double click to finish " + this.shape.type);
       }
       
       if ( count >= 2 ){
@@ -926,7 +926,7 @@ PolylineShape.prototype.dblclick = function(event,x,y){
    
    this.complete();
 
-   this.help("Click to add the first vertex");
+   this.help("Click and release to begin first leg...");
    
    if ( this.dirty ){
       this.transform();
@@ -967,7 +967,7 @@ function PolylineObject(){}
 PolylineObject.prototype.init = function(canvas){
    this.shape = new G_Polyline();
    this.parent.init.call(this,canvas,"shape");
-   this.help("Click to add the first vertex");
+   this.help("Click and release to begin first leg...");
    return this;
 };
 
@@ -1001,7 +1001,7 @@ function PolygonObject(){}
 PolygonObject.prototype.init = function(canvas){
    this.shape = new G_Polygon();
    this.parent.init.call(this,canvas,"shape");
-   this.help("Click to add the first vertex");
+   this.help("Click and release to begin first leg...");
    return this;
 };
 
@@ -1038,7 +1038,7 @@ function CardinalSplineObject(){}
 CardinalSplineObject.prototype.init = function(canvas){
    this.shape = new G_CardinalSpline(false);
    this.parent.init.call(this,canvas,"shape");
-   this.help("Click to add the first vertex");
+   this.help("Click and release to begin first leg...");
    return this;
 };
 
@@ -1090,7 +1090,7 @@ function ClosedCardinalSplineObject(){}
 ClosedCardinalSplineObject.prototype.init = function(canvas){
    this.shape = new G_CardinalSpline(true);
    this.parent.init.call(this,canvas,"shape");
-   this.help("Click to add the first vertex");
+   this.help("Click and release to begin first leg...");
    return this;
 };
 
@@ -1145,7 +1145,7 @@ function PencilObject(){}
 PencilObject.prototype.init = function(canvas){
    this.shape = new G_Polyline();
    this.parent.init.call(this,canvas,"shape");
-   this.help("Click and move to start drawing.","Pencil");
+   this.help("Click and drag to draw.","Pencil");
    return this;
 };
 
@@ -1171,7 +1171,7 @@ PencilObject.prototype.draw = function(event,x,y){
 PencilObject.prototype.mouseUp = function(event,x,y){
    if ( this.started() ){
       this.complete();
-      this.help("Click and move to start drawing.","Pencil");
+      this.help("Click and drag to draw.","Pencil");
       if ( this.dirty ){
          this.transform();
       }
@@ -1206,7 +1206,7 @@ EraserObject.prototype.init = function(canvas){
    
    this.supportGlobalCompositeOperation = (this.paintApp.context.globalCompositeOperation !== "");
    
-   this.help("Click and drag to erase. Press SHIFT key to increase eraser size. Press CTRL key to decrease eraser size.", "Eraser");
+   this.help("Click and drag to erase. Hold Shift while dragging to enlarge eraser. Hold Ctrl while dragging to shrink it.", "Eraser");
    return this;
 };
 EraserObject.prototype.createBrush = function(){
@@ -1246,7 +1246,7 @@ EraserObject.prototype.mouseDown = function(event,x,y){
    this.start();
    this.nodes = [];
    this.erase(x,y);
-   this.help("Click and drag to erase. Press SHIFT key to increase eraser size. Press CTRL key to decrease eraser size.", "Eraser(" + this.eraserSize + ")");   
+   this.help("Click and drag to erase. Hold Shift while dragging to enlarge eraser. Hold Ctrl while dragging to shrink it.", "Eraser(" + this.eraserSize + ")");   
 };
 
 EraserObject.prototype.mouseMove = function(event,x,y){
@@ -1264,7 +1264,7 @@ EraserObject.prototype.mouseMove = function(event,x,y){
       
       this.erase(x,y);
       
-      this.help("Click and drag to erase. Press SHIFT key to increase eraser size. Press CTRL key to decrease eraser size.", "Eraser(" + this.eraserSize + ")");   
+      this.help("Click and drag to erase. Hold Shift while dragging to enlarge eraser. Hold Ctrl while dragging to shrink it.", "Eraser(" + this.eraserSize + ")");   
    }
 };
 EraserObject.prototype.mouseUp = function(event,x,y){
@@ -1318,7 +1318,7 @@ function EyeDropperObject(){}
 
 EyeDropperObject.prototype.init = function(canvas){
    this.parent.init.call(this,canvas,"tool");
-   this.help("Click and drag to pick canvas color.","Eye dropper");
+   this.help("Set the Line color by clicking on an area of the canvas. Set the Fill color to that color by clicking the color Swap arrow (see Colors & Opacity).","Eye dropper");
    return this;
 };
 
@@ -1390,7 +1390,7 @@ EXTEND(RectangularSelectionObject,RectangularObject);
 function RectangularSelectionObject(){}
 RectangularSelectionObject.prototype.init = function(paintApplication){
    this.shape = new G_PolygonSelection();
-   this.parent.init.call(this,paintApplication,"selection","Click and drag to select rectanglular area. Press SHIFT key to select square area.");
+   this.parent.init.call(this,paintApplication,"selection"," Click and drag to select an area. Hold Shift while dragging to select square area.");
    this.shapeBeforeTransform = null;
    this.clearContextEnabled = true;
    return this;
@@ -1604,7 +1604,7 @@ function PolygonSelectionObject(){}
 
 PolygonSelectionObject.prototype.init = function(canvas){
    this.shape = new G_PolygonSelection();
-   this.parent.init.call(this,canvas,"selection","Click to add the first vertex");
+   this.parent.init.call(this,canvas,"selection"," Click and release to begin first leg...");
    this.shapeBeforeTransform = null;
    return this;
 };
@@ -1848,7 +1848,7 @@ function PaintBucketObject(trackingObject,GradType){
 
 PaintBucketObject.prototype.init = function(canvas){
    this.shape = new G_Line();
-   this.parent.init.call(this,canvas,"shape","Click and drag to select rectanglular area. Press SHIFT key to select square area.");
+   this.parent.init.call(this,canvas,"shape","Click in an area to fill it with the selected fill color.");
    return this;
 };
 
@@ -2040,7 +2040,7 @@ function ZoomGlassObject(){
 ZoomGlassObject.prototype.init = function(canvas){
       
    this.shape = new G_Rectangle();
-   this.parent.init.call(this,canvas,"shape","Click and drag to select rectanglular area. Press SHIFT key to select square area.");
+   this.parent.init.call(this,canvas,"shape","Click and drag to select rectangular area. Hold Shift while dragging to select square area.");
 
    this.orgWidth  = this.paintApp.width;
    this.orgHeight = this.paintApp.height;
@@ -2236,7 +2236,7 @@ AddHyperlinkObject.prototype.init = function() {
       $(obj.div).text(obj.link);
    }
    
-   this.parent.init.call(this,this.paintApp, "Add hyperlink", "Click and drag to create a new hyperlink object. Click an existing hyperlink object to edit it.");
+   this.parent.init.call(this,this.paintApp, "Add hyperlink", "Click and drag to create a new hyperlink object. Double-click an existing object to edit its URL.");
    this.type = "Hyperlink";
    
    this.shape = new G_Hyperlink();
@@ -2308,7 +2308,7 @@ AddHyperlinkObject.prototype.mouseUp = function(evt,x,y,callbackCancel) {
    
    new jsWindow(this.paintApp.winMgr)
       .createDialog("insertlink", "Insert link", 380, 150)
-      .load("/dialog/insert-link.html", 
+      .load("dialog/insert-link.html", 
       function(jWin){
          if ( dialog ){
             dialog.open(jWin,_this.paintApp,callbackOk,callbackCancel, _this.shape.link);
@@ -2411,7 +2411,7 @@ TextObject.prototype.init = function(iPaintApp) {
    
    this.shape  = new G_TextShape(iPaintApp);
    this.paintApp  = iPaintApp;
-   this.parent.init.call(this, this.paintApp, "Text", "Place text.");
+   this.parent.init.call(this, this.paintApp, "Text", " Click and drag to create a text box. Click and drag corner/side handles to fit box to your text.");
 };
 
 TextObject.prototype.mouseDown = function(event, x, y) {
