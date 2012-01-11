@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120106173433) do
+ActiveRecord::Schema.define(:version => 20120111175351) do
 
   create_table "emails", :force => true do |t|
     t.string   "to"
@@ -35,13 +35,13 @@ ActiveRecord::Schema.define(:version => 20120106173433) do
     t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.binary   "canvas_html"
+    t.binary   "canvas_html",     :limit => 2147483647
     t.string   "password_hash"
     t.string   "password_salt"
     t.string   "status"
     t.boolean  "email_me"
     t.date     "expiration_date"
-    t.integer  "flags",           :default => 0
+    t.integer  "flags",                                 :default => 0
   end
 
   create_table "users", :force => true do |t|

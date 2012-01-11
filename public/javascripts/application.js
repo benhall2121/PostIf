@@ -47,9 +47,9 @@ function getDrawnHistory(){
 
 function update_drawing(calling, status){
     var id = $("#post_id").val();
-    var s = getDrawnHistory();
+    var saveDrawn = getDrawnHistory();
     
-    $.post('/post/update_js/' + id, {post:{"canvas_html": s, "status": status }}, function(response) { 
+    $.post('/post/update_js/' + id, {post:{"canvas_html": saveDrawn, "status": status }}, function(response) { 
       if(calling=="post"){
         var url = "/" + $('#post_url').val() + '?popup=true';
         window.open(url);    	    
@@ -89,7 +89,15 @@ $(document).ready(function() {
   
   $(".preview_canvas").click(function(){
     var canvas = getDrawnHistory();
-    var url = "/post/preview/" + encodeURI(canvas);
+    var main_attr = [];
+    main_attr = canvas.split(' :!: ');
+    var base_attr = main_attr[0];
+    
+    
+    window.localStorage.setItem("baseattr",base_attr);
+    window.localStorage.setItem("canvas",canvas);
+    
+    var url = "/post/preview/preview";
     window.open(url);
     return false;
   });

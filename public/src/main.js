@@ -110,8 +110,11 @@ jQuery(document).ready(function(){
    initGUI();
    
    var ch = $('#canvas_html').val();
-   
-   if(ch != '' && ch != null){
+  
+   if(ch == "preview"){
+     var canvas = window.localStorage.getItem("canvas"); 
+     myApp.initHistoryEdit(canvas);  
+   } else if(ch != '' && ch != null){
      myApp.initHistoryEdit(ch);
    } else {
      myApp.initHistory();
