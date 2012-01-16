@@ -1,4 +1,4 @@
-<div class="popUp_wrapper">
+
 <script type="text/javascript">
 
 $(document).ready(function() {  
@@ -41,7 +41,28 @@ $(document).ready(function() {
   });
   
   $(".open_forgot").live('click', function(){
-    alert("open_forgot");
+    url = $('#post_url_open').val();
+    	 
+    valid_url = $('#valid_url_open').val();
+    
+    if(url == '' || valid_url != 'true'){
+      alert("Please Enter a Valid URL to open");
+      return false;
+    }
+    
+    email_exists = $('#email_exists').val();
+    
+    if(email_exists == '' || email_exists == 'false'){
+      $('.open_page_wrapper').hide();
+      $('.forgot_password_no_email_wrapper').show();
+      return false;
+    }
+    
+    $.post('<%= password_resets_path %>', {"url": url}, null);
+    
+    $('.open_page_wrapper').hide();
+    $('.forgot_password_success_wrapper').show();
+    
     return false;
   });
   
@@ -85,7 +106,7 @@ $(document).ready(function() {
 });
 
 </script>
-  
+<div class="popUp_wrapper open_page_wrapper">
   <div class="popUp_header">
     Open Page
   </div>
@@ -98,6 +119,7 @@ $(document).ready(function() {
         <div class="url_ok_div"><span id="url_ok_open2">&nbsp;</span></div>
         <%= hidden_field_tag 'valid_url_open', 'false', :id => 'valid_url_open' %>
         <%= hidden_field_tag 'valid_password', 'false', :id => 'valid_password' %>
+        <%= hidden_field_tag 'email_exists', 'false', :id => 'email_exists' %>
       <% end %>
       <br/>
       <span>then...</span>
@@ -135,3 +157,12 @@ $(document).ready(function() {
   </div>
 
 </div>
+
+<div class="forgot_password_success_wrapper" style="display:none">
+  <%= render 'password_resets/forgot_password_success' %>
+</div>
+
+<div class="forgot_password_no_email_wrapper" style="display:none">
+  <%= render 'password_resets/forgot_password_no_email' %>
+</div>
+

@@ -3,11 +3,17 @@
   $('#url_ok_open').removeClass('light_red');	
   $('#url_ok_open').addClass('light_green');
   $('#valid_url_open').val('true');
+  
+  <% if @posts.first.email != '' && @posts.first.email != nil %>
+    $('#email_exists').val('true');
+  <% end %>
+ 
 <% else %>
   $("#url_ok_open").html("That URL is not a valid URL");	
   $('#url_ok_open').removeClass('light_green');	
   $('#url_ok_open').addClass('light_red');
   $('#valid_url_open').val('false');
+  $('#email_exists').val('false');
 <% end %>
 
 

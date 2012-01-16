@@ -6,7 +6,7 @@ class Post < ActiveRecord::Base
   
   def self.search(search)
     if search
-      where('url = ?', "#{search}")
+      where('url = ? && status != "inactive"', "#{search}")
     else
       scoped
     end
@@ -26,5 +26,18 @@ class Post < ActiveRecord::Base
       self.password_salt = BCrypt::Engine.generate_salt
       self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)	
     end
+  end
+  
+  def send_password_reset
+    generate_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    PostifMailer.password_reset(self).deliver
+  end
+
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.base64.tr("+/", "-_")
+    end while Post.exists?(column => self[column])
   end
 end

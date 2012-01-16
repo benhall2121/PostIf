@@ -491,8 +491,6 @@ div.button_selected{
 }
 
 .show_page_ads_div{
-  border: 1px dashed #CCC;
-  padding:3px;	
 }
 
 .show_tell_friends{
@@ -790,14 +788,13 @@ img.asterisk{
 /****************     Create PostIF Page - posts/new.html.erb    ****************/ 
 
 .create_header{
-  padding: 3px 10px;	
+  padding: 0px 10px;	
   overflow:auto;
 }
 
 .create_header_left_div{
   display:inline-block;	
-  padding:3px;
-  margin-top:15px;
+  padding:10px 3px 3px 3px;
 }
 
 .post_url_div{
@@ -843,15 +840,13 @@ input#post_url:-moz-placeholder, input#post_url_open:-moz-placeholder{
 
 .create_header_right_div{
   display:inline-block;
-  border: 1px dashed #CCC;
-  padding:3px;	
   float:right;
 }
 
 .ipaint_navigation{
   background-color:#ECF5FD;
   border:1px solid #A9A9A9;
-  margin:5px 10px;
+  margin:0px 10px 5px 10px;
   font-size:14px;
   padding: 5px 10px;
   text-decoration:none;
@@ -930,13 +925,20 @@ input#post_url:-moz-placeholder, input#post_url_open:-moz-placeholder{
   padding:15px;	
 }
 
-.open_table_border{
+.open_table_border, .reset_password_wrapper{
   border:2px solid #666;
   width:250px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   -khtml-border-radius: 4px;
   border-radius: 4px;
+}
+
+.reset_password_wrapper{
+  margin:20px auto;
+  padding:20px;
+  width:350px;
+  text-align:center;
 }
 
 .open_table_border_inner_div{

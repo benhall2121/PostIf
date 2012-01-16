@@ -32,7 +32,7 @@ class PostsController < ApplicationController
   end
   
   def edit_page  
-  	  render '/posts/edit_page.html.erb', :layout => false
+    render '/posts/edit_page.html.erb', :layout => false
   end
   
   def save_page  
@@ -74,11 +74,18 @@ class PostsController < ApplicationController
     if params[:canvas]
       @post = Post.new(:canvas_html => params[:canvas])
     elsif params[:url]
-      @post = Post.find_by_url(params[:url])
+      @post = Post.find_by_url(params[:url], :conditions => 'status != "inactive"')
     else  
       @post = Post.find(params[:id])
     end
     
+    
+    if !@post
+      if params[:url]
+        @post = Post.find_by_url(params[:url])    
+      end
+    end	    
+    	    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @post }
@@ -105,7 +112,7 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit
     if params[:url]	  	  
-      @post = Post.find_by_url(params[:url])
+      @post = Post.find_by_url(params[:url], :conditions => 'status != "inactive"')
     else
       @post = Post.find(params[:id])
     end
@@ -116,7 +123,7 @@ class PostsController < ApplicationController
     @auth = Post.authenticate(params[:url], params[:password])
     
     if(@auth)
-      @post = Post.find_by_url(params[:url])
+      @post = Post.find_by_url(params[:url], :conditions => 'status != "inactive"')
     else
       puts 'else'
       render '/posts/valid_password.js.erb'
@@ -185,7 +192,7 @@ class PostsController < ApplicationController
   end
   
   def report_url
-    @post = Post.find_by_url(params[:url])
+    @post = Post.find_by_url(params[:url], :conditions => 'status != "inactive"')
     @post.flags += 1
     @post.save!
     

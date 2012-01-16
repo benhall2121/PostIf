@@ -5,7 +5,8 @@
       </div>
     </div>
 
-<%= hidden_field_tag 'post_url', @post.url, :id => 'post_url' %>    
+<%= hidden_field_tag 'post_url', @post.url, :id => 'post_url' %> 
+<%= hidden_field_tag 'post_email', @post.email, :id => 'post_email' %>    
     
 <div class="show_wrapper" style="margin-top:25px;">
     <% if @post.status == 'post' || !params[:canvas].blank? %>
@@ -38,10 +39,16 @@
 	      
 </div>
 
+	<% elsif @post.status == 'inactive' %>
+
+	  <div style="text-align:center;padding-top:75px;padding-bottom:75px;">
+	    <h1>This page has been set to inactive.</h1>
+	  </div>
+	
 	<% else %>
 
 	  <div style="text-align:center;padding-top:75px;padding-bottom:75px;">
-	    <h1>This page has not been Posted yet</h1>
+	    <h1>This page has not been Posted yet.</h1>
 	  </div>
 	
 	<% end %>
@@ -94,7 +101,16 @@
           <%= link_to 'Edit this page...', '', :onclick => 'alert("This is just a preview, it cannot be Edited."); return false;'  %>
         </div>
         
-      <% elsif @post.status != 'post' %>
+      <% elsif @post.status == 'inactive' %>
+      
+        <div class="show_tell_friends_center">
+          <%= link_to 'Report this page...', '', :onclick => 'alert("This page has been set to inactive, it cannot be Reported."); return false;' %>
+        </div>
+        <div class="show_tell_friends_right">
+          <%= link_to 'Edit this page...', '', :onclick => 'alert("This page has been set to inactive, it cannot be edited."); return false;' %>
+        </div>
+        
+      <% elsif @post.status == '' %>
       
         <div class="show_tell_friends_center">
           <%= link_to 'Report this page...', '', :onclick => 'alert("This page still has not been posted, it cannot be Reported."); return false;' %>

@@ -6,6 +6,17 @@ $(document).ready(function() {
     $.fancybox.close();
   });
   
+  $("#yes_button").live('click', function(){
+    var id = top.window.$("#post_id").val();	
+    var status = 'inactive';
+  		  
+    $.post('/post/update_js/' + id, {post:{"status": status }}, function(response) { 
+      $("#tb_tool .clear_image").trigger('click');
+      $('#post_url').val('').trigger('keyup');
+      window.location.href='/';
+    });	  
+  });
+  
 });
 
 </script>
@@ -16,11 +27,17 @@ $(document).ready(function() {
 
   <div class="popUpContent">
     <div class="popUpText normal_gray">
+      <span>Do you want to delete the current page entirely?</span><br/>
+      <span>This will remove the page from the internet and</span><br/>
+      <span>make the URL available for use by others.</span><br/>
+      <span>Deleting the page cannot be undone.</span><br/>
+      <br/>
       
     </div>
     
     <div class="popUpButtonDiv">
-      <button type="button" id="cancel_button" class="blue_button">Cancel</button>
+      <button type="button" id="yes_button" class="blue_button">Yes, continue</button>
+      <button type="button" id="cancel_button" class="blue_button">No, cancel</button>
     </div> 
   </div>
 

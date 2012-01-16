@@ -1,4 +1,5 @@
 Postif::Application.routes.draw do
+
   resources :emails
 
   resources :feedbacks
@@ -6,6 +7,8 @@ Postif::Application.routes.draw do
   resources :users
 
   resources :posts
+  
+  resources :password_resets
       
   match "home" => "posts#home", :as => "home"
   match "/post/reset_page" => "posts#reset_page", :as => "reset_page"

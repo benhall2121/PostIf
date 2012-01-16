@@ -1,0 +1,22 @@
+<%= form_for @post, :url => password_reset_path(params[:id]) do |f| %>
+  <% if @post.errors.any? %>
+    <div class="error_messages">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% for message in @post.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="reset_password_wrapper">
+    <div class="popUpText normal_gray">
+      <span><%= f.label :password %></span><br/>
+      <span><%= f.password_field :password, :class => 'green_input_field' %></span>
+      <br/>
+      <br/>
+    </div>
+    <div class="actions"><%= f.submit "Update Password", :class => 'blue_button' %></div>
+  </div>  
+    
+<% end %>
