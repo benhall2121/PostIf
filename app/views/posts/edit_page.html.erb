@@ -26,6 +26,7 @@ $(document).ready(function() {
   });
   
   $(".open_forgot").live('click', function(){
+  		 
     url = top.window.$('#post_url').val();
     
     email_exists = top.window.$('#post_email').val();
@@ -35,7 +36,7 @@ $(document).ready(function() {
       $('.forgot_password_no_email_wrapper').show();
       return false;
     }
-    return false;
+    
     $.post('<%= password_resets_path %>', {"url": url}, null);
     
     $('.open_page_wrapper').hide();
