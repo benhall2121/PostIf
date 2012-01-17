@@ -39,10 +39,10 @@
 	      
 </div>
 
-	<% elsif @post.status == 'inactive' %>
+	<% elsif @post.status != 'post' && @post.status != '' %>
 
 	  <div style="text-align:center;padding-top:75px;padding-bottom:75px;">
-	    <h1>This page has been set to inactive.</h1>
+	    <h1>This page has been set to <%= @post.status %>.</h1>
 	  </div>
 	
 	<% else %>
@@ -101,13 +101,13 @@
           <%= link_to 'Edit this page...', '', :onclick => 'alert("This is just a preview, it cannot be Edited."); return false;'  %>
         </div>
         
-      <% elsif @post.status == 'inactive' %>
+      <% elsif @post.status != 'post' && @post.status != '' %>
       
         <div class="show_tell_friends_center">
-          <%= link_to 'Report this page...', '', :onclick => 'alert("This page has been set to inactive, it cannot be Reported."); return false;' %>
+          <%= link_to 'Report this page...', '', :onclick => 'alert("This page has been set to ' + @post.status + ', it cannot be Reported."); return false;' %>
         </div>
         <div class="show_tell_friends_right">
-          <%= link_to 'Edit this page...', '', :onclick => 'alert("This page has been set to inactive, it cannot be edited."); return false;' %>
+          <%= link_to 'Edit this page...', '', :onclick => 'alert("This page has been set to ' + @post.status + ', it cannot be edited."); return false;' %>
         </div>
         
       <% elsif @post.status == '' %>

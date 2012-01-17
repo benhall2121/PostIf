@@ -1,31 +1,32 @@
-<h1>Listing posts</h1>
+<div class="post_index_wrapper common_border">
+<h1 class="red">Postif Pages</h1>
 
-<table>
-  <tr>
+<table class="post_index_table">
+  <tr class="small_red">
     <th>Url</th>
-    <th>Email</th>
-    <th>Password</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Flags</th>
+    <th>Date Created</th>
+    <th>Status</th>
   </tr>
 
 <% @posts.each do |post| %>
   <tr>
-    <td><%= post.url %></td>
-    <td><%= post.email %></td>
-    <td><%= post.password %></td>
-    <td><%= link_to 'Show', post %></td>
-    <td><%= link_to 'Edit', edit_post_path(post) %></td>
-    <td><%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'www.postif.com/' + post.url, post, :target => 'blank' %></td>
+    <td><%= post.flags %></td>
+    <td><%= post.created_at.strftime("%b %d, %Y") %></td>
+    <td><%= select_tag(post.status, options_for_select([["", ""], ["post", "post"], ["inactive", "inactive"], ["blocked", "blocked"], ["expired", "expired"]], post.status), :class => 'postif_update_status') %></td>
+    <%= hidden_field_tag 'post_id', post.id, :class => 'post_id' %>  
   </tr>
 <% end %>
 </table>
 
-<br />
+<br/>
+<div>
+  <%= link_to 'Admin Panel', admin_panel_path() %>
+</div>
 
-<%= link_to 'New Post', new_post_path %>
 
-<br />
+</div>
+
 
 

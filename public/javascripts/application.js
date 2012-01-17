@@ -1,9 +1,10 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
-jQuery.ajaxSetup({ 
-  'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
-})
+jQuery.ajaxSetup({
+  beforeSend: function(xhr) { xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+  }
+}); 
 
 
 var redirect_to = ""
@@ -59,13 +60,25 @@ function update_drawing(calling, status){
     });
 }
 
+function update_status(id, status){
+  $.post('/post/update_js/' + id, {post:{"status": status }}, null);	
+}
+
 $(document).ready(function() {	
+	
+  $(".postif_update_status").live("change", function(){
+    var p_id = $(this).parent().parent().find('.post_id').val();
+    var p_status = $(this).val();
+    
+    update_status(p_id, p_status);		  	  
+  });
 		
   $("#calendar").datepicker({
     inline:true
   });
 		
   $(".header_nav").fancybox();
+  
   $(".pop").fancybox({
     onStart: function(){
     },
@@ -170,7 +183,7 @@ $(document).ready(function() {
       var name = $('#feedback_name_id').val();
       var subject = $('#feedback_subject_id').val();
       var message = $('#feedback_message_id').val();
-  
+      
       if(name == '' || subject == '' || message == ''){
         alert("All fields are required. Please fill out the rest of the form");
       	return false;      
@@ -244,11 +257,11 @@ $(document).ready(function() {
 });
 
 $(window).load(function () {	
-    var showPopUp = getCookie('show_PopUp'); 
+    var showPopUp = getCookie('show_MainPopUp'); 
     var showTips = getCookie('show_Tips'); 
     
     if(showPopUp != 'true'){
-      setCookie('show_PopUp', 'true21', '3');  
+      setCookie('show_MainPopUp', 'true', '3');  
       $("#popHome").fancybox().trigger('click');
     }	
     

@@ -1,5 +1,7 @@
 class Post < ActiveRecord::Base
-  attr_accessible :canvas_html, :url, :email_me, :password, :email, :status, :expiration_date
+  attr_accessible :canvas_html, :url, :email_me, :password, :email, :status, :expiration_date, :user_id
+  
+  belongs_to :user
   
   attr_accessor :password
   before_save :encrypt_password

@@ -31,7 +31,7 @@ module ApplicationHelper
     c = params[:controller]
     a = params[:action]
     
-    if((c == "posts" && a == "new") || (c == "posts" && a == "edit"))
+    if((c == "posts" && a == "new") || (c == "posts" && a == "edit") || (c == "posts" && a == "show"))
       return true
     else
       return false

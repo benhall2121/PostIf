@@ -10,12 +10,13 @@
     <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js" %>
     <%= javascript_include_tag "fancybox/jquery.fancybox-1.3.4.pack.js" %>
     <%= javascript_include_tag 'rails' %>
+    <%= csrf_meta_tag %>
     
     <meta property="og:image" content='<%= image_tag('logo.ong') %>' id="fb_content_image" />
     <meta property="og:title" content='I found this really useful site: <%= request.url %> ' id="fb_content_title" />
     <meta property="og:description" content='I found this really useful site: <%= request.url %> ' id="fb_content_description" />
 
-    <%# if show_ipaint %>
+    <% if show_ipaint %>
     <!-----  iPaint Files  ----->
         <link rel="stylesheet" type="text/css" href="/style/iPaint.css" />      
         <link rel="stylesheet" type="text/css" href="/style/window.css" /> 
@@ -57,9 +58,16 @@
 	<script type="text/javascript" src="/src/jquery.form.js"></script>
     
     <!-----  End iPaint Files  ----->
-    <%# end %>
-
-    <%= csrf_meta_tag %>
+    <% end %>
+    
+    <style type="text/css">
+    *{
+     -moz-user-select: text;
+     -khtml-user-select: text;
+     user-select: text; 	    
+    }
+	</style>
+    
     
   <script type="text/javascript">
 

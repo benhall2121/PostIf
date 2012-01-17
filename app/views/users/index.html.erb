@@ -1,25 +1,16 @@
-<h1>Listing users</h1>
+<div class="user_index_wrapper common_border">
+<h1 class="red">Listing users</h1>
 
-<table>
-  <tr>
-    <th>Email</th>
-    <th>Subscribed</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<div>
 <% @users.each do |user| %>
-  <tr>
-    <td><%= user.email %></td>
-    <td><%= user.subscribed %></td>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+  <%= user.email %>, 
 <% end %>
-</table>
+</div>
 
-<br />
+<br/>
+<div>
+  <%= link_to 'Admin Panel', admin_panel_path() %>
+</div>
 
-<%= link_to 'New User', new_user_path %>
+
+</div>

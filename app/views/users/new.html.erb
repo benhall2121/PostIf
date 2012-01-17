@@ -1,5 +1,31 @@
-<h1>New user</h1>
 
-<%= render 'form' %>
 
-<%= link_to 'Back', users_path %>
+<div class="common_border">
+<h1 class="red">Sign Up</h1>
+
+
+<div class="popUpText normal_gray">
+<%= form_for @user do |f| %>
+  <% if @user.errors.any? %>
+    <div class="error_messages">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% for message in @user.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <span><%= f.label :email %></span><br />
+    <span><%= f.text_field :email, :class => 'green_input_field' %></span>
+  </div>
+  <div>
+    <span><%= f.label :password %></span><br />
+    <span><%= f.password_field :password, :class => 'green_input_field' %></span>
+  </div>
+  <div class="button"><%= f.submit "Sign Up", :class => 'blue_button' %></div>
+<% end %>
+</div>
+
+</div>

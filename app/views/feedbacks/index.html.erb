@@ -1,27 +1,33 @@
-<h1>Listing feedbacks</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Subject</th>
-    <th>Message</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="feedback_index_wrapper common_border">
+<h1 class="red">Feedback</h1>
 
 <% @feedbacks.each do |feedback| %>
-  <tr>
-    <td><%= feedback.name %></td>
-    <td><%= feedback.subject %></td>
-    <td><%= feedback.message %></td>
-    <td><%= link_to 'Show', feedback %></td>
-    <td><%= link_to 'Edit', edit_feedback_path(feedback) %></td>
-    <td><%= link_to 'Destroy', feedback, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+
+  <div class="single_feedback_wrapper">
+    <div class="bubble_div">
+      <%= button_to 'Delete', feedback, :method => :delete %><%= image_tag('bubble.jpg') %>
+    </div>
+    <div class="single_feedback_desc">
+      <div class="single_feedback_name">
+        <%= feedback.name %>
+      </div>
+      <div class="single_feedback_subject">
+        <%= feedback.subject %>
+      </div>
+      <div class="single_feedback_message">	
+        <%= feedback.message %>
+      </div>
+      <div class="single_feedback_date">	
+        <%= time_ago_in_words(feedback.created_at) %> ago
+      </div>
+    </div>
+  </div>
 <% end %>
-</table>
 
-<br />
+<br/>
+<div>
+  <%= link_to 'Admin Panel', admin_panel_path() %>
+</div>
 
-<%= link_to 'New Feedback', new_feedback_path %>
+
+</div>

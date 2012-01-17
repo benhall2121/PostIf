@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
+  before_filter :admin_only, :only => ['admin_panel', 'index']
 	
-   def add_subscriber
+  def add_subscriber
     params[:user] = {}	  
     
     params[:user][:email] = params[:email_address]
@@ -16,7 +17,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   def index
-    @users = User.all
+  	  @users = User.find(:all, :conditions => ['subscribed = ?', 1])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -58,7 +59,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to(@user, :notice => 'User was successfully created.') }
+        format.html { redirect_to root_url, :notice => "Signed up!" }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }
@@ -93,5 +94,8 @@ class UsersController < ApplicationController
       format.html { redirect_to(users_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  def admin_panel
   end
 end

@@ -112,7 +112,27 @@ div.button_selected{
 
 
 /******* End Notes *******/
- 
+
+.post_index_table{
+  margin: 0 auto;
+}
+
+.post_index_table td{
+  padding: 2px 10px;	
+}
+
+
+/******* Admin Panel *******/
+
+
+
+
+
+/******* End Admin Panel *******/
+
+
+
+
  
 /****************     FancyBox    ****************/
 #fancybox-wrap {
@@ -239,11 +259,11 @@ div.button_selected{
   color:#00D300;	 
 }
 
-.red{
+.red, .small_red, .smaller_red, .normal_red, .larger_red, .very_large_red{
   color:#783F00;	 
 }
 
-.light_red{
+.light_red, .smaller_light_green, .normal_light_red, .larger_light_red, .very_large_light_red{
   color:#E90000;	 
 }
  
@@ -339,23 +359,23 @@ div.button_selected{
   color: #BBB;
 }
 
-.very_large_green{
+.very_large_green, .very_large_red, .very_large_light_red{
   font-size:24px;	
 }
 
-.larger_gray, .larger_light_gray, .larger_green{
+.larger_gray, .larger_light_gray, .larger_green, .larger_red, .larger_light_red{
   font-size: 18px;
 }
 
-.normal_gray, .normal_light_gray, .normal_green{
+.normal_gray, .normal_light_gray, .normal_green, .normal_red, .normal_light_red{
   font-size: 16px;
 }
 
-.small_gray, .small_light_gray, .small_green{
+.small_gray, .small_light_gray, .small_green, .small_red, .small_light_red{
   font-size: 14px;
 }
 
-.smaller_gray, .smaller_light_gray, .smaller_green{
+.smaller_gray, .smaller_light_gray, .smaller_green, .smaller_red, .smaller_light_red{
   font-size: 12px;
 }
 
@@ -925,7 +945,7 @@ input#post_url:-moz-placeholder, input#post_url_open:-moz-placeholder{
   padding:15px;	
 }
 
-.open_table_border, .reset_password_wrapper{
+.open_table_border, .reset_password_wrapper, .common_border{
   border:2px solid #666;
   width:250px;
   -moz-border-radius: 4px;
@@ -934,11 +954,15 @@ input#post_url:-moz-placeholder, input#post_url_open:-moz-placeholder{
   border-radius: 4px;
 }
 
-.reset_password_wrapper{
+.reset_password_wrapper, .common_border{
   margin:20px auto;
   padding:20px;
   width:350px;
   text-align:center;
+}
+
+.post_index_wrapper, .user_index_wrapper, .feedback_index_wrapper{
+  width:75%;	
 }
 
 .open_table_border_inner_div{

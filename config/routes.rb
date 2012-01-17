@@ -4,8 +4,6 @@ Postif::Application.routes.draw do
 
   resources :feedbacks
 
-  resources :users
-
   resources :posts
   
   resources :password_resets
@@ -39,6 +37,15 @@ Postif::Application.routes.draw do
   get "/post/search_post_is_url" => "posts#search_post_is_url", :as => "search_post_is_url"
   get 'secret/secret_test' => "posts#secret_test", :as => 'secret_test'
   match '/secret/check_secret' => "posts#check_secret", :as => 'check_secret'
+  
+  
+  get "log_out" => "sessions#destroy", :as => "log_out"
+  get "log_in" => "sessions#new", :as => "log_in"
+  get "sign_up" => "users#new", :as => "sign_up"
+  get "admin_panel" => "users#admin_panel", :as => "admin_panel"
+  resources :users
+  resources :sessions
+  
   
   match '/:url' => 'posts#show'
 end

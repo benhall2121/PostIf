@@ -1,4 +1,5 @@
 class FeedbacksController < ApplicationController
+  before_filter :admin_only, :only => ['index']
   
   def add_feedback
     

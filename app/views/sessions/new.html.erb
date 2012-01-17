@@ -1,0 +1,19 @@
+<div class="common_border">
+<h1 class="red">Log in</h1>
+
+
+<div class="popUpText normal_gray">
+<%= form_tag sessions_path do %>
+  <div>
+    <span><%= label_tag :email %></span><br />
+    <span><%= text_field_tag :email, params[:email], :class => 'green_input_field' %></span>
+  </div>
+  <div>
+    <span><%= label_tag :password %></span><br />
+    <span><%= password_field_tag :password, '', :class => 'green_input_field' %></span>
+  </div>
+  <div class="button"><%= submit_tag "Log in", :class => 'blue_button' %></div>
+<% end %>
+</div>
+
+</div>

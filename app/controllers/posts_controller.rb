@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   skip_before_filter :require_secret, :only => [:check_secret, :secret_test, :create]
+  before_filter :admin_only, :only => ['index']
   # GET /posts
   # GET /posts.xml
   
@@ -60,7 +61,7 @@ class PostsController < ApplicationController
   end
   
   def index
-    @posts = Post.all
+    @posts = Post.find(:all, :order => 'flags desc, created_at desc')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -135,6 +136,24 @@ class PostsController < ApplicationController
   def create
   	
     session[:secret_ok] = true
+    
+    if(!params[:post][:email].blank?)
+    puts 'in if statement 1'
+      @user = User.find_by_email(params[:post][:email])
+     
+      if !@user
+    puts 'in if statement 2'
+        @user = User.new(:email => params[:post][:email], :subscribed => params[:post][:email_me])
+        @user.save
+      end
+      
+    puts 'exit 3'
+      params[:post][:user_id] = @user.id   
+      puts "params[:post][:user_id]"
+      puts params[:post][:user_id]
+      puts "params[:post][:email_me]"
+      puts params[:post][:email_me]
+    end
     
     @post = Post.new(params[:post])
 

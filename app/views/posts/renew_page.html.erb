@@ -20,12 +20,13 @@ $(document).ready(function() {
     $.fancybox.close();
   });  
   
-  $("#renew_save_button").live('click', function(){
+  $("#renew_save_button").click(function(){
     var id = top.window.$("#post_id").val();
     var expiration_date = $("#time_to_set").html();	  
   		  
     $.post('/post/update_js/' + id, {post:{"expiration_date": expiration_date }}, function(response) { 
       alert("Your postif page renew date has been saved.");
+      top.window.$('#expiration_date').val(expiration_date);
       $.fancybox.close();
     });	  
   });
