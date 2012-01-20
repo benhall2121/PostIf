@@ -7,6 +7,8 @@ Postif::Application.routes.draw do
   resources :posts
   
   resources :password_resets
+  
+  resources :uploaded_files
       
   match "home" => "posts#home", :as => "home"
   match "/post/reset_page" => "posts#reset_page", :as => "reset_page"

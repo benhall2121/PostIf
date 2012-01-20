@@ -2693,3 +2693,25 @@ iPaintApp.prototype.restoreHistoryRangeEdit = function(start,nTotal){
    this.canvas_history.startLogging();
 };
 
+iPaintApp.prototype.hideRulerEdit = function(flag){
+   if ( this._showRuler === flag ){return this;}
+  
+   $("#h_ruler_container").css("display",(flag ? "" : "none"));
+   $("#v_ruler_container").css("display",(flag ? "" : "none"));
+   $("#h_unit").css("display",(flag ? "" : "none")).html(this.unit);
+   
+   this._showRuler = flag;
+   
+   var w = $("#inner_container").width(),
+       h = $("#inner_container").height();
+
+       
+      $("#inner_container")
+      .css({
+         left:"0px",top:this.topMargin + "px",
+         width: w + this.RulerSize + "px", height: h + this.RulerSize + "px"
+      });
+      
+   return this;
+};
+

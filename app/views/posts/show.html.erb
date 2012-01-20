@@ -7,6 +7,7 @@
 
 <%= hidden_field_tag 'post_url', @post.url, :id => 'post_url' %> 
 <%= hidden_field_tag 'post_email', @post.email, :id => 'post_email' %>    
+<%= hidden_field_tag 'show_page', true, :id => 'show_page' %>
     
 <div class="show_wrapper" style="margin-top:25px;">
     <% if @post.status == 'post' || !params[:canvas].blank? %>

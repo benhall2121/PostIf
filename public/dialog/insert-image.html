@@ -191,6 +191,13 @@ var dialog = {
                      dlg.initSearch(function(){googleSearch();});
                   });
                   
+             $('.file_upload_field').change(function(){
+             		     alert("yesy21");
+             		     alert($("#upload_image_form").attr('action'));
+		   //$('#upload_image_form').submit();
+		});  
+               
+               
              $("#browseFile")
                .bind("change",
                   function(){ 
@@ -475,7 +482,16 @@ function isUrl(s) {
 <form name="frm_file_open_url" id="frm_file_open_url" method="post" style="margin:0;padding:0;" enctype="multipart/form-data" action="process_local_image.php">
    <div class="insertImageContainer browseContainer">
       <p>Upload an image from your computer</p>
-      Browse: <input type="file" name="browseFile" id="browseFile" value=""  />
+      
+      <form action="/uploaded_files/new" enctype="multipart/form-data" id="upload_image_form" method="post">
+        <div style="margin:0;padding:0;display:inline">
+          <input name="utf8" type="hidden" value="&#x2713;" />
+          <input name="authenticity_token" type="hidden" value="WfBfnTwNAgr7Y2c3GVK+OsArcd8wP1haQrshOTRaqbA=" />
+        </div>	
+        <input class="file_upload_field" id="uploaded_file_uploaded_files" name="uploaded_file[uploaded_files]" type="file" />
+      </form>
+      
+      
    </div>
    <div class="insertImageOr">
       OR

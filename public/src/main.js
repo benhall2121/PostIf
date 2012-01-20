@@ -114,8 +114,14 @@ jQuery(document).ready(function(){
    if(ch == "preview"){
      var canvas = window.localStorage.getItem("canvas"); 
      myApp.initHistoryEdit(canvas);  
+     myApp.hideRulerEdit(false); //Turn off the rulers for the preview page
    } else if(ch != '' && ch != null){
      myApp.initHistoryEdit(ch);
+   
+     var show_page = $('#show_page').val();
+     if(show_page){
+       myApp.hideRulerEdit(false); //Turn off the rulers for the show page
+     }
    } else {
      myApp.initHistory();
      myApp.setAction("pencil");

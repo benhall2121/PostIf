@@ -258,7 +258,8 @@ $(document).ready(function() {
 
 $(window).load(function () {	
     var showPopUp = getCookie('show_MainPopUp'); 
-    var showTips = getCookie('show_Tips'); 
+    //Turned off the tips so by setting the variable to true instead of grabbing the cookie
+    var showTips = 'true'; //getCookie('show_Tips'); 
     
     if(showPopUp != 'true'){
       setCookie('show_MainPopUp', 'true', '3');  
