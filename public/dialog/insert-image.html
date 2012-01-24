@@ -199,7 +199,7 @@ var dialog = {
                	  	  
                	    if(data){
                	      var file_name = $("#uploaded_file_uploaded_files").val().replace(/C:\\fakepath\\/i, '');
-                      var srcUrl = "http://localhost:3000/assets/uploaded_image/" + data + "/original/" + file_name;
+                      var srcUrl = get_hostname(window.location) + "/assets/uploaded_image/" + data + "/original/" + file_name;
                       dialog.window.close();
                       dialog.app.insertImageBySrc(srcUrl);
                	    } else {
@@ -491,13 +491,19 @@ function isUrl(s) {
 	var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
 	return regexp.test(s);
 }
+
+function get_hostname(url) {
+    var m = ((url||'')+'').match(/^http:\/\/[^/]+/);
+    return m ? m[0] : null;
+}
+
 </script>
 
 <div class="insertImageDialog">
 
    <div class="insertImageContainer browseContainer">
       <p>Upload an image from your computer</p>
-      <form action="uploaded_files/ajax_submit" enctype="multipart/form-data" id="upload_image_form" method="post">
+      <form action="http://localhost:3000/uploaded_files/ajax_submit" enctype="multipart/form-data" id="upload_image_form" method="post">
         <div style="margin:0;padding:0;display:inline">
           <input name="utf8" type="hidden" value="&#x2713;" />
           <input name="authenticity_token" type="hidden" value="WfBfnTwNAgr7Y2c3GVK+OsArcd8wP1haQrshOTRaqbA=" />

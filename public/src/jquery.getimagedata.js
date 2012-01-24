@@ -48,9 +48,13 @@ f=d("head")[0]||document.documentElement,q={},S=0,p,C={callback:L,url:location.h
 		
 			// Using jquery-jsonp (http://code.google.com/p/jquery-jsonp/) for the request
 			// so that errors can be handled
+			
+			
+			var new_url = args.url.replace(/%2520/g, '%20');
+			
 			$.jsonp({	
 				url: server_url,
-				data: { url: escape(args.url) },
+				data: { url: escape(new_url) },
 				dataType: 'jsonp',
 				timeout: 10000,
 				// It worked!

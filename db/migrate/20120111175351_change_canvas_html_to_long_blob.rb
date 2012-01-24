@@ -1,7 +1,7 @@
 class ChangeCanvasHtmlToLongBlob < ActiveRecord::Migration
    def self.up
     change_table :posts do |t|
-    	    t.change :canvas_html, :longblob
+      t.change :canvas_html, :longblob
     end
   end
 
