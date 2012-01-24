@@ -9,6 +9,8 @@ Postif::Application.routes.draw do
   resources :password_resets
   
   resources :uploaded_files
+  
+  match "/uploaded_files/ajax_submit" => "uploaded_files#ajax_submit", :as => "ajax_submit"
       
   match "home" => "posts#home", :as => "home"
   match "/post/reset_page" => "posts#reset_page", :as => "reset_page"

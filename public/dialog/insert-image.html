@@ -190,13 +190,28 @@ var dialog = {
                      }
                      dlg.initSearch(function(){googleSearch();});
                   });
-                  
-             $('.file_upload_field').change(function(){
-             		     alert("yesy21");
-             		     alert($("#upload_image_form").attr('action'));
-		   //$('#upload_image_form').submit();
-		});  
                
+               
+             $("#uploaded_file_uploaded_files").change(function(){
+               	$('#upload_image_form').ajaxSubmit({
+               	  dataType: 'json',
+               	  success: function(data) {
+               	  	  
+               	    if(data){
+               	      var file_name = $("#uploaded_file_uploaded_files").val().replace(/C:\\fakepath\\/i, '');
+                      var srcUrl = "http://localhost:3000/assets/uploaded_image/" + data + "/original/" + file_name;
+                      dialog.window.close();
+                      dialog.app.insertImageBySrc(srcUrl);
+               	    } else {
+               	      alert("The file was not able to be uploaded");  
+               	    }
+                  },
+                  error: function(data) {
+                    alert("An error occured when uploading the file");
+                  }
+                });
+                return;
+             });
                
              $("#browseFile")
                .bind("change",
@@ -479,23 +494,22 @@ function isUrl(s) {
 </script>
 
 <div class="insertImageDialog">
-<form name="frm_file_open_url" id="frm_file_open_url" method="post" style="margin:0;padding:0;" enctype="multipart/form-data" action="process_local_image.php">
+
    <div class="insertImageContainer browseContainer">
       <p>Upload an image from your computer</p>
-      
-      <form action="/uploaded_files/new" enctype="multipart/form-data" id="upload_image_form" method="post">
+      <form action="uploaded_files/ajax_submit" enctype="multipart/form-data" id="upload_image_form" method="post">
         <div style="margin:0;padding:0;display:inline">
           <input name="utf8" type="hidden" value="&#x2713;" />
           <input name="authenticity_token" type="hidden" value="WfBfnTwNAgr7Y2c3GVK+OsArcd8wP1haQrshOTRaqbA=" />
         </div>	
-        <input class="file_upload_field" id="uploaded_file_uploaded_files" name="uploaded_file[uploaded_files]" type="file" />
+        Browse: <input class="file_upload_field" id="uploaded_file_uploaded_files" name="uploaded_file[uploaded_file]" type="file" />
       </form>
-      
       
    </div>
    <div class="insertImageOr">
       OR
    </div>
+<form name="frm_file_open_url" id="frm_file_open_url" method="post" style="margin:0;padding:0;" enctype="multipart/form-data" action="process_local_image.php">   
    <div class="insertImageContainer searchContainer">
       <p>Find and upload an image from the web</p>
       <input type="text" name="URL" id="URL" style="width:256px;" value="" /><button type="button" name="BtnGoogle" title="Search online images!">Search</button>
