@@ -193,6 +193,9 @@ var dialog = {
                
                
              $("#uploaded_file_uploaded_files").change(function(){
+             		     
+             	$('#upload_image_form').attr('action', get_hostname(window.location) + '/uploaded_files/ajax_submit');
+             		   
                	$('#upload_image_form').ajaxSubmit({
                	  dataType: 'json',
                	  success: function(data) {
@@ -503,7 +506,7 @@ function get_hostname(url) {
 
    <div class="insertImageContainer browseContainer">
       <p>Upload an image from your computer</p>
-      <form action="http://localhost:3000/uploaded_files/ajax_submit" enctype="multipart/form-data" id="upload_image_form" method="post">
+      <form action="/uploaded_files/ajax_submit" enctype="multipart/form-data" id="upload_image_form" method="post">
         <div style="margin:0;padding:0;display:inline">
           <input name="utf8" type="hidden" value="&#x2713;" />
           <input name="authenticity_token" type="hidden" value="WfBfnTwNAgr7Y2c3GVK+OsArcd8wP1haQrshOTRaqbA=" />

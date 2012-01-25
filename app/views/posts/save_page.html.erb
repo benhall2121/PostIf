@@ -7,6 +7,16 @@ jQuery.ajaxSetup({
 
 $(document).ready(function() {  
   
+  $("input").keypress(function (evt) {
+    //Deterime where our character code is coming from within the event
+    var charCode = evt.charCode || evt.keyCode;
+    if (charCode  == 13) { //Enter key's keycode
+      evt.stopPropagation();
+      return false;
+    }
+   });		
+		
+		
   //expiration_date
   parent_expiration_date = top.window.$('#expiration_date').val();		  
   $("#time_to_set").html(parent_expiration_date);
